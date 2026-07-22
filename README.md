@@ -44,5 +44,5 @@ Driven by curiosity and a passion for building. 🚀
 
 📧 Email: [joshueagape.itpro@gmail.com](mailto:joshueagape.itpro@gmail.com)  
 📱 Phone: +261 34 24 393 87 / +261 33 68 473 73  
-🌐 Portfolio: [RAHARISON Joshué Agapé](https://raharison-joshue-agape-folio.vercel.app)  
+🌐 Portfolio: [RAHARISON Joshué Agapé](https://raharison-joshue-agape.vercel.app)  
 💼 LinkedIn: [RAHARISON Joshué Agapé](https://www.linkedin.com/in/joshue-agape)
