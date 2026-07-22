@@ -1,7 +1,9 @@
 import CustomCursor from "@/components/custom-cursor"
 import AboutMe from "@/components/sections/about-me"
+import Experiences from "@/components/sections/experiences"
 import Header from "@/components/sections/Header"
 import Hero from "@/components/sections/hero"
+import Skills from "@/components/sections/skills"
 
 export function App() {
     return (
@@ -11,6 +13,8 @@ export function App() {
             <Header />
             <Hero />
             <AboutMe />
+            <Experiences />
+            <Skills />
         </main>
     )
 }

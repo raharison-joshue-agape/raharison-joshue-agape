@@ -17,7 +17,7 @@ import {
     Globe,
     CheckCircle2,
 } from "lucide-react"
-import { personalInfo } from "@/data/Personal-info"
+import { personalInfo } from "@/data/personal-info"
 import GridBackground from "@/components/grid-background"
 
 const focuses = [

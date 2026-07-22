@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion"
 import { TypeAnimation } from "react-type-animation"
 import { Mail, Zap, MapPin, ExternalLink } from "lucide-react"
-import { personalInfo } from "@/data/Personal-info"
+import { personalInfo } from "@/data/personal-info"
 import { staggerContainer, staggerItem } from "@/lib/animations"
 import GridBackground from "@/components/grid-background"
 
