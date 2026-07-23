@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { MessageCircle, X, Send, Bot, User, Sparkles } from "lucide-react"
 import { v4 as uuidv4 } from "uuid"
 import { ASK_IA, useApi } from "@/hooks/use-api"
+import { cn } from "@/lib/utils"
 
 interface Message {
     id: string
@@ -220,10 +221,10 @@ export default function AIChat() {
                                             duration: 0.3,
                                             ease: "easeOut",
                                         }}
-                                        className={`relative flex gap-2.5 ${msg.role === "user" ? "items-end justify-end" : "items-start justify-start"}`}
+                                        className={`relative flex items-end gap-2.5 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                                     >
                                         {msg.role === "bot" && (
-                                            <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-700">
+                                            <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-600">
                                                 <Bot
                                                     size={20}
                                                     className="text-white"
@@ -231,12 +232,20 @@ export default function AIChat() {
                                             </div>
                                         )}
                                         <div
-                                            className={`max-w-[80%] space-y-0.5 px-4 py-3 text-sm leading-relaxed ${
+                                            className={`relative max-w-[80%] space-y-0.5 px-4 py-3 text-sm leading-relaxed ${
                                                 msg.role === "user"
                                                     ? "chat-message-user"
                                                     : "chat-message-bot"
                                             }`}
                                         >
+                                            <div
+                                                className={cn(
+                                                    "absolute bottom-1.75 h-2.5 w-2.5 rotate-45",
+                                                    msg.role === "user"
+                                                        ? "-right-1.25 bg-cyan-600"
+                                                        : "-left-1.25 border-b border-l border-[#30363d] bg-gray-800"
+                                                )}
+                                            />
                                             {renderMarkdown(msg.text)}
                                             <div className="mt-2 text-xs opacity-50">
                                                 {msg.timestamp.toLocaleTimeString(
@@ -250,7 +259,7 @@ export default function AIChat() {
                                         </div>
                                         {msg.role === "user" && (
                                             <div className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-cyan-600 bg-cyan-600 text-gray-200">
-                                                <User size={13} />
+                                                <User size={16} />
                                             </div>
                                         )}
                                     </motion.div>
@@ -265,15 +274,16 @@ export default function AIChat() {
                                         exit={{ opacity: 0 }}
                                         className="flex items-center gap-2.5"
                                     >
-                                        <div className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gray-700 text-white">
-                                            <Bot size={13} />
+                                        <div className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gray-600 text-white">
+                                            <Bot size={16} />
                                         </div>
 
-                                        <div className="chat-message-bot flex items-center gap-1.5 px-4 py-3">
+                                        <div className="chat-message-bot relative flex items-center gap-1 px-4 py-3">
+                                            <div className="absolute bottom-1.75 -left-1.25 h-2.5 w-2.5 rotate-45 border-b border-l border-[#30363d] bg-gray-800" />
                                             {[0, 1, 2].map((i) => (
                                                 <motion.div
                                                     key={i}
-                                                    className="h-2 w-2 rounded-full bg-gray-400"
+                                                    className="h-1.5 w-1.5 rounded-full bg-gray-400"
                                                     animate={{ y: [0, -6, 0] }}
                                                     transition={{
                                                         duration: 0.6,

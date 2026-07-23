@@ -337,12 +337,12 @@ body {
 .chat-message-user {
     background: var(--color-cyan-600);
     color: white;
-    border-radius: 18px 18px 4px 18px;
+    border-radius: 18px 18px 10px 18px;
 }
 
 .chat-message-bot {
     background: var(--color-gray-800);
     color: var(--color-gray-100);
-    border-radius: 18px 18px 18px 4px;
+    border-radius: 18px 18px 18px 10px;
     border: 1px solid #30363d;
 }
