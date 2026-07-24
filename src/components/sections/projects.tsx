@@ -462,7 +462,7 @@ export default function Projects() {
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.15 }}
                     className={cn(
-                        "mb-12 flex flex-wrap items-center justify-center gap-2"
+                        "mb-12 hidden flex-wrap items-center justify-center gap-2"
                     )}
                 >
                     <div

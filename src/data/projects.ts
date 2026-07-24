@@ -12,14 +12,24 @@ export type Project = {
     image: string
 }
 
+const portfolioV1URL = new URL(
+    "@/assets/projects/portfolio-v1.png",
+    import.meta.url
+).href
+
+const portfolioV2URL = new URL(
+    "@/assets/projects/portfolio-v2.png",
+    import.meta.url
+).href
+
 export const projects: Project[] = [
     {
         title: "Portfolio V1.0",
         description:
-            "Un espace web pour présenter mes réalisations, mes aptitudes et mon parcours, avec une approche actuelle et facile à utiliser, assurant une découverte aisée et une adaptation à tous les écrans.",
+            "Un espace web moderne et responsive pour présenter mes réalisations et mon parcours avec une navigation fluide et adaptée à tous les écrans.",
         tags: ["Vue.js", "PrimeVue", "Tailwindcss", "FastAPI"],
         category: "Applications Web",
-        image: "/projects/portfolio-v1.png",
+        image: portfolioV1URL,
         github: "",
         demo: "https://raharison-joshue-agape-folio.vercel.app",
         stars: 1,
@@ -30,10 +40,10 @@ export const projects: Project[] = [
     {
         title: "Portfolio V2.0",
         description:
-            "Amélioration de mon portfolio personnel avec une nouvelle combinaison de technologies. Une refonte complète conçue pour améliorer la rapidité, rendre l'utilisation plus agréable et actualiser le design visuel.",
+            "Refonte complète de mon portfolio personnel intégrant des animations fluides et de nouvelles technologies pour booster les performances et dynamiser l'expérience.",
         tags: ["React", "Framer Motion", "Tailwindcss", "Node.js/Express"],
         category: "Applications Web",
-        image: "/projects/portfolio-v2.png",
+        image: portfolioV2URL,
         github: "",
         demo: "https://raharison-joshue-agape.vercel.app/",
         stars: 1,
@@ -41,20 +51,6 @@ export const projects: Project[] = [
         metrics: [],
         color: "accent",
     },
-    /*{
-        title: "Système d'Aide à la Décision Multicritère",
-        description:
-            'ADOMC est une application web interactive permettant d’analyser et de comparer plusieurs alternatives selon plusieurs critères, en utilisant une approche robuste basée sur la minimisation du regret maximal (Min-Max).',
-        tags: ['Python', 'NumPy', 'Streamlit', 'Panda', 'Plotly Express'],
-        category: 'Applications Web',
-        image: '/projects/adomc.png',
-        github: 'https://github.com/joshue-agape/Decision-Support-System',
-        demo: '',
-        stars: 1,
-        featured: true,
-        metrics: [],
-        color: 'green',
-    },*/
 ]
 
 export type ToolBox = {

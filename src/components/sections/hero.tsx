@@ -23,7 +23,8 @@ export default function Hero() {
     const imageY = useTransform(scrollY, [0, 400], [0, 40])
     const textY = useTransform(scrollY, [0, 400], [0, 20])
     const opacity = useTransform(scrollY, [0, 300], [1, 0])
-    const avatarURL = new URL("@/assets/images/profile.jpg", import.meta.url).href;
+    const avatarURL = new URL("@/assets/images/profile.jpg", import.meta.url)
+        .href
 
     const socialLinks = [
         { icon: GithubIcon, href: personalInfo.github, label: "GitHub" },

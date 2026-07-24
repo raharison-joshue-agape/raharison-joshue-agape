@@ -10,103 +10,75 @@ import { Calendar, Building2, Terminal } from "lucide-react"
 import GridBackground from "@/components/grid-background"
 import { cn } from "@/lib/utils"
 
-const TimelineCard = ({ experience }: { experience: Experience }) => {
+function TimelineCard({ experience }: { experience: Experience }) {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
+        <motion.article
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ y: -4 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            whileHover={{ y: -8, transition: { duration: 0.25 } }}
             className={cn(
-                "group h-full overflow-hidden rounded-xl border shadow-lg transition-all duration-300",
-                "border-gray-800 bg-gray-900/50 hover:shadow-[0_8px_30px_rgb(88,166,255,0.12)]"
+                "group overflow-hidden rounded-3xl border bg-linear-to-b transition-all duration-300",
+                "border-white/10 from-[#151922a6] to-[#0e1118] shadow-[0_10px_35px_rgba(0,0,0,.35)] hover:border-emerald-500/20 hover:shadow-[0_20px_60px_rgba(16,185,129,.12)]"
             )}
         >
-            <div
-                className={cn(
-                    "relative h-60 overflow-hidden",
-                    "bg-gray-900/40"
-                )}
-            >
-                <div
-                    className={cn(
-                        "absolute inset-0 bg-linear-to-br",
-                        "from-gray-950/20 to-gray-900/20"
-                    )}
-                />
+            <div className="relative h-64 overflow-hidden">
                 <img
                     src={experience.image}
                     alt={experience.title}
                     className={cn(
-                        "h-full w-full object-cover opacity-80 transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
+                        "h-full w-full object-cover",
+                        "transition duration-700",
+                        "group-hover:scale-105"
                     )}
                 />
 
-                <div
-                    className={cn(
-                        "absolute inset-0 bg-linear-to-t",
-                        "from-gray-900 to-transparent"
-                    )}
-                />
+                <div className="absolute inset-0 bg-linear-to-t from-[#0e1118] via-black/20 to-transparent" />
 
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,.20),transparent_60%)] opacity-0 transition duration-500 group-hover:opacity-100" />
+
+                <div className="absolute top-5 right-5">
+                    <span className="rounded-full border border-white/10 bg-black/50 px-3 py-1 text-xs font-medium text-white backdrop-blur-xl">
+                        <Calendar size={12} className="mr-1 inline" />
+                        {experience.year}
+                    </span>
+                </div>
+            </div>
+
+            <div className={cn("flex flex-col p-4")}>
                 <div
                     className={cn(
-                        "absolute top-3 right-3 flex items-center gap-1.5 rounded-full border px-3 py-1.5 backdrop-blur-sm",
-                        "border-gray-800 bg-gray-900/50"
+                        "mb-4 flex items-center gap-2 rounded-lg border px-3 py-2 backdrop-blur-sm",
+                        "border-gray-800 bg-gray-900/30"
                     )}
                 >
-                    <Calendar
-                        size={12}
-                        className={cn("text-emerald-400")}
+                    <Building2
+                        size={14}
+                        className={cn("shrink-0", "text-emerald-400")}
                         strokeWidth={2}
                     />
                     <span
                         className={cn(
-                            "text-xs font-semibold",
+                            "flex-1 truncate text-sm font-semibold",
                             "text-[#c9d1d9]"
                         )}
                     >
-                        {experience.year}
+                        {experience.company}
+                    </span>
+                    <span
+                        className={cn(
+                            "text-xs font-semibold",
+                            "text-emerald-400"
+                        )}
+                    >
+                        {experience.type}
                     </span>
                 </div>
 
-                <div className={cn("absolute right-3 bottom-3 left-3")}>
-                    <div
-                        className={cn(
-                            "flex items-center gap-2 rounded-lg border px-3 py-2 backdrop-blur-sm",
-                            "border-gray-800 bg-gray-900/30"
-                        )}
-                    >
-                        <Building2
-                            size={14}
-                            className={cn("shrink-0", "text-emerald-400")}
-                            strokeWidth={2}
-                        />
-                        <span
-                            className={cn(
-                                "flex-1 truncate text-sm font-semibold",
-                                "text-[#c9d1d9]"
-                            )}
-                        >
-                            {experience.company}
-                        </span>
-                        <span
-                            className={cn(
-                                "text-xs font-semibold",
-                                "text-emerald-400"
-                            )}
-                        >
-                            {experience.type}
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div className={cn("p-6")}>
                 <h3
                     className={cn(
-                        "mb-3 line-clamp-2 text-lg font-bold transition-colors",
+                        "mb-3 line-clamp-2 text-sm font-bold transition-colors",
                         "text-[#c9d1d9] group-hover:text-emerald-400"
                     )}
                 >
@@ -115,7 +87,7 @@ const TimelineCard = ({ experience }: { experience: Experience }) => {
 
                 <p
                     className={cn(
-                        "mb-4 line-clamp-5 text-sm leading-relaxed",
+                        "mb-4 line-clamp-5 flex-1 text-[13px] leading-relaxed",
                         "text-[#8b949e]"
                     )}
                 >
@@ -146,7 +118,7 @@ const TimelineCard = ({ experience }: { experience: Experience }) => {
                     )}
                 </div>
             </div>
-        </motion.div>
+        </motion.article>
     )
 }
 
@@ -159,7 +131,7 @@ export default function Experiences() {
 
             <div
                 className={cn(
-                    "relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+                    "relative z-10 mx-auto max-w-350 px-4 sm:px-6 lg:px-8"
                 )}
             >
                 <motion.div

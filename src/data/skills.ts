@@ -58,28 +58,102 @@ export type Framework = {
 }
 
 export const frameworks: Framework[] = [
-    { name: "IA N8N", icon: "/techs/n8n.png" },
-    { name: "Tailwind css", icon: "/techs/tailwindcss.png" },
-    { name: "Bootstrap", icon: "/techs/bootstrap.jpeg" },
-    { name: "Nuxt", icon: "/techs/nuxt.png" },
-    { name: "Primevue", icon: "/techs/primevue.png" },
-    { name: "Quasar", icon: "/techs/quasar.png" },
-    { name: "Nest", icon: "/techs/nestjs.png" },
-    { name: "Vuetify", icon: "/techs/vuetify.jpeg" },
-    { name: "Material UI", icon: "/techs/material-ui.jpg" },
-    { name: "Hero UI", icon: "/techs/heroUI.png" },
-    { name: "React bootstrap", icon: "/techs/React-bootstrap.webp" },
-    { name: "Shadcn ui", icon: "/techs/shadcs.png" },
-    { name: "Chakra UI", icon: "/techs/chakraui.jpeg" },
-    { name: "Ant design", icon: "/techs/ant-design.jpg" },
-    { name: "Primereact", icon: "/techs/primereact.jpg" },
-    { name: "Element Plus", icon: "/techs/element-plus.png" },
-    { name: "Bootstrap vue", icon: "/techs/bootstrapvue.jpg" },
-    { name: "PrimeNG", icon: "/techs/primeng.png" },
-    { name: "Angular Material", icon: "/techs/angular-material.svg" },
-    { name: "Lucide Icon", icon: "/techs/lucide.jpg" },
-    { name: "Flaticon", icon: "/techs/flaticon.jpeg" },
-    { name: "Native Expo", icon: "/techs/native-expo.jpeg" },
-    { name: "Prisma ORM", icon: "/techs/prisma.png" },
-    { name: "Sequelize", icon: "/techs/sequelize.jpg" },
+    {
+        name: "IA N8N",
+        icon: new URL("@/assets/techs/n8n.png", import.meta.url).href,
+    },
+    {
+        name: "Tailwind css",
+        icon: new URL("@/assets/techs/tailwindcss.png", import.meta.url).href,
+    },
+    {
+        name: "Bootstrap",
+        icon: new URL("@/assets/techs/bootstrap.jpeg", import.meta.url).href,
+    },
+    {
+        name: "Nuxt",
+        icon: new URL("@/assets/techs/nuxt.png", import.meta.url).href,
+    },
+    {
+        name: "Primevue",
+        icon: new URL("@/assets/techs/primevue.png", import.meta.url).href,
+    },
+    {
+        name: "Quasar",
+        icon: new URL("@/assets/techs/quasar.png", import.meta.url).href,
+    },
+    {
+        name: "Nest",
+        icon: new URL("@/assets/techs/nestjs.png", import.meta.url).href,
+    },
+    {
+        name: "Vuetify",
+        icon: new URL("@/assets/techs/vuetify.jpeg", import.meta.url).href,
+    },
+    {
+        name: "Material UI",
+        icon: new URL("@/assets/techs/material-ui.jpg", import.meta.url).href,
+    },
+    {
+        name: "Hero UI",
+        icon: new URL("@/assets/techs/heroUI.png", import.meta.url).href,
+    },
+    {
+        name: "React bootstrap",
+        icon: new URL("@/assets/techs/React-bootstrap.webp", import.meta.url)
+            .href,
+    },
+    {
+        name: "Shadcn ui",
+        icon: new URL("@/assets/techs/shadcs.png", import.meta.url).href,
+    },
+    {
+        name: "Chakra UI",
+        icon: new URL("@/assets/techs/chakraui.jpeg", import.meta.url).href,
+    },
+    {
+        name: "Ant design",
+        icon: new URL("@/assets/techs/ant-design.jpg", import.meta.url).href,
+    },
+    {
+        name: "Primereact",
+        icon: new URL("@/assets/techs/primereact.jpg", import.meta.url).href,
+    },
+    {
+        name: "Element Plus",
+        icon: new URL("@/assets/techs/element-plus.png", import.meta.url).href,
+    },
+    {
+        name: "Bootstrap vue",
+        icon: new URL("@/assets/techs/bootstrapvue.jpg", import.meta.url).href,
+    },
+    {
+        name: "PrimeNG",
+        icon: new URL("@/assets/techs/primeng.png", import.meta.url).href,
+    },
+    {
+        name: "Angular Material",
+        icon: new URL("@/assets/techs/angular-material.svg", import.meta.url)
+            .href,
+    },
+    {
+        name: "Lucide Icon",
+        icon: new URL("@/assets/techs/lucide.jpg", import.meta.url).href,
+    },
+    {
+        name: "Flaticon",
+        icon: new URL("@/assets/techs/flaticon.jpeg", import.meta.url).href,
+    },
+    {
+        name: "Native Expo",
+        icon: new URL("@/assets/techs/native-expo.jpeg", import.meta.url).href,
+    },
+    {
+        name: "Prisma ORM",
+        icon: new URL("@/assets/techs/prisma.png", import.meta.url).href,
+    },
+    {
+        name: "Sequelize",
+        icon: new URL("@/assets/techs/sequelize.jpg", import.meta.url).href,
+    },
 ]
