@@ -67,7 +67,7 @@ export type ToolBox = {
 
 export const toolbox: ToolBox[] = [
     {
-        source: "https://github.com/raharison-joshue-agape/ps-git-cli",
+        source: "https://github.com/raharison-joshue-agape/ps-git-aliases",
         title: "Git CLI",
         description:
             "Alias prédéfinis pour accélérer vos flux de travail et la gestion de vos versions.",
@@ -91,7 +91,7 @@ export const toolbox: ToolBox[] = [
         type: "Alias PowerShell Windows",
     },
     {
-        source: "https://github.com/raharison-joshue-agape/ps-python-cli",
+        source: "https://github.com/raharison-joshue-agape/ps-fastapi-aliases",
         title: "FastAPI Project",
         description:
             "Alias prédéfinis pour accélérer l’initialisation et la configuration de projets FastAPI.",
@@ -99,7 +99,7 @@ export const toolbox: ToolBox[] = [
         type: "Alias PowerShell Windows",
     },
     {
-        source: "https://github.com/raharison-joshue-agape/ps-vue-cli",
+        source: "https://github.com/raharison-joshue-agape/ps-vue-project",
         title: "VueJS Project",
         description:
             "Alias prédéfinis pour accélérer l’initialisation et la configuration de projets VueJS.",
@@ -107,7 +107,7 @@ export const toolbox: ToolBox[] = [
         type: "Alias PowerShell Windows",
     },
     {
-        source: "https://github.com/raharison-joshue-agape/ps-react-cli",
+        source: "https://github.com/raharison-joshue-agape/ps-react-project",
         title: "ReactJS Project",
         description:
             "Alias prédéfinis pour accélérer l’initialisation et la configuration de projets ReactJS.",
