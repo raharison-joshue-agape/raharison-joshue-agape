@@ -13,7 +13,6 @@ import {
     MessageSquare,
     ExternalLink,
 } from "lucide-react"
-import GridBackground from "@/components/grid-background"
 import { AlertComponent, type Alert } from "@/components/alert"
 import { SEND_MESSAGE, useApi } from "@/hooks/use-api"
 import { cn } from "@/lib/utils"
@@ -48,7 +47,7 @@ const contactLinks = [
     {
         icon: GithubIcon,
         label: "GitHub",
-        value: "joshue-agape",
+        value: "raharison-joshue-agape",
         href: personalInfo.github,
     },
     {
@@ -67,7 +66,7 @@ const contactLinks = [
     {
         icon: MapPin,
         label: "Location",
-        value: "Fianarantsoa 301, Madagascar",
+        value: "Lot 021B III 3504FR, 301, Fianarantsoa, Madagascar",
         href: personalInfo.map,
         isLucide: true,
     },
@@ -230,8 +229,6 @@ export default function Contact() {
 
     return (
         <section id="contact" className={cn("relative overflow-hidden py-24")}>
-            <GridBackground className={cn("opacity-25")} />
-
             <div
                 className={cn(
                     "relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
@@ -370,7 +367,7 @@ export default function Contact() {
                                 </div>
                             </div>
 
-                            <div className="space-y-1">
+                            <div className="space-y-2">
                                 {contactLinks.map(
                                     ({
                                         icon: Icon,
@@ -385,7 +382,7 @@ export default function Contact() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className={cn(
-                                                "group flex items-center gap-3 rounded-md px-3 py-2.5 transition-colors duration-200",
+                                                "group flex items-center gap-4 rounded-md px-3 py-2.5 transition-colors duration-200",
                                                 "hover:bg-[#21262d]"
                                             )}
                                         >
@@ -417,7 +414,7 @@ export default function Contact() {
                                                 </p>
                                                 <p
                                                     className={cn(
-                                                        "truncate text-sm transition-colors",
+                                                        "line-clamp-2 text-sm transition-colors",
                                                         "text-[#c9d1d9] group-hover:text-[#58a6ff]"
                                                     )}
                                                 >

@@ -379,34 +379,12 @@ export default function Projects() {
         <section
             id="projects"
             ref={ref}
-            className={cn("relative overflow-hidden py-28", "bg-[#06090e]")}
+            className={cn(
+                "relative overflow-hidden py-28 backdrop-blur-lg",
+                "bg-gray-950/30"
+            )}
         >
             <GridBackground className={cn("opacity-15")} />
-
-            <div
-                className={cn(
-                    "pointer-events-none absolute inset-0 overflow-hidden"
-                )}
-            >
-                <div
-                    className={cn(
-                        "absolute top-[10%] left-[5%] h-130 w-130 rounded-full blur-[120px]",
-                        "bg-cyan-500/10"
-                    )}
-                />
-                <div
-                    className={cn(
-                        "absolute right-[5%] bottom-[10%] h-130 w-130 rounded-full blur-[120px]",
-                        "bg-emerald-500/10"
-                    )}
-                />
-                <div
-                    className={cn(
-                        "absolute inset-0 bg-size-[32px_32px]",
-                        "bg-[radial-gradient(circle_at_1px_1px,rgba(148,163,184,0.07)_1px,transparent_0)]"
-                    )}
-                />
-            </div>
 
             <div
                 className={cn(

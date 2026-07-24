@@ -1,5 +1,6 @@
 import AIChat from "@/components/ai-chat"
 import CustomCursor from "@/components/custom-cursor"
+import DottedBackground from "@/components/dotted-background"
 import AboutMe from "@/components/sections/about-me"
 import Contact from "@/components/sections/contact"
 import Experiences from "@/components/sections/experiences"
@@ -15,8 +16,17 @@ import { cn } from "@/lib/utils"
 
 export default function App() {
     return (
-        <main className={cn("relative min-h-screen w-full", "bg-gray-950")}>
+        <main className={cn("relative min-h-screen w-full")}>
             <CustomCursor />
+            <DottedBackground
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100vw",
+                    height: "100vh",
+                }}
+            />
 
             <Header />
             <Hero />

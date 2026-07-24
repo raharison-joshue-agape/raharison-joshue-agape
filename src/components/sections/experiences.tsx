@@ -7,7 +7,6 @@ import { experiences, type Experience } from "@/data/experiences"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation, Autoplay } from "swiper/modules"
 import { Calendar, Building2, Terminal } from "lucide-react"
-import GridBackground from "@/components/grid-background"
 import { cn } from "@/lib/utils"
 
 function TimelineCard({ experience }: { experience: Experience }) {
@@ -127,8 +126,6 @@ export default function Experiences() {
 
     return (
         <section id="experiences" className={cn("relative py-24")}>
-            <GridBackground className={cn("opacity-25")} />
-
             <div
                 className={cn(
                     "relative z-10 mx-auto max-w-350 px-4 sm:px-6 lg:px-8"

@@ -6,7 +6,6 @@ import { useInView } from "react-intersection-observer"
 import { frameworks, skills } from "@/data/skills"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper/modules"
-import GridBackground from "@/components/grid-background"
 import { Terminal } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -33,10 +32,6 @@ export default function Skills() {
     const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
     return (
         <section id="skills" className={cn("relative py-28")}>
-            <div className={cn("absolute inset-0", "bg-(--bg-primary)")} />
-
-            <GridBackground className={cn("opacity-20")} />
-
             <div
                 className={cn(
                     "relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
@@ -173,7 +168,7 @@ export default function Skills() {
                                     <p
                                         className={cn(
                                             "mx-auto mt-3 max-w-2xl text-sm leading-relaxed md:text-base",
-                                            "text-neutral-400"
+                                            "text-slate-400"
                                         )}
                                     >
                                         {category.subtitle}
@@ -281,7 +276,7 @@ export default function Skills() {
                                 whileHover={{ scale: 1.1, y: -2 }}
                                 className={cn(
                                     "skill-tag border",
-                                    "border-gray-700 bg-gray-700/50 text-gray-400 hover:bg-gray-700/70"
+                                    "border-gray-700 bg-gray-700/50 text-slate-400 hover:bg-gray-700/70"
                                 )}
                             >
                                 {tool}

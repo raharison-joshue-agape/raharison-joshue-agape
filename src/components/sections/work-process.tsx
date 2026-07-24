@@ -1,5 +1,4 @@
 import { motion } from "framer-motion"
-import GridBackground from "@/components/grid-background"
 import {
     CalendarRange,
     ChartSpline,
@@ -45,7 +44,6 @@ export default function WorkProcess() {
 
     return (
         <section id="work-process" className={cn("relative py-28")}>
-            <GridBackground className={cn("opacity-25")} />
             <div className={cn("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8")}>
                 <div
                     className={cn(
@@ -59,7 +57,7 @@ export default function WorkProcess() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             className={cn(
-                                "justify-center lg:justify-start",
+                                "text-center lg:text-start",
                                 "text-emerald-400"
                             )}
                         >
@@ -113,7 +111,7 @@ export default function WorkProcess() {
                     </div>
 
                     {/* RIGHT */}
-                    <div className={cn("grid grid-cols-2 gap-x-6")}>
+                    <div className={cn("grid grid-cols-2 gap-x-4 md:gap-x-6")}>
                         {workStepData.map((step, i) => {
                             const Icon = step.icon
 

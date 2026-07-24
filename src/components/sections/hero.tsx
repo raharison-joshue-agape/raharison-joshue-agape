@@ -3,7 +3,7 @@ import { TypeAnimation } from "react-type-animation"
 import { Mail, Zap, MapPin, ExternalLink } from "lucide-react"
 import { personalInfo } from "@/data/Personal-info"
 import { staggerContainer, staggerItem } from "@/lib/animations"
-import GridBackground from "@/components/grid-background"
+//import GridBackground from "@/components/grid-background"
 import { cn } from "@/lib/utils"
 
 const GithubIcon = () => (
@@ -38,47 +38,6 @@ export default function Hero() {
                 "relative flex min-h-screen items-center justify-center overflow-hidden"
             )}
         >
-            <GridBackground className={cn("opacity-30")} />
-
-            <div
-                className={cn(
-                    "pointer-events-none absolute inset-0 overflow-hidden"
-                )}
-            >
-                <motion.div
-                    animate={{
-                        scale: [1, 1.08, 1],
-                        x: [0, 10, 0],
-                        y: [0, -10, 0],
-                    }}
-                    transition={{
-                        duration: 14,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                    className={cn(
-                        "absolute top-20 right-[10%] h-72 w-72 rounded-full blur-2xl",
-                        "bg-cyan-500/8"
-                    )}
-                />
-                <motion.div
-                    animate={{
-                        scale: [1, 1.12, 1],
-                        x: [0, -8, 0],
-                        y: [0, 12, 0],
-                    }}
-                    transition={{
-                        duration: 18,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 3,
-                    }}
-                    className={cn(
-                        "absolute bottom-20 left-[5%] h-80 w-80 rounded-full blur-2xl",
-                        "bg-emerald-500/6"
-                    )}
-                />
-            </div>
             <div
                 className={cn(
                     "relative z-10 mx-auto max-w-7xl px-4 pt-32 pb-16 sm:px-6 lg:px-8 lg:pt-15"

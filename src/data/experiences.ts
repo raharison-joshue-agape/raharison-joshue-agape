@@ -104,7 +104,7 @@ export const experiences: Experience[] = [
         location: "Full Remote",
         description:
             "Optimisation du backend Node.js et développement de nouvelles fonctionnalités d'API pour améliorer la scalabilité système.",
-        tags: ["Node.js", "Express", "Sequelize ORM", "Docker", "websocket"],
+        tags: ["Node.js", "Express", "Docker", "Sequelize ORM", "websocket"],
         image: helloArchiURL,
     },
     {

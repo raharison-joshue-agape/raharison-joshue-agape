@@ -4,8 +4,8 @@ import { getAccessToken } from "@/services/token-service"
 export const BASE_USER_API = import.meta.env.VITE_API_URL
 export const WEB_SOCKET_BASE = import.meta.env.VITE_WEBSOCKET_URL
 
-export const SEND_MESSAGE = "/api/v1/users/create-customer"
-export const ASK_IA = "/api/v1/users/ask-ia"
+export const SEND_MESSAGE = "/api/v1/send-message"
+export const ASK_IA = "/api/v1/ask-ia"
 
 type ApiResponse<T> = {
     message: string

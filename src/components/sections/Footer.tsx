@@ -8,8 +8,8 @@ export default function Footer() {
     return (
         <footer
             className={cn(
-                "relative border-t py-10",
-                "border-border bg-(--bg-secondary)"
+                "relative border-t py-10 backdrop-blur-3xl",
+                "border-gray-900 bg-gray-950"
             )}
         >
             <div className={cn("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8")}>

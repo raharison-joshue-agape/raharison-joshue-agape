@@ -16,9 +16,14 @@ export default function ToolBox() {
     const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
 
     return (
-        <section id="services" className={cn("relative overflow-hidden py-28")}>
-            <GridBackground className={cn("opacity-14")} />
-
+        <section
+            id="tool-box"
+            className={cn(
+                "relative overflow-hidden py-28 backdrop-blur-lg",
+                "bg-gray-950/30"
+            )}
+        >
+            <GridBackground className="opacity-15" />
             <div
                 className={cn(
                     "pointer-events-none absolute inset-0 overflow-hidden"

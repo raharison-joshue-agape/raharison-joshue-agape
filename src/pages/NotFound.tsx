@@ -1,7 +1,7 @@
 import { ArrowLeft, ShieldAlert } from "lucide-react"
-import GridBackground from "@/components/grid-background"
 import CustomCursor from "@/components/custom-cursor"
 import { cn } from "@/lib/utils"
+import DottedBackground from "@/components/dotted-background"
 
 export default function NotFoundPage() {
     return (
@@ -12,22 +12,15 @@ export default function NotFoundPage() {
             )}
         >
             <CustomCursor />
-
-            <div className={cn("absolute inset-0 z-0")}>
-                <GridBackground className={cn("opacity-25")} />
-                <div
-                    className={cn(
-                        "pointer-events-none absolute top-1/2 left-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]",
-                        "bg-cyan-500/10"
-                    )}
-                />
-                <div
-                    className={cn(
-                        "pointer-events-none absolute top-1/3 left-1/4 h-75 w-75 rounded-full blur-[100px]",
-                        "bg-emerald-500/5"
-                    )}
-                />
-            </div>
+            <DottedBackground
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100vw",
+                    height: "100vh",
+                }}
+            />
 
             <div
                 className={cn(
