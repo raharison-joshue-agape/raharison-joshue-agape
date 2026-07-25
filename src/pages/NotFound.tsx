@@ -20,6 +20,8 @@ export default function NotFoundPage() {
                     width: "100vw",
                     height: "100vh",
                 }}
+                frequency={2}
+                gamma={3}
             />
 
             <div

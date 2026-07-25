@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -10,6 +10,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { useNavigate } from "react-router-dom"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Link } from "react-router-dom"
 import { useState } from "react"
@@ -30,6 +31,8 @@ type DataType = {
 }
 
 export default function LoginPage() {
+    const navigate = useNavigate()
+
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState({
         value: "",
@@ -89,7 +92,7 @@ export default function LoginPage() {
         return hasError
     }
 
-    const { request } = useApi<DataType[]>()
+    const { request } = useApi<DataType>()
 
     const onSubmit = async () => {
         if (checkError()) return
@@ -106,7 +109,19 @@ export default function LoginPage() {
                 body: payload,
             })
             if (response?.success) {
-                // 
+                const token = response.data?.access_token
+                if (token) {
+                    localStorage.setItem("admin_token", token)
+                }
+
+                navigate("/portfolio/dashboard")
+            } else {
+                setAlert({
+                    show: true,
+                    type: "error",
+                    title: "Erreur d'authentification",
+                    message: "Identifiants incorrects. Veuillez réessayer.",
+                })
             }
         } catch {
             setAlert({
@@ -140,14 +155,11 @@ export default function LoginPage() {
                 gamma={3}
                 cellSize={2}
             />
-            <div
-                className={cn(
-                    "pointer-events-none absolute top-1/4 h-87.5 w-87.5 -translate-y-1/2 rounded-full blur-[120px]",
-                    "bg-emerald-500/10"
-                )}
-            />
 
-            <div
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 className={cn("relative z-10 mb-6 flex flex-col items-center")}
             >
                 <div
@@ -172,13 +184,16 @@ export default function LoginPage() {
                 >
                     Portofolio Administration
                 </h1>
-            </div>
+            </motion.div>
 
-            <form
+            <motion.form
                 onSubmit={(e) => {
                     e.preventDefault()
                     onSubmit()
                 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
                 className="w-full max-w-100"
             >
                 <Card
@@ -205,30 +220,40 @@ export default function LoginPage() {
 
                     <CardContent className={cn("space-y-4")}>
                         {alertMessage.show && (
-                            <Alert
-                                variant={
-                                    alertMessage.type === "error"
-                                        ? "destructive"
-                                        : "default"
-                                }
-                                className={cn(
-                                    "mb-8 w-full bg-gray-900/60",
-                                    alertMessage.type === "success" &&
-                                        "border-emerald-500/40 bg-emerald-400/10 text-emerald-400"
-                                )}
+                            <motion.div
+                                initial={{ opacity: 0, height: 0, y: -10 }}
+                                animate={{ opacity: 1, height: "auto", y: 0 }}
+                                exit={{ opacity: 0, height: 0, y: -10 }}
+                                transition={{ duration: 0.3 }}
                             >
-                                <AlertCircleIcon />
-                                <AlertTitle>{alertMessage.title}</AlertTitle>
-                                <AlertDescription
+                                <Alert
+                                    variant={
+                                        alertMessage.type === "error"
+                                            ? "destructive"
+                                            : "default"
+                                    }
                                     className={cn(
+                                        "mb-8 w-full bg-gray-900/60",
                                         alertMessage.type === "success" &&
-                                            "text-emerald-400"
+                                            "border-emerald-500/40 bg-emerald-400/10 text-emerald-400"
                                     )}
                                 >
-                                    {alertMessage.message}
-                                </AlertDescription>
-                            </Alert>
+                                    <AlertCircleIcon />
+                                    <AlertTitle>
+                                        {alertMessage.title}
+                                    </AlertTitle>
+                                    <AlertDescription
+                                        className={cn(
+                                            alertMessage.type === "success" &&
+                                                "text-emerald-400"
+                                        )}
+                                    >
+                                        {alertMessage.message}
+                                    </AlertDescription>
+                                </Alert>
+                            </motion.div>
                         )}
+
                         <div className={cn("space-y-2")}>
                             <Label
                                 htmlFor="email"
@@ -258,16 +283,21 @@ export default function LoginPage() {
                                         : "border-gray-800 focus:border-[#58a6ff] focus:ring-[#58a6ff]"
                                 )}
                             />
-                            {email.error && (
-                                <small
-                                    className={cn(
-                                        "mt-1 text-sm",
-                                        "text-red-500"
+                            <AnimatePresence>
+                                    {email.error && (
+                                        <motion.small
+                                            initial={{ opacity: 0, y: -4 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -4 }}
+                                            className={cn(
+                                                "mt-1 block text-sm",
+                                                "text-red-500"
+                                            )}
+                                        >
+                                            {email.error_message}
+                                        </motion.small>
                                     )}
-                                >
-                                    {email.error_message}
-                                </small>
-                            )}
+                                </AnimatePresence>
                         </div>
 
                         <div className={cn("space-y-2")}>
@@ -335,17 +365,22 @@ export default function LoginPage() {
                                         <EyeOff size={18} />
                                     )}
                                 </button>
+                            </div>
+                            <AnimatePresence>
                                 {password.error && (
-                                    <small
+                                    <motion.small
+                                        initial={{ opacity: 0, y: -4 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -4 }}
                                         className={cn(
-                                            "mt-1 text-sm",
+                                            "mt-1 block text-sm",
                                             "text-red-500"
                                         )}
                                     >
                                         {password.error_message}
-                                    </small>
+                                    </motion.small>
                                 )}
-                            </div>
+                            </AnimatePresence>
                         </div>
 
                         <div className={cn("flex items-center space-x-2 pt-1")}>
@@ -416,7 +451,7 @@ export default function LoginPage() {
                         </p>
                     </CardFooter>
                 </Card>
-            </form>
+            </motion.form>
         </main>
     )
 }
