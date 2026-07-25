@@ -12,10 +12,11 @@ import {
     FileText,
     MessageSquare,
     ExternalLink,
+    AlertCircleIcon,
 } from "lucide-react"
-import { AlertComponent, type Alert } from "@/components/alert"
 import { SEND_MESSAGE, useApi } from "@/hooks/use-api"
 import { cn } from "@/lib/utils"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 type DataType = {
     name: string
@@ -29,6 +30,13 @@ type DataType = {
     is_read: boolean
     created_at: string
     updated_at: string
+}
+
+interface AlertType {
+    show: boolean
+    title: string
+    message: string
+    type: "success" | "info" | "warning" | "error"
 }
 
 const GithubIcon = () => (
@@ -101,7 +109,7 @@ export default function Contact() {
     })
     const [sending, setSending] = useState(false)
     const [sent, setSent] = useState(false)
-    const [alertMessage, setAlert] = useState<Alert>({
+    const [alertMessage, setAlert] = useState<AlertType>({
         show: false,
         type: "success",
         title: "",
@@ -190,7 +198,7 @@ export default function Contact() {
             email: email.value,
             location: location.value,
             subject: subject.value,
-            message: message.value,
+            description: message.value,
         }
 
         try {
@@ -223,7 +231,7 @@ export default function Contact() {
             })
         } finally {
             setSending(false)
-            setTimeout(() => setSent(false), 5000)
+            setTimeout(() => setSent(false), 10000)
         }
     }
 
@@ -483,9 +491,32 @@ export default function Contact() {
                                 className={cn("space-y-5 p-6")}
                             >
                                 {alertMessage.show && (
-                                    <AlertComponent
-                                        alertMessage={alertMessage}
-                                    />
+                                    <Alert
+                                        variant={
+                                            alertMessage.type === "error"
+                                                ? "destructive"
+                                                : "default"
+                                        }
+                                        className={cn(
+                                            "mb-8 w-full bg-gray-900/60",
+                                            alertMessage.type === "success" &&
+                                                "border-emerald-500/40 bg-emerald-400/10 text-emerald-400"
+                                        )}
+                                    >
+                                        <AlertCircleIcon />
+                                        <AlertTitle>
+                                            {alertMessage.title}
+                                        </AlertTitle>
+                                        <AlertDescription
+                                            className={cn(
+                                                alertMessage.type ===
+                                                    "success" &&
+                                                    "text-emerald-400"
+                                            )}
+                                        >
+                                            {alertMessage.message}
+                                        </AlertDescription>
+                                    </Alert>
                                 )}
 
                                 {/* Name & Email */}

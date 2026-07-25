@@ -26,6 +26,8 @@ export default function App() {
                     width: "100vw",
                     height: "100vh",
                 }}
+                frequency={2}
+                gamma={3}
             />
 
             <Header />

@@ -4,12 +4,14 @@ import { getAccessToken } from "@/services/token-service"
 export const BASE_USER_API = import.meta.env.VITE_API_URL
 export const WEB_SOCKET_BASE = import.meta.env.VITE_WEBSOCKET_URL
 
-export const SEND_MESSAGE = "/api/v1/send-message"
+export const SEND_MESSAGE = "/api/v1/clients"
 export const ASK_IA = "/api/v1/ask-ia"
+export const LOGIN_API = "/api/v1/auth/login"
 
 type ApiResponse<T> = {
     message: string
     success: boolean
+    status_code: number
     data?: T
 }
 
