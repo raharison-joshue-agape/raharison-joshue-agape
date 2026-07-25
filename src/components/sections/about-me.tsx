@@ -465,7 +465,7 @@ export default function AboutMe() {
                                         </span>
                                     </div>
 
-                                    <div className={cn("pl-12")}>
+                                    {/*<div className={cn("pl-12")}>
                                         <span className={cn("text-slate-400")}>
                                             {"{"}
                                         </span>
@@ -522,7 +522,7 @@ export default function AboutMe() {
                                         <span className={cn("text-slate-400")}>
                                             ,
                                         </span>
-                                    </div>
+                                    </div>*/}
 
                                     <div className={cn("pl-12")}>
                                         <span className={cn("text-slate-400")}>
