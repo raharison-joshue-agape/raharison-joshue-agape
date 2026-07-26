@@ -3,10 +3,10 @@ import { useEffect, useState } from "react"
 import { User, Bell, Shield, Palette } from "lucide-react"
 import ProfileSetting, {
     type PayloadProfileType,
-} from "@/components/admin/profile-setting"
-import SecuritySetting from "@/components/admin/security-setting"
-import NotificationSetting from "@/components/admin/notification-setting"
-import AppearanceSetting from "@/components/admin/appearance-setting"
+} from "@/components/admin/settings/profile-setting"
+import SecuritySetting from "@/components/admin/settings/security-setting"
+import NotificationSetting from "@/components/admin/settings/notification-setting"
+import AppearanceSetting from "@/components/admin/settings/appearance-setting"
 import { useSearchParams } from "react-router-dom"
 
 export default function AdminSetting() {

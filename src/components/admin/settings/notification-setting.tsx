@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { Switch } from "../ui/switch"
+import { Switch } from "../../ui/switch"
 import { useState } from "react"
 
 export default function NotificationSetting() {

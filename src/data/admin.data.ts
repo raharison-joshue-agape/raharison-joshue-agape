@@ -3,13 +3,18 @@ import type { NotificationItemProps } from "@/components/admin/notification"
 import {
     Briefcase,
     ChartColumn,
+    CheckCircle2,
+    Eye,
+    FolderKanban,
     Globe,
     LayoutDashboard,
     ListTodo,
     MessageSquare,
     Receipt,
+    Send,
     Settings,
     Star,
+    TrendingUp,
     Users,
 } from "lucide-react"
 
@@ -172,5 +177,117 @@ export const mockNotificationsGrouped: GroupedNotifications[] = [
                 type: "default",
             },
         ],
+    },
+]
+
+// Données fictives pour les statistiques
+export const stats = [
+    {
+        title: "Visites du Portfolio",
+        value: "24,592",
+        change: "+12.5%",
+        isPositive: true,
+        icon: Eye,
+        description: "vs le mois dernier",
+    },
+    {
+        title: "Messages Reçus",
+        value: "142",
+        change: "+18.2%",
+        isPositive: true,
+        icon: MessageSquare,
+        description: "vs le mois dernier",
+    },
+    {
+        title: "Projets Actifs",
+        value: "8",
+        change: "0%",
+        isPositive: true,
+        icon: FolderKanban,
+        description: "En cours de maintenance",
+    },
+    {
+        title: "Taux d'Engagement",
+        value: "68.4%",
+        change: "-2.1%",
+        isPositive: false,
+        icon: TrendingUp,
+        description: "vs le mois dernier",
+    },
+]
+
+// Activités récentes
+export const recentActivities = [
+    {
+        action: "Mise à jour du projet DGSR",
+        time: "Il y a 2 heures",
+        status: "Complété",
+        icon: CheckCircle2,
+    },
+    {
+        action: "Nouveau message de contact (Jean Dupont)",
+        time: "Il y a 5 heures",
+        status: "En attente",
+        icon: MessageSquare,
+    },
+    {
+        action: "Déploiement de la version 2.4.0",
+        time: "Il y a 1 jour",
+        status: "Succès",
+        icon: Send,
+    },
+]
+
+export const projects = [
+    {
+        name: "Plateforme ERP DGSR",
+        category: "Architecture & Backend",
+        progress: 85,
+        status: "En cours",
+        tech: "Angular / NestJS",
+    },
+    {
+        name: "Interface Portfolio Admin",
+        category: "Frontend Management",
+        progress: 95,
+        status: "Finalisation",
+        tech: "React / Vite / Tailwind",
+    },
+    {
+        name: "API Sécurisée de Trafic",
+        category: "Microservices",
+        progress: 40,
+        status: "Planifié",
+        tech: "Node.js",
+    },
+]
+
+export const quickMessagesData = [
+    {
+        id: "1",
+        sender: "Jean Dupont",
+        email: "jean.dupont@example.com",
+        preview:
+            "Bonjour, je souhaite discuter d'une collaboration sur une architecture d'application...",
+        time: "Il y a 35 min",
+        unread: true,
+    },
+    {
+        id: "2",
+        sender: "Sarah Ravelo",
+        email: "sarah.rav@example.com",
+        preview:
+            "Super portfolio ! Seriez-vous disponible pour un projet de refonte frontend ?",
+        time: "Il y a 3 heures",
+        unread: true,
+    },
+    {
+        id: "3",
+        sender: "Marc Andriana",
+        email: "marc.andriana@example.com",
+        preview:
+            "Voici les spécifications techniques demandées pour la partie backend NestJS.",
+        time: "Il y a 1 jour",
+        unread: false,
     },
 ]
