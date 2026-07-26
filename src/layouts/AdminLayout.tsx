@@ -1,15 +1,15 @@
 import { cn } from "@/lib/utils"
-import { Outlet, Link, useLocation } from "react-router-dom"
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom"
 import {
     LogOut,
     Globe,
     Search,
     Bell,
     MessageSquareText,
-    BadgeCheckIcon,
-    CreditCardIcon,
-    BellIcon,
     LogOutIcon,
+    User,
+    Shield,
+    Palette,
 } from "lucide-react"
 import { motion } from "framer-motion"
 import DottedBackground from "@/components/dotted-background"
@@ -51,6 +51,7 @@ import { MessageItem } from "@/components/admin/message"
 
 export default function AdminLayout() {
     const location = useLocation()
+    const navigate = useNavigate()
     const { logout } = UseAuth()
 
     const [isOpen, setIsOpen] = useState(false)
@@ -158,8 +159,9 @@ export default function AdminLayout() {
                                 </p>
                                 {childrens.items.map((navItems) => {
                                     const Icon = navItems.icon
-                                    const isActive =
-                                        location.pathname === navItems.href
+                                    const isActive = navItems.href.startsWith(
+                                        location.pathname
+                                    )
 
                                     return (
                                         <Link
@@ -387,22 +389,54 @@ export default function AdminLayout() {
                                 className={cn("mt-5 w-50", "bg-gray-950")}
                             >
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem className="cursor-pointer py-2">
-                                        <BadgeCheckIcon />
-                                        Compte
+                                    <DropdownMenuItem
+                                        onClick={() =>
+                                            navigate(
+                                                "/portfolio/settings?tab=profile"
+                                            )
+                                        }
+                                        className={cn("cursor-pointer py-2")}
+                                    >
+                                        <User />
+                                        Profil & Identité
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem className="cursor-pointer py-2">
-                                        <CreditCardIcon />
-                                        Facturation
+                                    <DropdownMenuItem
+                                        onClick={() =>
+                                            navigate(
+                                                "/portfolio/settings?tab=security"
+                                            )
+                                        }
+                                        className={cn("cursor-pointer py-2")}
+                                    >
+                                        <Shield />
+                                        Sécurité & Mot de passe
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem className="cursor-pointer py-2">
-                                        <BellIcon />
+                                    <DropdownMenuItem
+                                        onClick={() =>
+                                            navigate(
+                                                "/portfolio/settings?tab=notifications"
+                                            )
+                                        }
+                                        className={cn("cursor-pointer py-2")}
+                                    >
+                                        <Bell />
                                         Notifications
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        onClick={() =>
+                                            navigate(
+                                                "/portfolio/settings?tab=appearance"
+                                            )
+                                        }
+                                        className={cn("cursor-pointer py-2")}
+                                    >
+                                        <Palette />
+                                        Apparence & Langue
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
-                                    className="cursor-pointer py-2"
+                                    className={cn("cursor-pointer py-2")}
                                     onClick={() => setIsOpen(true)}
                                 >
                                     <LogOutIcon />

@@ -1,6 +1,6 @@
+import { cn } from "@/lib/utils"
 import { ArrowLeft, ShieldAlert } from "lucide-react"
 import CustomCursor from "@/components/custom-cursor"
-import { cn } from "@/lib/utils"
 import DottedBackground from "@/components/dotted-background"
 
 export default function NotFoundPage() {

@@ -79,7 +79,7 @@ export const adminNavItems = [
             },
             {
                 title: "Paramètres",
-                href: "/portfolio/settings",
+                href: "/portfolio/settings?tab=profile",
                 icon: Settings,
             },
         ],
