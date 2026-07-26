@@ -111,40 +111,66 @@ export function TestimonialDetail({
 
                         <div className={cn("grid grid-cols-2 gap-2")}>
                             <div className={cn("space-y-1")}>
-                                <label className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+                                <label
+                                    className={cn(
+                                        "text-[10px] font-semibold tracking-wider uppercase",
+                                        "text-slate-400"
+                                    )}
+                                >
                                     Rôle
                                 </label>
                                 <Input
                                     value={role}
                                     onChange={(e) => setRole(e.target.value)}
                                     placeholder="Ex: CTO"
-                                    className="h-8 border-gray-800 bg-gray-950/80 text-xs text-slate-200"
+                                    className={cn(
+                                        "h-8 text-xs",
+                                        "border-gray-800 bg-gray-950/80 text-slate-200"
+                                    )}
                                 />
                             </div>
-                            <div className="space-y-1">
-                                <label className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+                            <div className={cn("space-y-1")}>
+                                <label
+                                    className={cn(
+                                        "text-[10px] font-semibold tracking-wider uppercase",
+                                        "text-slate-400"
+                                    )}
+                                >
                                     Entreprise
                                 </label>
                                 <Input
                                     value={company}
                                     onChange={(e) => setCompany(e.target.value)}
                                     placeholder="Ex: DGSR"
-                                    className="h-8 border-gray-800 bg-gray-950/80 text-xs text-slate-200"
+                                    className={cn(
+                                        "h-8 text-xs",
+                                        "border-gray-800 bg-gray-950/80 text-slate-200"
+                                    )}
                                 />
                             </div>
                         </div>
 
-                        <div className="space-y-1">
-                            <label className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+                        <div className={cn("space-y-1")}>
+                            <label
+                                className={cn(
+                                    "text-[10px] font-semibold tracking-wider uppercase",
+                                    "text-slate-400"
+                                )}
+                            >
                                 Note
                             </label>
-                            <div className="flex items-center gap-1.5 rounded-md border border-gray-800 bg-gray-950/50 p-2">
+                            <div
+                                className={cn(
+                                    "flex items-center gap-1.5 rounded-md border p-2",
+                                    "border-gray-800 bg-gray-950/50"
+                                )}
+                            >
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <button
                                         type="button"
                                         key={star}
                                         onClick={() => setRating(star)}
-                                        className="focus:outline-none"
+                                        className={cn("focus:outline-none")}
                                     >
                                         <Star
                                             size={16}
@@ -159,8 +185,13 @@ export function TestimonialDetail({
                             </div>
                         </div>
 
-                        <div className="space-y-1">
-                            <label className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+                        <div className={cn("space-y-1")}>
+                            <label
+                                className={cn(
+                                    "text-[10px] font-semibold tracking-wider uppercase",
+                                    "text-slate-400"
+                                )}
+                            >
                                 Témoignage
                             </label>
                             <textarea
@@ -168,26 +199,40 @@ export function TestimonialDetail({
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}
                                 placeholder="Message..."
-                                className="w-full resize-none rounded-md border border-gray-800 bg-gray-950/80 p-2.5 text-xs text-slate-200 placeholder:text-slate-600 focus:ring-1 focus:ring-slate-700 focus:outline-none"
+                                className={cn(
+                                    "w-full resize-none rounded-md border p-2.5 text-xs focus:ring-1 focus:outline-none",
+                                    "border-gray-800 bg-gray-950/80 text-slate-200 placeholder:text-slate-600 focus:ring-slate-700"
+                                )}
                                 required
                             />
                         </div>
                     </div>
 
-                    <div className="flex shrink-0 items-center justify-end gap-2 border-t border-gray-800 pt-3">
+                    <div
+                        className={cn(
+                            "flex shrink-0 items-center justify-end gap-2 border-t pt-3",
+                            "border-gray-800"
+                        )}
+                    >
                         <Button
                             type="button"
                             variant="ghost"
                             size="sm"
                             onClick={onCancelEdit}
-                            className="h-8 text-xs font-medium text-slate-400 hover:text-white"
+                            className={cn(
+                                "h-8 text-xs font-medium",
+                                "text-slate-400 hover:text-white"
+                            )}
                         >
                             Annuler
                         </Button>
                         <Button
                             type="submit"
                             size="sm"
-                            className="h-8 gap-1 bg-white text-xs font-semibold text-gray-950 hover:bg-slate-200"
+                            className={cn(
+                                "h-8 gap-1 text-xs font-semibold",
+                                "bg-white text-gray-950 hover:bg-slate-200"
+                            )}
                         >
                             <Check size={13} />
                             Enregistrer
@@ -195,12 +240,31 @@ export function TestimonialDetail({
                     </div>
                 </form>
             ) : (
-                <div className="flex flex-1 flex-col space-y-4 overflow-y-auto p-4 text-xs">
+                <div
+                    className={cn(
+                        "flex flex-1 flex-col space-y-4 overflow-y-auto p-4 text-xs"
+                    )}
+                >
                     {active ? (
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3 border-b border-gray-800/80 pb-3">
-                                <Avatar className="h-10 w-10 border border-gray-800">
-                                    <AvatarFallback className="bg-gray-900 text-xs font-medium text-slate-200">
+                        <div className={cn("space-y-4")}>
+                            <div
+                                className={cn(
+                                    "flex items-center gap-3 border-b pb-3",
+                                    "border-gray-800/80"
+                                )}
+                            >
+                                <Avatar
+                                    className={cn(
+                                        "h-10 w-10 border",
+                                        "border-gray-800"
+                                    )}
+                                >
+                                    <AvatarFallback
+                                        className={cn(
+                                            "text-xs font-medium",
+                                            "bg-gray-900 text-slate-200"
+                                        )}
+                                    >
                                         {active.author
                                             .split(" ")
                                             .map((n) => n[0])
@@ -208,49 +272,89 @@ export function TestimonialDetail({
                                     </AvatarFallback>
                                 </Avatar>
                                 <div>
-                                    <h3 className="font-semibold text-slate-100">
+                                    <h3
+                                        className={cn(
+                                            "font-semibold",
+                                            "text-slate-100"
+                                        )}
+                                    >
                                         {active.author}
                                     </h3>
-                                    <p className="text-[11px] text-slate-400">
+                                    <p
+                                        className={cn(
+                                            "text-[11px]",
+                                            "text-slate-400"
+                                        )}
+                                    >
                                         {active.role} -{" "}
-                                        <span className="text-slate-300">
+                                        <span className={cn("text-slate-300")}>
                                             {active.company}
                                         </span>
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="space-y-1">
-                                <span className="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">
+                            <div className={cn("space-y-1")}>
+                                <span
+                                    className={cn(
+                                        "text-[10px] font-semibold tracking-wider uppercase",
+                                        "text-slate-500"
+                                    )}
+                                >
                                     Note attribuée
                                 </span>
-                                <div className="flex items-center gap-1 text-amber-400">
+                                <div
+                                    className={cn(
+                                        "flex items-center gap-1",
+                                        "text-amber-400"
+                                    )}
+                                >
                                     {Array.from({ length: active.rating }).map(
                                         (_, i) => (
                                             <Star
                                                 key={i}
                                                 size={14}
-                                                className="fill-amber-400"
+                                                className={cn("fill-amber-400")}
                                             />
                                         )
                                     )}
-                                    <span className="ml-1 text-xs font-medium text-slate-300">
+                                    <span
+                                        className={cn(
+                                            "ml-1 text-xs font-medium",
+                                            "text-slate-300"
+                                        )}
+                                    >
                                         ({active.rating}/5)
                                     </span>
                                 </div>
                             </div>
 
-                            <div className="space-y-1">
-                                <span className="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">
+                            <div className={cn("space-y-1")}>
+                                <span
+                                    className={cn(
+                                        "text-[10px] font-semibold tracking-wider uppercase",
+                                        "text-slate-500"
+                                    )}
+                                >
                                     Message complet
                                 </span>
-                                <p className="rounded-lg border border-gray-800/50 bg-gray-950/60 p-3 leading-relaxed text-slate-300">
+                                <p
+                                    className={cn(
+                                        "rounded-lg border p-3 leading-relaxed",
+                                        "border-gray-800/50 bg-gray-950/60 text-slate-300"
+                                    )}
+                                >
                                     "{active.content}"
                                 </p>
                             </div>
 
-                            <div className="space-y-1 border-t border-gray-800/80 pt-2 text-[11px] text-slate-500">
-                                <div className="flex justify-between">
+                            <div
+                                className={cn(
+                                    "space-y-1 border-t pt-2 text-[11px]",
+                                    "border-gray-800/80 text-slate-500"
+                                )}
+                            >
+                                <div className={cn("flex justify-between")}>
                                     <span>Statut :</span>
                                     <span
                                         className={
@@ -264,16 +368,21 @@ export function TestimonialDetail({
                                             : "En attente"}
                                     </span>
                                 </div>
-                                <div className="flex justify-between">
+                                <div className={cn("flex justify-between")}>
                                     <span>Date d'ajout :</span>
-                                    <span className="text-slate-300">
+                                    <span className={cn("text-slate-300")}>
                                         {active.date}
                                     </span>
                                 </div>
                             </div>
                         </div>
                     ) : (
-                        <div className="flex h-full flex-1 flex-col items-center justify-center text-center text-slate-500">
+                        <div
+                            className={cn(
+                                "flex h-full flex-1 flex-col items-center justify-center text-center",
+                                "text-slate-500"
+                            )}
+                        >
                             <p>Sélectionnez un avis pour voir les détails.</p>
                         </div>
                     )}

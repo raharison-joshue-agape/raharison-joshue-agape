@@ -58,39 +58,65 @@ export function TestimonialList({
                     "border-gray-800"
                 )}
             >
-                <span className="text-xs font-semibold text-slate-300">
+                <span className={cn("text-xs font-semibold", "text-slate-300")}>
                     Témoignages ({filteredTestimonials.length})
                 </span>
                 <Button
                     onClick={onOpenCreate}
                     size="sm"
-                    className="h-7 gap-1.5 bg-white text-[11px] font-semibold text-gray-950 hover:bg-slate-200"
+                    className={cn(
+                        "h-7 gap-1.5 text-[11px] font-semibold",
+                        "bg-white text-gray-950 hover:bg-slate-200"
+                    )}
                 >
                     <Plus size={13} />
                     Nouveau
                 </Button>
             </div>
 
-            <div className="hidden shrink-0 border-b border-gray-800/60 p-3 md:block">
-                <div className="relative w-full">
+            <div
+                className={cn(
+                    "hidden shrink-0 border-b p-3 md:block",
+                    "border-gray-800/60"
+                )}
+            >
+                <div className={cn("relative w-full")}>
                     <Search
                         size={14}
-                        className="absolute top-1/2 left-3 -translate-y-1/2 text-slate-500"
+                        className={cn(
+                            "absolute top-1/2 left-3 -translate-y-1/2",
+                            "text-slate-500"
+                        )}
                     />
                     <Input
                         placeholder="Rechercher par nom ou entreprise..."
                         value={searchQuery}
                         onChange={(e) => onSearchChange(e.target.value)}
-                        className="h-8 w-full border-gray-800 bg-gray-950/50 pl-9 text-xs text-slate-200"
+                        className={cn(
+                            "h-8 w-full pl-9 text-xs",
+                            "border-gray-800 bg-gray-950/50 text-slate-200"
+                        )}
                     />
                 </div>
             </div>
 
-            <div className="flex-1 space-y-2 divide-y divide-gray-800/40 overflow-y-auto p-2">
+            <div
+                className={cn(
+                    "flex-1 space-y-2 divide-y overflow-y-auto p-2",
+                    "divide-gray-800/40"
+                )}
+            >
                 {filteredTestimonials.length === 0 ? (
-                    <div className="flex h-40 flex-col items-center justify-center text-slate-500">
-                        <Quote size={24} className="mb-2 opacity-20" />
-                        <p className="text-xs">Aucun témoignage trouvé.</p>
+                    <div
+                        className={cn(
+                            "flex h-40 flex-col items-center justify-center",
+                            "text-slate-500"
+                        )}
+                    >
+                        <Quote size={24} className={cn("mb-2 opacity-20")} />
+                        <p className={cn("text-xs")}>
+                            Aucun témoignage trouvé.
+                        </p>
                     </div>
                 ) : (
                     filteredTestimonials.map((t) => {
@@ -111,16 +137,43 @@ export function TestimonialList({
                                         : "hover:border-gray-800 hover:bg-gray-800/20"
                                 )}
                             >
-                                <div className="flex items-start justify-between">
-                                    <div className="flex items-center gap-3">
-                                        <Avatar className="h-9 w-9 shrink-0 border border-gray-800">
-                                            <AvatarFallback className="bg-gray-900 text-xs font-medium text-slate-300">
+                                <div
+                                    className={cn(
+                                        "flex items-start justify-between"
+                                    )}
+                                >
+                                    <div
+                                        className={cn(
+                                            "flex items-center gap-3"
+                                        )}
+                                    >
+                                        <Avatar
+                                            className={cn(
+                                                "h-9 w-9 shrink-0 border",
+                                                "border-gray-800"
+                                            )}
+                                        >
+                                            <AvatarFallback
+                                                className={cn(
+                                                    "text-xs font-medium",
+                                                    "bg-gray-900 text-slate-300"
+                                                )}
+                                            >
                                                 {initials}
                                             </AvatarFallback>
                                         </Avatar>
                                         <div>
-                                            <div className="flex items-center gap-2">
-                                                <h3 className="text-xs font-semibold text-slate-100">
+                                            <div
+                                                className={cn(
+                                                    "flex items-center gap-2"
+                                                )}
+                                            >
+                                                <h3
+                                                    className={cn(
+                                                        "text-xs font-semibold",
+                                                        "text-slate-100"
+                                                    )}
+                                                >
                                                     {t.author}
                                                 </h3>
                                                 <Badge
@@ -140,20 +193,36 @@ export function TestimonialList({
                                                         : "Brouillon"}
                                                 </Badge>
                                             </div>
-                                            <p className="text-[11px] text-slate-400">
+                                            <p
+                                                className={cn(
+                                                    "text-[11px]",
+                                                    "text-slate-400"
+                                                )}
+                                            >
                                                 {t.role} •{" "}
-                                                <span className="text-slate-300">
+                                                <span
+                                                    className={cn(
+                                                        "text-slate-300"
+                                                    )}
+                                                >
                                                     {t.company}
                                                 </span>
                                             </p>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                                    <div
+                                        className={cn(
+                                            "flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
+                                        )}
+                                    >
                                         <Button
                                             variant="ghost"
                                             size="icon"
-                                            className="h-7 w-7 text-slate-400 hover:text-white"
+                                            className={cn(
+                                                "h-7 w-7",
+                                                "text-slate-400 hover:text-white"
+                                            )}
                                             onClick={(e) => onOpenEdit(t, e)}
                                         >
                                             <Edit size={13} />
@@ -161,7 +230,10 @@ export function TestimonialList({
                                         <Button
                                             variant="ghost"
                                             size="icon"
-                                            className="h-7 w-7 text-slate-400 hover:text-red-400"
+                                            className={cn(
+                                                "h-7 w-7",
+                                                "text-slate-400 hover:text-red-400"
+                                            )}
                                             onClick={(e) => onDelete(t.id, e)}
                                         >
                                             <Trash2 size={13} />
@@ -169,12 +241,26 @@ export function TestimonialList({
                                     </div>
                                 </div>
 
-                                <p className="line-clamp-2 text-xs leading-relaxed text-slate-300">
+                                <p
+                                    className={cn(
+                                        "line-clamp-2 text-xs leading-relaxed",
+                                        "text-slate-300"
+                                    )}
+                                >
                                     "{t.content}"
                                 </p>
 
-                                <div className="flex items-center justify-between pt-1 text-[10px] text-slate-500">
-                                    <div className="flex items-center gap-0.5">
+                                <div
+                                    className={cn(
+                                        "flex items-center justify-between pt-1 text-[10px]",
+                                        "text-slate-500"
+                                    )}
+                                >
+                                    <div
+                                        className={cn(
+                                            "flex items-center gap-0.5"
+                                        )}
+                                    >
                                         {Array.from({ length: 5 }).map(
                                             (_, i) => (
                                                 <Star
