@@ -346,3 +346,38 @@ body {
     border-radius: 18px 18px 18px 10px;
     border: 1px solid #30363d;
 }
+
+/******  LOADER  ******/
+
+.My-loader {
+    width: 50px;
+    aspect-ratio: 1;
+    display: grid;
+}
+
+.My-loader::before,
+.My-loader::after {
+    content: "";
+    grid-area: 1/1;
+    --c: no-repeat radial-gradient(farthest-side, #25b09b 92%, #0000);
+    background:
+        var(--c) 50% 0,
+        var(--c) 50% 100%,
+        var(--c) 100% 50%,
+        var(--c) 0 50%;
+    background-size: 12px 12px;
+    animation: l12 1s infinite;
+}
+
+.My-loader::before {
+    margin: 4px;
+    filter: hue-rotate(45deg);
+    background-size: 8px 8px;
+    animation-timing-function: linear;
+}
+
+@keyframes l12 {
+    100% {
+        transform: rotate(0.5turn);
+    }
+}

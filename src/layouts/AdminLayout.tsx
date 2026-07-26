@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils"
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom"
-import { LayoutDashboard, MessageSquare, LogOut, ShieldAlert } from "lucide-react"
+import { LayoutDashboard, MessageSquare, LogOut } from "lucide-react"
+import { motion } from "framer-motion"
+import DottedBackground from "@/components/dotted-background"
 
 export default function AdminLayout() {
     const location = useLocation()
@@ -30,14 +32,66 @@ export default function AdminLayout() {
                 "flex min-h-screen w-full bg-gray-950 text-slate-100"
             )}
         >
+            <DottedBackground
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100vw",
+                    height: "100vh",
+                }}
+                frequency={2}
+                gamma={3}
+                cellSize={2}
+            />
+
             {/* Sidebar de navigation */}
-            <aside className="hidden w-64 flex-col border-r border-gray-800 bg-gray-900/50 p-4 md:flex">
-                <div className="mb-6 flex items-center gap-2 px-2 text-sm font-semibold tracking-wider text-gray-400 uppercase">
-                    <ShieldAlert className="h-4 w-4 text-emerald-500" />
-                    <span>Administration</span>
-                </div>
+            <aside className="z-50 hidden w-70 flex-col border-r border-gray-800 bg-gray-900/50 p-4 md:flex">
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className={cn(
+                        "relative z-5 mb-10 flex flex-col items-center rounded-lg border px-2 py-4",
+                        "border-gray-800/50 bg-gray-900/50"
+                    )}
+                >
+                    <div
+                        className={cn(
+                            "relative mb-4 flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border shadow-inner",
+                            "border-gray-800 bg-gray-900/50"
+                        )}
+                    >
+                        <img
+                            src="/logo.png"
+                            alt="Logo"
+                            width={80}
+                            height={80}
+                            className={cn("object-contain")}
+                        />
+                    </div>
+                    <h1
+                        className={cn(
+                            "text-[17px] font-medium tracking-tight",
+                            "text-white"
+                        )}
+                    >
+                        RAHARISON Joshué Agapé
+                    </h1>
+                    <p className={cn("text-sm", "text-slate-400")}>
+                        raharison-joshue-agape
+                    </p>
+                </motion.div>
 
                 <nav className="flex-1 space-y-1">
+                    <p
+                        className={cn(
+                            "mb-2.5 ml-2.5 text-xs uppercase",
+                            "text-slate-500"
+                        )}
+                    >
+                        Gestion des Clients
+                    </p>
                     {navItems.map((item) => {
                         const Icon = item.icon
                         const isActive = location.pathname === item.href
@@ -47,10 +101,10 @@ export default function AdminLayout() {
                                 key={item.href}
                                 to={item.href}
                                 className={cn(
-                                    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                                    "flex items-center gap-3 rounded-lg border px-3 py-2 text-sm font-medium transition-colors",
                                     isActive
-                                        ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                                        : "text-gray-400 hover:bg-gray-800/50 hover:text-slate-100"
+                                        ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
+                                        : "border-transparent text-gray-400 hover:bg-gray-800/50 hover:text-slate-100"
                                 )}
                             >
                                 <Icon className="h-4 w-4" />
@@ -76,7 +130,7 @@ export default function AdminLayout() {
             </aside>
 
             {/* Contenu principal */}
-            <main className="flex min-w-0 flex-1 flex-col overflow-y-auto">
+            <main className="z-50 flex min-w-0 flex-1 flex-col overflow-y-auto">
                 <header className="flex h-16 items-center justify-between border-b border-gray-800 bg-gray-900/50 px-6 backdrop-blur-md">
                     <div className="flex items-center gap-4">
                         <span className="text-sm font-medium text-slate-300">
@@ -85,7 +139,7 @@ export default function AdminLayout() {
                     </div>
                     {/* Tu pourras ajouter ici un profil utilisateur ou des actions rapides */}
                 </header>
-                
+
                 <div className="flex-1 p-6">
                     <Outlet />
                 </div>

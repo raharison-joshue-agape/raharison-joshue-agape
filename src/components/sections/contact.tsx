@@ -231,7 +231,15 @@ export default function Contact() {
             })
         } finally {
             setSending(false)
-            setTimeout(() => setSent(false), 10000)
+            setTimeout(() => {
+                setSent(false)
+                setAlert({
+                    show: false,
+                    type: "error",
+                    title: "",
+                    message: "",
+                })
+            }, 300000)
         }
     }
 
@@ -397,7 +405,7 @@ export default function Contact() {
                                             <div
                                                 className={cn(
                                                     "h-5 w-5 shrink-0 transition-colors",
-                                                    "text-[#8b949e] group-hover:text-[#58a6ff]"
+                                                    "text-[#8b949e] group-hover:text-[#03e2ff]"
                                                 )}
                                             >
                                                 {isLucide ? (
@@ -423,7 +431,7 @@ export default function Contact() {
                                                 <p
                                                     className={cn(
                                                         "line-clamp-2 text-sm transition-colors",
-                                                        "text-[#c9d1d9] group-hover:text-[#58a6ff]"
+                                                        "text-[#c9d1d9] group-hover:text-[#03e2ff]"
                                                     )}
                                                 >
                                                     {value}
@@ -822,13 +830,13 @@ export default function Contact() {
                                 <div
                                     className={cn(
                                         "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
-                                        "border-[#58a6ff]"
+                                        "border-[#03e2ff]"
                                     )}
                                 >
                                     <div
                                         className={cn(
                                             "h-1.5 w-1.5 rounded-full",
-                                            "bg-[#58a6ff]"
+                                            "bg-[#03e2ff]"
                                         )}
                                     />
                                 </div>

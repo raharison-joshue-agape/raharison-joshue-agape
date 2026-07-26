@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils"
-import { motion, AnimatePresence } from "framer-motion"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -11,12 +10,14 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { useNavigate } from "react-router-dom"
+import { motion, AnimatePresence } from "framer-motion"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { AlertCircleIcon, Eye, EyeOff } from "lucide-react"
 import DottedBackground from "@/components/dotted-background"
 import { LOGIN_API, useApi } from "@/hooks/use-api"
+import { UseAuth } from "@/context/AuthContext"
 
 interface AlertType {
     show: boolean
@@ -32,6 +33,7 @@ type DataType = {
 
 export default function LoginPage() {
     const navigate = useNavigate()
+    const { login } = UseAuth()
 
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState({
@@ -111,7 +113,7 @@ export default function LoginPage() {
             if (response?.success) {
                 const token = response.data?.access_token
                 if (token) {
-                    localStorage.setItem("admin_token", token)
+                    login(token)
                 }
 
                 navigate("/portfolio/dashboard")
@@ -182,8 +184,11 @@ export default function LoginPage() {
                         "text-white"
                     )}
                 >
-                    Portofolio Administration
+                    RAHARISON Joshué Agapé
                 </h1>
+                <p className={cn("text-sm", "text-slate-400")}>
+                    raharison-joshue-agape
+                </p>
             </motion.div>
 
             <motion.form
@@ -199,7 +204,7 @@ export default function LoginPage() {
                 <Card
                     className={cn(
                         "relative z-10 w-full shadow-2xl backdrop-blur-xl",
-                        "border-gray-800/80 bg-gray-900/80 text-slate-100"
+                        "border-gray-800/50 bg-gray-900/30 text-slate-100"
                     )}
                 >
                     <CardHeader className={cn("space-y-1 pb-4")}>
@@ -284,20 +289,20 @@ export default function LoginPage() {
                                 )}
                             />
                             <AnimatePresence>
-                                    {email.error && (
-                                        <motion.small
-                                            initial={{ opacity: 0, y: -4 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -4 }}
-                                            className={cn(
-                                                "mt-1 block text-sm",
-                                                "text-red-500"
-                                            )}
-                                        >
-                                            {email.error_message}
-                                        </motion.small>
-                                    )}
-                                </AnimatePresence>
+                                {email.error && (
+                                    <motion.small
+                                        initial={{ opacity: 0, y: -4 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -4 }}
+                                        className={cn(
+                                            "mt-1 block text-sm",
+                                            "text-red-500"
+                                        )}
+                                    >
+                                        {email.error_message}
+                                    </motion.small>
+                                )}
+                            </AnimatePresence>
                         </div>
 
                         <div className={cn("space-y-2")}>
@@ -346,6 +351,7 @@ export default function LoginPage() {
                                     )}
                                 />
                                 <button
+                                    type="button"
                                     onClick={() =>
                                         setPassword((prev) => ({
                                             ...prev,
