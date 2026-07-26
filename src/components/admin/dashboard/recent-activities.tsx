@@ -7,6 +7,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 
 interface Activity {
     action: string
@@ -23,33 +24,60 @@ export default function RecentActivities({
     activities,
 }: RecentActivitiesProps) {
     return (
-        <Card className="border-gray-800 bg-gray-900/40 text-slate-100 backdrop-blur-sm lg:col-span-3">
+        <Card
+            className={cn(
+                "backdrop-blur-sm lg:col-span-3",
+                "border-gray-800 bg-gray-900/40 text-slate-100"
+            )}
+        >
             <CardHeader>
-                <CardTitle className="text-base font-semibold">
+                <CardTitle className={cn("text-base font-semibold")}>
                     Dernières Activités
                 </CardTitle>
-                <CardDescription className="text-slate-400">
+                <CardDescription className={cn("text-slate-400")}>
                     Historique récent de vos actions système
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <div className="space-y-4">
+                <div className={cn("space-y-4")}>
                     {activities.map((activity, index) => {
                         const Icon = activity.icon
                         return (
                             <div
                                 key={index}
-                                className="flex items-start gap-3 rounded-lg border border-gray-800/60 bg-gray-950/20 p-3 transition-colors hover:bg-gray-800/20"
+                                className={cn(
+                                    "flex items-start gap-3 rounded-lg border p-3 transition-colors",
+                                    "border-gray-800/60 bg-gray-950/20 hover:bg-gray-800/20"
+                                )}
                             >
-                                <div className="rounded-md bg-gray-800/80 p-2 text-slate-300">
+                                <div
+                                    className={cn(
+                                        "rounded-md p-2",
+                                        "bg-gray-800/80 text-slate-300"
+                                    )}
+                                >
                                     <Icon size={16} />
                                 </div>
-                                <div className="flex-1 space-y-1">
-                                    <p className="text-xs font-medium text-slate-200">
+                                <div className={cn("flex-1 space-y-1")}>
+                                    <p
+                                        className={cn(
+                                            "text-xs font-medium",
+                                            "text-slate-200"
+                                        )}
+                                    >
                                         {activity.action}
                                     </p>
-                                    <div className="flex items-center gap-2 text-[10px] text-slate-400">
-                                        <span className="flex items-center gap-1">
+                                    <div
+                                        className={cn(
+                                            "flex items-center gap-2 text-[10px]",
+                                            "text-slate-400"
+                                        )}
+                                    >
+                                        <span
+                                            className={cn(
+                                                "flex items-center gap-1"
+                                            )}
+                                        >
                                             <Clock size={12} />
                                             {activity.time}
                                         </span>
@@ -57,7 +85,10 @@ export default function RecentActivities({
                                 </div>
                                 <Badge
                                     variant="outline"
-                                    className="border-gray-800 text-[10px] text-slate-400"
+                                    className={cn(
+                                        "text-[10px]",
+                                        "border-gray-800 text-slate-400"
+                                    )}
                                 >
                                     {activity.status}
                                 </Badge>
