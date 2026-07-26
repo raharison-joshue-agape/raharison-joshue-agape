@@ -9,7 +9,7 @@ import {
     BadgeCheckIcon,
     CreditCardIcon,
     BellIcon,
-    LogOutIcon
+    LogOutIcon,
 } from "lucide-react"
 import { motion } from "framer-motion"
 import DottedBackground from "@/components/dotted-background"
@@ -84,7 +84,7 @@ export default function AdminLayout() {
     return (
         <div
             className={cn(
-                "flex min-h-screen w-full overflow-auto",
+                "flex h-screen w-full overflow-auto",
                 "bg-gray-950 text-slate-100"
             )}
         >
@@ -210,7 +210,7 @@ export default function AdminLayout() {
             >
                 <header
                     className={cn(
-                        "flex h-16 items-center justify-between border-b px-6 backdrop-blur-md",
+                        "sticky top-0 flex h-16 items-center justify-between border-b px-6 py-2 backdrop-blur-md",
                         "border-gray-800 bg-gray-900/50"
                     )}
                 >
@@ -255,7 +255,7 @@ export default function AdminLayout() {
 
                     <div className={cn("flex items-center gap-4")}>
                         <DropdownMenu>
-                            <DropdownMenuTrigger>
+                            <DropdownMenuTrigger asChild>
                                 <button className={cn("relative p-2")}>
                                     <Badge
                                         className={cn(
@@ -270,14 +270,14 @@ export default function AdminLayout() {
                             </DropdownMenuTrigger>
 
                             <DropdownMenuContent
-                                align="start"
-                                className="mt-5 w-80 bg-gray-950"
+                                align="center"
+                                className={cn("mt-5 w-80", "bg-gray-950")}
                             >
                                 <DropdownMenuGroup>
                                     {mockMessages.map((message, i) => (
                                         <DropdownMenuItem
                                             key={i}
-                                            className="mb-1 p-0 last:mb-0"
+                                            className={cn("mb-1 p-0 last:mb-0")}
                                         >
                                             <MessageItem
                                                 preview={message.preview}
@@ -293,7 +293,7 @@ export default function AdminLayout() {
                         </DropdownMenu>
 
                         <DropdownMenu>
-                            <DropdownMenuTrigger>
+                            <DropdownMenuTrigger asChild>
                                 <button className={cn("relative p-2")}>
                                     <Badge
                                         className={cn(
@@ -308,13 +308,17 @@ export default function AdminLayout() {
                             </DropdownMenuTrigger>
 
                             <DropdownMenuContent
-                                align="start"
-                                className="mt-5 w-90 bg-gray-950"
+                                align="center"
+                                className={cn("mt-5 w-90", "bg-gray-950")}
                             >
                                 {mockNotificationsGrouped.map(
                                     (Notification, i) => (
                                         <DropdownMenuGroup key={i}>
-                                            <p className="mb-2 ml-2 text-xs first:mt-1">
+                                            <p
+                                                className={cn(
+                                                    "mb-2 ml-2 text-xs first:mt-1"
+                                                )}
+                                            >
                                                 {Notification.date}
                                             </p>
                                             {Notification.items.map(
@@ -323,7 +327,9 @@ export default function AdminLayout() {
                                                     return (
                                                         <DropdownMenuItem
                                                             key={j}
-                                                            className="mb-1 p-0 last:mb-0"
+                                                            className={cn(
+                                                                "mb-1 p-0 last:mb-0"
+                                                            )}
                                                         >
                                                             <NotificationItem
                                                                 time={item.time}
@@ -347,8 +353,12 @@ export default function AdminLayout() {
                         </DropdownMenu>
 
                         <DropdownMenu>
-                            <DropdownMenuTrigger className="ml-4">
-                                <div className={cn("flex items-center gap-3")}>
+                            <DropdownMenuTrigger className="ml-4" asChild>
+                                <div
+                                    className={cn(
+                                        "flex cursor-pointer items-center gap-3"
+                                    )}
+                                >
                                     <Avatar size="lg">
                                         <AvatarImage
                                             src="https://raharison-joshue-agape.vercel.app/assets/profile-7cyklktk.jpg"
@@ -372,23 +382,27 @@ export default function AdminLayout() {
                                 </div>
                             </DropdownMenuTrigger>
 
-                            <DropdownMenuContent align="end">
+                            <DropdownMenuContent
+                                align="end"
+                                className={cn("mt-5 w-50", "bg-gray-950")}
+                            >
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem>
+                                    <DropdownMenuItem className="cursor-pointer py-2">
                                         <BadgeCheckIcon />
                                         Compte
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem>
+                                    <DropdownMenuItem className="cursor-pointer py-2">
                                         <CreditCardIcon />
                                         Facturation
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem>
+                                    <DropdownMenuItem className="cursor-pointer py-2">
                                         <BellIcon />
                                         Notifications
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
+                                    className="cursor-pointer py-2"
                                     onClick={() => setIsOpen(true)}
                                 >
                                     <LogOutIcon />

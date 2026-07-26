@@ -42,7 +42,7 @@ export const MessageItem = ({
                     </span>
                 </div>
                 <p
-                    className={`truncate text-[11px] w-60 leading-relaxed ${unread ? "font-medium text-foreground" : "text-muted-foreground"}`}
+                    className={`w-60 truncate text-[11px] leading-relaxed ${unread ? "font-medium text-foreground" : "text-muted-foreground"}`}
                 >
                     {preview}
                 </p>
