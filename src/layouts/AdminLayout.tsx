@@ -212,7 +212,7 @@ export default function AdminLayout() {
             >
                 <header
                     className={cn(
-                        "sticky top-0 flex h-16 items-center justify-between border-b px-6 py-2 backdrop-blur-md z-50",
+                        "sticky top-0 z-50 flex h-16 items-center justify-between border-b px-6 py-2 backdrop-blur-md",
                         "border-gray-800 bg-gray-900/50"
                     )}
                 >
