@@ -46,9 +46,19 @@ export function TestimonialDetail({
     const active = testimonials.find((t) => t.id === currentId)
 
     return (
-        <div className="flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 shadow-lg backdrop-blur-md lg:col-span-2">
-            <div className="flex shrink-0 items-center justify-between border-b border-gray-800 bg-gray-900/80 px-4 py-3">
-                <span className="text-xs font-semibold text-white">
+        <div
+            className={cn(
+                "flex flex-col overflow-hidden rounded-xl border shadow-lg backdrop-blur-md lg:col-span-2",
+                "border-gray-800 bg-gray-900/50"
+            )}
+        >
+            <div
+                className={cn(
+                    "flex shrink-0 items-center justify-between border-b px-4 py-3",
+                    "border-gray-800 bg-gray-900/80"
+                )}
+            >
+                <span className={cn("text-xs font-semibold", "text-white")}>
                     {isEditing
                         ? currentId
                             ? "Modifier le témoignage"
@@ -59,10 +69,13 @@ export function TestimonialDetail({
                     <Button
                         variant="outline"
                         size="sm"
-                        className="h-7 border-gray-700 bg-transparent text-[11px] text-slate-200 hover:bg-gray-800"
+                        className={cn(
+                            "h-7 bg-transparent text-[11px]",
+                            "border-gray-700 text-slate-200 hover:bg-gray-800"
+                        )}
                         onClick={onStartEdit}
                     >
-                        <Edit size={12} className="mr-1.5" /> Éditer
+                        <Edit size={12} className={cn("mr-1.5")} /> Éditer
                     </Button>
                 )}
             </div>
@@ -70,24 +83,34 @@ export function TestimonialDetail({
             {isEditing ? (
                 <form
                     onSubmit={onSave}
-                    className="flex flex-1 flex-col justify-between space-y-3 overflow-y-auto p-4"
+                    className={cn(
+                        "flex flex-1 flex-col justify-between space-y-3 overflow-y-auto p-4"
+                    )}
                 >
-                    <div className="space-y-3">
-                        <div className="space-y-1">
-                            <label className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+                    <div className={cn("space-y-3")}>
+                        <div className={cn("space-y-1")}>
+                            <label
+                                className={cn(
+                                    "text-[10px] font-semibold tracking-wider uppercase",
+                                    "text-slate-400"
+                                )}
+                            >
                                 Auteur
                             </label>
                             <Input
                                 value={author}
                                 onChange={(e) => setAuthor(e.target.value)}
                                 placeholder="Nom complet"
-                                className="h-8 border-gray-800 bg-gray-950/80 text-xs text-slate-200"
+                                className={cn(
+                                    "h-8 text-xs",
+                                    "border-gray-800 bg-gray-950/80 text-slate-200"
+                                )}
                                 required
                             />
                         </div>
 
-                        <div className="grid grid-cols-2 gap-2">
-                            <div className="space-y-1">
+                        <div className={cn("grid grid-cols-2 gap-2")}>
+                            <div className={cn("space-y-1")}>
                                 <label className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
                                     Rôle
                                 </label>

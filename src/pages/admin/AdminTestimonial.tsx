@@ -5,6 +5,7 @@ import {
     type Testimonial,
 } from "@/components/admin/testimonials/testimonial-list"
 import { TestimonialDetail } from "@/components/admin/testimonials/testimonial-detail"
+import { cn } from "@/lib/utils"
 
 const initialTestimonials: Testimonial[] = [
     {
@@ -151,19 +152,28 @@ export default function AdminTestimonial() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="flex h-[calc(100vh-6rem)] flex-col space-y-4 p-1"
+            className={cn("flex h-[calc(100vh-6rem)] flex-col space-y-4 p-1")}
         >
-            <div className="flex shrink-0 flex-col gap-1">
-                <h1 className="text-xl font-bold tracking-tight text-white">
+            <div className={cn("flex shrink-0 flex-col gap-1")}>
+                <h1
+                    className={cn(
+                        "text-xl font-bold tracking-tight",
+                        "text-white"
+                    )}
+                >
                     Avis & Témoignages
                 </h1>
-                <p className="text-xs text-slate-400">
+                <p className={cn("text-xs", "text-slate-400")}>
                     Gérez la visibilité des recommandations clients sur votre
                     portfolio public.
                 </p>
             </div>
 
-            <div className="grid flex-1 grid-cols-1 gap-4 overflow-hidden lg:grid-cols-5">
+            <div
+                className={cn(
+                    "grid flex-1 grid-cols-1 gap-4 overflow-hidden lg:grid-cols-5"
+                )}
+            >
                 <TestimonialList
                     testimonials={testimonials}
                     currentId={currentId}

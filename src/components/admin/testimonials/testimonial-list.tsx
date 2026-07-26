@@ -46,8 +46,18 @@ export function TestimonialList({
     )
 
     return (
-        <div className="flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/30 backdrop-blur-md lg:col-span-3">
-            <div className="flex shrink-0 items-center justify-between border-b border-gray-800 px-4 py-3">
+        <div
+            className={cn(
+                "flex flex-col overflow-hidden rounded-xl border backdrop-blur-md lg:col-span-3",
+                "border-gray-800 bg-gray-900/30"
+            )}
+        >
+            <div
+                className={cn(
+                    "flex shrink-0 items-center justify-between border-b px-4 py-3",
+                    "border-gray-800"
+                )}
+            >
                 <span className="text-xs font-semibold text-slate-300">
                     Témoignages ({filteredTestimonials.length})
                 </span>
