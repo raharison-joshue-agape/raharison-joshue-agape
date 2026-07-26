@@ -28,9 +28,19 @@ export function ReplyBox({
         mode === "message" ? !replyText.trim() : !customInviteNote.trim()
 
     return (
-        <div className="space-y-3 border-t border-gray-800 bg-gray-900/40 p-3">
-            <div className="flex items-center justify-between">
-                <div className="flex gap-1 rounded-lg border border-gray-800 bg-gray-950 p-1">
+        <div
+            className={cn(
+                "sticky bottom-0 z-20 space-y-3 border-t p-3 backdrop-blur-3xl",
+                "border-gray-800 bg-gray-900/50"
+            )}
+        >
+            <div className={cn("flex items-center justify-between")}>
+                <div
+                    className={cn(
+                        "flex gap-1 rounded-lg border p-1",
+                        "border-gray-800 bg-gray-950"
+                    )}
+                >
                     <button
                         type="button"
                         onClick={() => setMode("message")}
@@ -61,8 +71,13 @@ export function ReplyBox({
             </div>
 
             {mode === "invitation" ? (
-                <div className="space-y-2">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-400">
+                <div className={cn("space-y-2")}>
+                    <div
+                        className={cn(
+                            "flex items-center gap-1.5 text-[11px] font-medium",
+                            "text-emerald-400"
+                        )}
+                    >
                         <UserPlus size={14} />
                         <span>
                             Personnaliser l'e-mail d'invitation pour {email} :
@@ -72,12 +87,20 @@ export function ReplyBox({
                         rows={4}
                         value={customInviteNote}
                         onChange={(e) => setCustomInviteNote(e.target.value)}
-                        className="w-full rounded-md border border-gray-800 bg-gray-950/80 p-2.5 font-mono text-xs leading-relaxed text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none"
+                        className={cn(
+                            "w-full rounded-md border p-2.5 font-mono text-xs leading-relaxed focus:outline-none",
+                            "border-gray-800 bg-gray-950/80 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+                        )}
                     />
-                    <div className="flex items-center justify-between rounded border border-gray-800 bg-gray-950/40 p-2 text-[10px] text-slate-400">
+                    <div
+                        className={cn(
+                            "flex items-center justify-between rounded border p-2 text-[10px]",
+                            "border-gray-800 bg-gray-950/40 text-slate-400"
+                        )}
+                    >
                         <span>
                             🔗 Lien inclus dynamiquement :{" "}
-                            <strong className="text-slate-200">
+                            <strong className={cn("text-slate-200")}>
                                 /register?email={email}
                             </strong>
                         </span>
@@ -93,7 +116,7 @@ export function ReplyBox({
                 />
             )}
 
-            <div className="flex justify-end">
+            <div className={cn("flex justify-end")}>
                 <Button
                     size="sm"
                     onClick={onSend}

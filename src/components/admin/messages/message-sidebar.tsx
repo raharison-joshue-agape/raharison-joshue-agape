@@ -1,7 +1,10 @@
 import { Inbox, Mail, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import type { FilterType, ConversationGroup } from "./types"
+import type {
+    FilterType,
+    ConversationGroup,
+} from "@/components/admin/messages/types"
 
 interface MessageSidebarProps {
     filter: FilterType
@@ -18,8 +21,18 @@ export function MessageSidebar({
     const starredCount = conversations.filter((c) => c.isStarred).length
 
     return (
-        <div className="flex space-y-1 border-b border-gray-800 p-3 lg:col-span-3 lg:flex-col lg:border-r lg:border-b-0">
-            <div className="mb-2 hidden px-3 pt-2 text-xs font-semibold text-slate-500 lg:block">
+        <div
+            className={cn(
+                "flex space-y-1 border-b p-3 lg:col-span-3 lg:flex-col lg:border-r lg:border-b-0",
+                "border-gray-800"
+            )}
+        >
+            <div
+                className={cn(
+                    "mb-2 hidden px-3 pt-2 text-xs font-semibold lg:block",
+                    "text-slate-500"
+                )}
+            >
                 DOSSIERS
             </div>
             <Button
@@ -31,8 +44,10 @@ export function MessageSidebar({
                 )}
             >
                 <Inbox size={16} />
-                <span className="hidden lg:inline">Toutes les discussions</span>
-                <span className="ml-auto text-[10px] opacity-60">
+                <span className={cn("hidden lg:inline")}>
+                    Toutes les discussions
+                </span>
+                <span className={cn("ml-auto text-[10px] opacity-60")}>
                     {conversations.length}
                 </span>
             </Button>
@@ -45,8 +60,8 @@ export function MessageSidebar({
                 )}
             >
                 <Mail size={16} />
-                <span className="hidden lg:inline">Non lues</span>
-                <span className="ml-auto text-[10px] opacity-60">
+                <span className={cn("hidden lg:inline")}>Non lues</span>
+                <span className={cn("ml-auto text-[10px] opacity-60")}>
                     {unreadCount}
                 </span>
             </Button>
@@ -58,9 +73,9 @@ export function MessageSidebar({
                     filter === "starred" && "bg-gray-800 text-white"
                 )}
             >
-                <Star size={16} className="text-amber-400" />
-                <span className="hidden lg:inline">Favorites</span>
-                <span className="ml-auto text-[10px] opacity-60">
+                <Star size={16} className={cn("text-amber-400")} />
+                <span className={cn("hidden lg:inline")}>Favorites</span>
+                <span className={cn("ml-auto text-[10px] opacity-60")}>
                     {starredCount}
                 </span>
             </Button>

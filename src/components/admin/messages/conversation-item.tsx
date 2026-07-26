@@ -1,7 +1,7 @@
+import { cn } from "@/lib/utils"
 import { Star } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
-import type { ConversationGroup } from "./types"
+import type { ConversationGroup } from "@/components/admin/messages/types"
 
 interface ConversationItemProps {
     conversation: ConversationGroup
@@ -24,13 +24,13 @@ export function ConversationItem({
         <div
             onClick={onSelect}
             className={cn(
-                "group flex cursor-pointer flex-col gap-1 p-3 transition-colors hover:bg-gray-800/30",
+                "group flex cursor-pointer flex-col gap-1 p-3 transition-colors",
+                "hover:bg-gray-800/30",
                 isSelected && "bg-gray-800/50",
-                !conversation.isRead &&
-                    "border-l-2 border-emerald-500 bg-emerald-500/5"
+                !conversation.isRead && "bg-emerald-500/10"
             )}
         >
-            <div className="flex items-center justify-between">
+            <div className={cn("flex items-center justify-between")}>
                 <span
                     className={cn(
                         "text-xs font-medium",
@@ -41,11 +41,11 @@ export function ConversationItem({
                 >
                     {conversation.name}
                 </span>
-                <div className="flex items-center gap-1.5">
+                <div className={cn("flex items-center gap-1.5")}>
                     <button
                         type="button"
                         onClick={onToggleStar}
-                        className="text-slate-500 hover:text-amber-400"
+                        className={cn("text-slate-500 hover:text-amber-400")}
                     >
                         <Star
                             size={14}
@@ -55,7 +55,7 @@ export function ConversationItem({
                             )}
                         />
                     </button>
-                    <span className="text-[10px] text-slate-500">
+                    <span className={cn("text-[10px]", "text-slate-500")}>
                         {formatDate(lastMsg.created_at)}
                     </span>
                 </div>
@@ -64,19 +64,27 @@ export function ConversationItem({
                 className={cn(
                     "truncate text-xs",
                     !conversation.isRead
-                        ? "font-semibold text-slate-100"
+                        ? cn("font-semibold", "text-slate-100")
                         : "text-slate-400"
                 )}
             >
                 {conversation.subject}
             </h4>
-            <div className="flex items-center justify-between pt-0.5 text-[10px] text-slate-500">
-                <span className="max-w-42.5 truncate">
+            <div
+                className={cn(
+                    "flex items-center justify-between pt-0.5 text-[10px]",
+                    "text-slate-500"
+                )}
+            >
+                <span className={cn("max-w-42.5 truncate")}>
                     {lastMsg.description}
                 </span>
                 <Badge
                     variant="outline"
-                    className="border-gray-800 bg-gray-950 px-1 py-0 text-[9px]"
+                    className={cn(
+                        "px-1 py-0 text-[9px]",
+                        "border-gray-800 bg-gray-950"
+                    )}
                 >
                     {conversation.messages.length} msg
                     {conversation.messages.length > 1 ? "s" : ""}

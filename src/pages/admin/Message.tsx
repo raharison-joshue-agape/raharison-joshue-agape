@@ -189,7 +189,7 @@ export default function AdminMessage() {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold tracking-tight text-white">
-                        Boîte de Réception & Contacts Portfolio
+                        Boîte de Réception
                     </h1>
                     <p className="text-xs text-slate-400">
                         Centralisez les messages reçus et convertissez vos
