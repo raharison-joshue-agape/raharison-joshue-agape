@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             if (token) {
                 setIsAuthenticated(true)
             }
-            setTimeout(() => setIsLoading(false), 10000)
+            setTimeout(() => setIsLoading(false), 1000)
         }
         checkToken()
     }, [])

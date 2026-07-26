@@ -381,3 +381,7 @@ body {
         transform: rotate(0.5turn);
     }
 }
+
+aside::-webkit-scrollbar {
+    width: 0;
+}
