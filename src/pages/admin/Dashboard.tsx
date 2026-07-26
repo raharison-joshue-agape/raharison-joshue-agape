@@ -49,12 +49,12 @@ export default function AdminDashboard() {
             </div>
 
             {/* Grille principale (Graphique & Activités) */}
-            <div className="grid gap-6 lg:grid-cols-7">
+            <div className={cn("grid gap-6 lg:grid-cols-7")}>
                 <TrafficOverview />
                 <RecentActivities activities={recentActivities} />
             </div>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className={cn("grid grid-cols-2 gap-6")}>
                 <CurrentProjects projects={projects} />
                 <QuickMessages messages={quickMessagesData} />
             </div>

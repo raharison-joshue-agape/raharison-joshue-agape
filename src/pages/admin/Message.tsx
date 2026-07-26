@@ -9,6 +9,7 @@ import type {
 import { MessageSidebar } from "@/components/admin/messages/message-sidebar"
 import { ConversationList } from "@/components/admin/messages/conversation-list"
 import { ChatView } from "@/components/admin/messages/chat-view"
+import { cn } from "@/lib/utils"
 
 const initialConversations: ConversationGroup[] = [
     {
@@ -184,27 +185,39 @@ export default function AdminMessage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="flex h-[calc(100vh-7rem)] flex-col space-y-4"
+            className={cn("flex h-[calc(100vh-7rem)] flex-col space-y-4")}
         >
-            <div className="flex items-center justify-between">
+            <div className={cn("flex items-center justify-between")}>
                 <div>
-                    <h1 className="text-2xl font-bold tracking-tight text-white">
+                    <h1
+                        className={cn(
+                            "text-2xl font-bold tracking-tight",
+                            "text-white"
+                        )}
+                    >
                         Boîte de Réception
                     </h1>
-                    <p className="text-xs text-slate-400">
+                    <p className={cn("text-xs", "text-slate-400")}>
                         Centralisez les messages reçus et convertissez vos
                         visiteurs en clients sur votre plateforme
                     </p>
                 </div>
                 <Badge
                     variant="outline"
-                    className="border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
+                    className={cn(
+                        "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
+                    )}
                 >
                     {unreadCount} non lus
                 </Badge>
             </div>
 
-            <div className="grid flex-1 grid-cols-1 overflow-hidden rounded-xl border border-gray-800 bg-gray-900/40 backdrop-blur-sm lg:grid-cols-12">
+            <div
+                className={cn(
+                    "grid flex-1 grid-cols-1 overflow-hidden rounded-xl border backdrop-blur-sm lg:grid-cols-12",
+                    "border-gray-800 bg-gray-900/40"
+                )}
+            >
                 <MessageSidebar
                     filter={filter}
                     setFilter={setFilter}
@@ -221,7 +234,12 @@ export default function AdminMessage() {
                     formatDate={formatDate}
                 />
 
-                <div className="flex flex-1 flex-col bg-gray-950/20 lg:col-span-5">
+                <div
+                    className={cn(
+                        "flex flex-1 flex-col lg:col-span-5",
+                        "bg-gray-950/20"
+                    )}
+                >
                     <ChatView
                         activeConversation={activeConversation}
                         onDelete={handleDelete}
