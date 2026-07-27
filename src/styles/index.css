@@ -382,6 +382,7 @@ body {
     }
 }
 
-aside::-webkit-scrollbar {
+aside::-webkit-scrollbar,
+.admin-layout *::-webkit-scrollbar {
     width: 0;
 }

@@ -1,4 +1,4 @@
-import PersonalInfoForm from "@/components/admin/content/personal-info-form"
+import ExperiencesManager from "@/components/admin/content/experiences-manager"
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import { User } from "lucide-react"
@@ -68,7 +68,7 @@ export default function AdminContent() {
                 </aside>
 
                 <main className={cn("flex-1 space-y-6")}>
-                    {activeTab === "personal-info" && <PersonalInfoForm />}
+                    {activeTab === "personal-info" && <ExperiencesManager />}
                 </main>
             </div>
         </motion.div>

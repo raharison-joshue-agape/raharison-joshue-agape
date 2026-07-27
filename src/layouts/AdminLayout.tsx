@@ -85,7 +85,7 @@ export default function AdminLayout() {
     return (
         <div
             className={cn(
-                "flex h-screen w-full overflow-auto",
+                "admin-layout flex h-screen w-full overflow-auto",
                 "bg-gray-950 text-slate-100"
             )}
         >
