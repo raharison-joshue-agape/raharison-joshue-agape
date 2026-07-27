@@ -11,6 +11,7 @@ import {
     Sparkles,
     BarChart2,
     Briefcase,
+    FolderGit2,
 } from "lucide-react"
 import ProfileSetting, {
     type PayloadProfileType,
@@ -33,7 +34,8 @@ const sidebarItem = [
     { label: "Bio & Accroche", tabValue: "bio-and-tagline", icon: Sparkles },
     { label: "Statistiques", tabValue: "stats", icon: BarChart2 },
     { label: "Badges Flottants", tabValue: "tech-badge", icon: Sparkles },
-    { label: "Expériences", tabValue: "experiences", icon: Briefcase },
+    { label: "Mes Expériences", tabValue: "experiences", icon: Briefcase },
+    { label: "Mes Projets", tabValue: "projects", icon: FolderGit2 },
     { label: "Sécurité & Mot de passe", tabValue: "security", icon: Shield },
     { label: "Notifications", tabValue: "notifications", icon: Bell },
     { label: "Apparence & Langue", tabValue: "appearance", icon: Palette },
@@ -146,6 +148,10 @@ export default function AdminSetting() {
                     )}
 
                     {activeTab === "experiences" && (
+                        <ExperienceSetting loading onSubmit={() => {}} />
+                    )}
+
+                    {activeTab === "projects" && (
                         <ExperienceSetting loading onSubmit={() => {}} />
                     )}
 
