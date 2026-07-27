@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import { User, Bell, Shield, Palette } from "lucide-react"
+import { User, Bell, Shield, Palette, Link, Contact } from "lucide-react"
 import ProfileSetting, {
     type PayloadProfileType,
 } from "@/components/admin/settings/profile-setting"
@@ -9,6 +9,17 @@ import SecuritySetting from "@/components/admin/settings/security-setting"
 import NotificationSetting from "@/components/admin/settings/notification-setting"
 import AppearanceSetting from "@/components/admin/settings/appearance-setting"
 import { useSearchParams } from "react-router-dom"
+import LinkSetting from "@/components/admin/settings/link-setting"
+import ContactSetting from "@/components/admin/settings/contact-setting"
+
+const sidebarItem = [
+    { label: "Profil & Identité", tabValue: "profile", icon: User },
+    { label: "Contacts", tabValue: "contacts", icon: Contact },
+    { label: "Liens Réseaux", tabValue: "links", icon: Link },
+    { label: "Sécurité & Mot de passe", tabValue: "security", icon: Shield },
+    { label: "Notifications", tabValue: "notifications", icon: Bell },
+    { label: "Apparence & Langue", tabValue: "appearance", icon: Palette },
+]
 
 export default function AdminSetting() {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -39,7 +50,7 @@ export default function AdminSetting() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className={cn("mx-auto max-w-6xl space-y-6 p-6")}
+            className={cn("z-0 mx-auto max-w-6xl space-y-6 p-6")}
         >
             <div
                 className={cn(
@@ -63,57 +74,25 @@ export default function AdminSetting() {
             <div className={cn("flex flex-col gap-8 lg:flex-row")}>
                 <aside className={cn("sticky top-100 z-50 shrink-0 lg:w-64")}>
                     <nav className="flex gap-1 overflow-x-auto pb-2 lg:flex-col lg:pb-0">
-                        <button
-                            onClick={() => handleTabChange("profile")}
-                            className={cn(
-                                "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-left text-sm font-medium transition-colors",
-                                activeTab === "profile"
-                                    ? "bg-primary text-primary-foreground"
-                                    : "text-muted-foreground hover:bg-muted hover:text-slate-100"
-                            )}
-                        >
-                            <User className={cn("h-4 w-4")} />
-                            Profil & Identité
-                        </button>
-
-                        <button
-                            onClick={() => handleTabChange("security")}
-                            className={cn(
-                                "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-left text-sm font-medium transition-colors",
-                                activeTab === "security"
-                                    ? "bg-primary text-primary-foreground"
-                                    : "text-muted-foreground hover:bg-muted hover:text-slate-100"
-                            )}
-                        >
-                            <Shield className={cn("h-4 w-4")} />
-                            Sécurité & Mot de passe
-                        </button>
-
-                        <button
-                            onClick={() => handleTabChange("notifications")}
-                            className={cn(
-                                "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-left text-sm font-medium transition-colors",
-                                activeTab === "notifications"
-                                    ? "bg-primary text-primary-foreground"
-                                    : "text-muted-foreground hover:bg-muted hover:text-slate-100"
-                            )}
-                        >
-                            <Bell className={cn("h-4 w-4")} />
-                            Notifications
-                        </button>
-
-                        <button
-                            onClick={() => handleTabChange("appearance")}
-                            className={cn(
-                                "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-left text-sm font-medium transition-colors",
-                                activeTab === "appearance"
-                                    ? "bg-primary text-primary-foreground"
-                                    : "text-muted-foreground hover:bg-muted hover:text-slate-100"
-                            )}
-                        >
-                            <Palette className={cn("h-4 w-4")} />
-                            Apparence & Langue
-                        </button>
+                        {sidebarItem.map((item) => {
+                            const Icon = item.icon
+                            return (
+                                <button
+                                    onClick={() =>
+                                        handleTabChange(item.tabValue)
+                                    }
+                                    className={cn(
+                                        "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-left text-sm font-medium transition-colors",
+                                        activeTab === item.tabValue
+                                            ? "bg-primary text-primary-foreground"
+                                            : "text-muted-foreground hover:bg-muted hover:text-slate-100"
+                                    )}
+                                >
+                                    <Icon size={18} />
+                                    {item.label}
+                                </button>
+                            )
+                        })}
                     </nav>
                 </aside>
 
@@ -128,7 +107,14 @@ export default function AdminSetting() {
                         />
                     )}
 
-                    {/* Onglet 2 : Sécurité */}
+                    {activeTab === "contacts" && (
+                        <ContactSetting loading onSubmit={() => {}} />
+                    )}
+
+                    {activeTab === "links" && (
+                        <LinkSetting loading onSubmit={() => {}} />
+                    )}
+
                     {activeTab === "security" && (
                         <SecuritySetting
                             loading={loadingSecurity}

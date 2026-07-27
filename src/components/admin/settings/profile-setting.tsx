@@ -100,6 +100,11 @@ export default function ProfileSetting({
         error: false,
         error_message: "",
     })
+    const [location, setLocation] = useState({
+        value: "",
+        error: false,
+        error_message: "",
+    })
 
     const checkError = () => {
         let hasError = false
@@ -239,6 +244,21 @@ export default function ProfileSetting({
             }))
         }
 
+        if (!location.value.trim()) {
+            hasError = true
+            setLocation((prev) => ({
+                ...prev,
+                error: true,
+                error_message: "Le location est requis.",
+            }))
+        } else {
+            setLocation((prev) => ({
+                ...prev,
+                error: false,
+                error_message: "",
+            }))
+        }
+
         return hasError
     }
 
@@ -360,7 +380,7 @@ export default function ProfileSetting({
                 </div>
 
                 <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-2")}>
-                    <div>
+                    <div className={cn("space-y-1")}>
                         <label
                             htmlFor="firstname"
                             className={cn(
@@ -397,7 +417,7 @@ export default function ProfileSetting({
                         )}
                     </div>
 
-                    <div>
+                    <div className={cn("space-y-1")}>
                         <label
                             htmlFor="lastname"
                             className={cn(
@@ -531,7 +551,7 @@ export default function ProfileSetting({
                         type="text"
                         id="role"
                         value={role.value}
-                        placeholder="RAHARISON"
+                        placeholder="Développeur Full-Stack avec une sensibilité Ops"
                         onChange={(e) =>
                             setRole({
                                 value: e.target.value,
@@ -608,7 +628,7 @@ export default function ProfileSetting({
                             type="text"
                             id="availability"
                             value={availability.value}
-                            placeholder="RAHARISON"
+                            placeholder="À l'écoute de nouvelles opportunités"
                             onChange={(e) =>
                                 setAvailability({
                                     value: e.target.value,
@@ -667,6 +687,43 @@ export default function ProfileSetting({
                             </small>
                         )}
                     </div>
+                </div>
+
+                <div className="col-span-3 space-y-1">
+                    <label
+                        htmlFor="location"
+                        className={cn(
+                            "block text-xs font-medium",
+                            "text-slate-100"
+                        )}
+                    >
+                        Localisation
+                    </label>
+                    <input
+                        type="text"
+                        id="location"
+                        value={location.value}
+                        placeholder="Fianarantsoa 301, Madagascar"
+                        onChange={(e) =>
+                            setLocation({
+                                value: e.target.value,
+                                error: false,
+                                error_message: "",
+                            })
+                        }
+                        className={cn(
+                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                            "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
+                            location.error
+                                ? "border-red-500 focus:ring-red-500"
+                                : "border-gray-700 focus:ring-emerald-500"
+                        )}
+                    />
+                    {location.error && (
+                        <small className="ml-1 text-xs font-medium text-red-500">
+                            {location.error_message}
+                        </small>
+                    )}
                 </div>
             </div>
 
