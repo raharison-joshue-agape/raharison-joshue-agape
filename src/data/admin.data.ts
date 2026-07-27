@@ -80,7 +80,7 @@ export const adminNavItems = [
         items: [
             {
                 title: "Contenu du portfolio",
-                href: "/portfolio/content",
+                href: "/portfolio/content?tab=personal-info",
                 icon: Globe,
             },
             {

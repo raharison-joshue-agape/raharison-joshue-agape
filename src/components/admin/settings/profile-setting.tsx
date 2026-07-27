@@ -1,13 +1,14 @@
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
-import { Save, Mail } from "lucide-react"
+import { Save, Mail, Calendar } from "lucide-react"
 import { useState, useRef as useReactRef, useEffect } from "react"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export type PayloadProfileType = {
     firstname: string
     lastname: string
-    email: string
+    emailPro: string
+    emailConnexion: string
 }
 
 interface ProfileSettingProp {
@@ -69,7 +70,32 @@ export default function ProfileSetting({
         error: false,
         error_message: "",
     })
-    const [email, setEmail] = useState({
+    const [emailPro, setEmailPro] = useState({
+        value: "",
+        error: false,
+        error_message: "",
+    })
+    const [emailConnexion, setEmailConnexion] = useState({
+        value: "",
+        error: false,
+        error_message: "",
+    })
+    const [role, setRole] = useState({
+        value: "",
+        error: false,
+        error_message: "",
+    })
+    const [birthDate, setBirthDate] = useState({
+        value: "",
+        error: false,
+        error_message: "",
+    })
+    const [availability, setAvailability] = useState({
+        value: "",
+        error: false,
+        error_message: "",
+    })
+    const [exp, setExp] = useState({
         value: "",
         error: false,
         error_message: "",
@@ -109,22 +135,104 @@ export default function ProfileSetting({
             }))
         }
 
-        if (!email.value.trim()) {
+        if (!emailPro.value.trim()) {
             hasError = true
-            setEmail((prev) => ({
+            setEmailPro((prev) => ({
                 ...prev,
                 error: true,
                 error_message: "L'adresse email est requise.",
             }))
-        } else if (!emailRegex.test(email.value.trim())) {
+        } else if (!emailRegex.test(emailPro.value.trim())) {
             hasError = true
-            setEmail((prev) => ({
+            setEmailPro((prev) => ({
                 ...prev,
                 error: true,
                 error_message: "Veuillez entrer une adresse email valide.",
             }))
         } else {
-            setEmail((prev) => ({
+            setEmailPro((prev) => ({
+                ...prev,
+                error: false,
+                error_message: "",
+            }))
+        }
+
+        if (!emailConnexion.value.trim()) {
+            hasError = true
+            setEmailConnexion((prev) => ({
+                ...prev,
+                error: true,
+                error_message: "L'adresse email est requise.",
+            }))
+        } else if (!emailRegex.test(emailConnexion.value.trim())) {
+            hasError = true
+            setEmailConnexion((prev) => ({
+                ...prev,
+                error: true,
+                error_message: "Veuillez entrer une adresse email valide.",
+            }))
+        } else {
+            setEmailConnexion((prev) => ({
+                ...prev,
+                error: false,
+                error_message: "",
+            }))
+        }
+
+        if (!role.value.trim()) {
+            hasError = true
+            setRole((prev) => ({
+                ...prev,
+                error: true,
+                error_message: "Le Rôle / Intitulé du poste est requis.",
+            }))
+        } else {
+            setRole((prev) => ({
+                ...prev,
+                error: false,
+                error_message: "",
+            }))
+        }
+
+        if (!birthDate.value.trim()) {
+            hasError = true
+            setBirthDate((prev) => ({
+                ...prev,
+                error: true,
+                error_message: "Le date de naissance est requis.",
+            }))
+        } else {
+            setBirthDate((prev) => ({
+                ...prev,
+                error: false,
+                error_message: "",
+            }))
+        }
+
+        if (!availability.value.trim()) {
+            hasError = true
+            setAvailability((prev) => ({
+                ...prev,
+                error: true,
+                error_message: "Le date de naissance est requis.",
+            }))
+        } else {
+            setAvailability((prev) => ({
+                ...prev,
+                error: false,
+                error_message: "",
+            }))
+        }
+
+        if (!exp.value.trim()) {
+            hasError = true
+            setExp((prev) => ({
+                ...prev,
+                error: true,
+                error_message: "Le expérience est requis.",
+            }))
+        } else {
+            setExp((prev) => ({
                 ...prev,
                 error: false,
                 error_message: "",
@@ -140,7 +248,8 @@ export default function ProfileSetting({
         const payload = {
             firstname: firstname.value,
             lastname: lastname.value,
-            email: email.value,
+            emailPro: emailPro.value,
+            emailConnexion: emailConnexion.value,
         }
 
         onSubmit(payload)
@@ -251,7 +360,7 @@ export default function ProfileSetting({
                 </div>
 
                 <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-2")}>
-                    <div className="space-y-1">
+                    <div>
                         <label
                             htmlFor="firstname"
                             className={cn(
@@ -288,7 +397,7 @@ export default function ProfileSetting({
                         )}
                     </div>
 
-                    <div className={cn("space-y-1")}>
+                    <div>
                         <label
                             htmlFor="lastname"
                             className={cn(
@@ -326,44 +435,238 @@ export default function ProfileSetting({
                     </div>
                 </div>
 
+                <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-2")}>
+                    <div className="space-y-1">
+                        <label
+                            htmlFor="email-address-pro"
+                            className={cn(
+                                "block text-xs font-medium",
+                                "text-slate-100"
+                            )}
+                        >
+                            Adresse Email Professionnel
+                        </label>
+                        <div className="relative">
+                            <Mail className="absolute top-2.5 left-3 h-4 w-4 text-muted-foreground" />
+                            <input
+                                type="email"
+                                id="email-address-pro"
+                                value={emailPro.value}
+                                onChange={(e) =>
+                                    setEmailPro({
+                                        value: e.target.value,
+                                        error: false,
+                                        error_message: "",
+                                    })
+                                }
+                                placeholder="joshueagape.itpro@gmail.com"
+                                className={cn(
+                                    "-mb-1 w-full rounded-md border py-2 pr-3 pl-9 text-sm focus:ring-1 focus:outline-none",
+                                    "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
+                                    emailPro.error
+                                        ? "border-red-500 focus:ring-red-500"
+                                        : "border-gray-700 focus:ring-emerald-500"
+                                )}
+                            />
+                        </div>
+                        {emailPro.error && (
+                            <small className="ml-1 text-xs font-medium text-red-500">
+                                {emailPro.error_message}
+                            </small>
+                        )}
+                    </div>
+
+                    <div className="space-y-1">
+                        <label
+                            htmlFor="email-address-connexion"
+                            className={cn(
+                                "block text-xs font-medium",
+                                "text-slate-100"
+                            )}
+                        >
+                            Adresse Email de Connexion
+                        </label>
+                        <div className="relative">
+                            <Mail className="absolute top-2.5 left-3 h-4 w-4 text-muted-foreground" />
+                            <input
+                                type="email"
+                                id="email-address-connexion"
+                                value={emailConnexion.value}
+                                onChange={(e) =>
+                                    setEmailConnexion({
+                                        value: e.target.value,
+                                        error: false,
+                                        error_message: "",
+                                    })
+                                }
+                                placeholder="joshueagape.itpro@gmail.com"
+                                className={cn(
+                                    "-mb-1 w-full rounded-md border py-2 pr-3 pl-9 text-sm focus:ring-1 focus:outline-none",
+                                    "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
+                                    emailConnexion.error
+                                        ? "border-red-500 focus:ring-red-500"
+                                        : "border-gray-700 focus:ring-emerald-500"
+                                )}
+                            />
+                        </div>
+                        {emailConnexion.error && (
+                            <small className="ml-1 text-xs font-medium text-red-500">
+                                {emailConnexion.error_message}
+                            </small>
+                        )}
+                    </div>
+                </div>
+
                 <div className="space-y-1">
                     <label
-                        htmlFor="email-address"
+                        htmlFor="role"
                         className={cn(
                             "block text-xs font-medium",
                             "text-slate-100"
                         )}
                     >
-                        Adresse Email
+                        Rôle / Intitulé du poste
                     </label>
-                    <div className="relative">
-                        <Mail className="absolute top-2.5 left-3 h-4 w-4 text-muted-foreground" />
+                    <input
+                        type="text"
+                        id="role"
+                        value={role.value}
+                        placeholder="RAHARISON"
+                        onChange={(e) =>
+                            setRole({
+                                value: e.target.value,
+                                error: false,
+                                error_message: "",
+                            })
+                        }
+                        className={cn(
+                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                            "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
+                            role.error
+                                ? "border-red-500 focus:ring-red-500"
+                                : "border-gray-700 focus:ring-emerald-500"
+                        )}
+                    />
+                    {role.error && (
+                        <small className="ml-1 text-xs font-medium text-red-500">
+                            {role.error_message}
+                        </small>
+                    )}
+                </div>
+
+                <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-8")}>
+                    <div className="col-span-3 space-y-1">
+                        <label
+                            htmlFor="birth-date"
+                            className={cn(
+                                "block text-xs font-medium",
+                                "text-slate-100"
+                            )}
+                        >
+                            Date de naissance
+                        </label>
+                        <div className="relative">
+                            <Calendar className="absolute top-2.5 left-3 h-4 w-4 text-muted-foreground" />
+                            <input
+                                type="date"
+                                id="birth-date"
+                                value={birthDate.value}
+                                onChange={(e) =>
+                                    setBirthDate({
+                                        value: e.target.value,
+                                        error: false,
+                                        error_message: "",
+                                    })
+                                }
+                                className={cn(
+                                    "-mb-1 w-full rounded-md border py-2 pr-3 pl-9 text-sm focus:ring-1 focus:outline-none",
+                                    "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
+                                    birthDate.error
+                                        ? "border-red-500 focus:ring-red-500"
+                                        : "border-gray-700 focus:ring-emerald-500"
+                                )}
+                            />
+                        </div>
+                        {birthDate.error && (
+                            <small className="ml-1 text-xs font-medium text-red-500">
+                                {birthDate.error_message}
+                            </small>
+                        )}
+                    </div>
+
+                    <div className="col-span-3 space-y-1">
+                        <label
+                            htmlFor="availability"
+                            className={cn(
+                                "block text-xs font-medium",
+                                "text-slate-100"
+                            )}
+                        >
+                            Disponibilité
+                        </label>
                         <input
-                            type="email"
-                            id="email-address"
-                            value={email.value}
+                            type="text"
+                            id="availability"
+                            value={availability.value}
+                            placeholder="RAHARISON"
                             onChange={(e) =>
-                                setEmail({
+                                setAvailability({
                                     value: e.target.value,
                                     error: false,
                                     error_message: "",
                                 })
                             }
-                            placeholder="joshueagape.itpro@gmail.com"
                             className={cn(
-                                "-mb-1 w-full rounded-md border py-2 pr-3 pl-9 text-sm focus:ring-1 focus:outline-none",
+                                "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
                                 "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
-                                email.error
+                                availability.error
                                     ? "border-red-500 focus:ring-red-500"
                                     : "border-gray-700 focus:ring-emerald-500"
                             )}
                         />
+                        {availability.error && (
+                            <small className="ml-1 text-xs font-medium text-red-500">
+                                {availability.error_message}
+                            </small>
+                        )}
                     </div>
-                    {email.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
-                            {email.error_message}
-                        </small>
-                    )}
+
+                    <div className={cn("col-span-2 space-y-1")}>
+                        <label
+                            htmlFor="exp"
+                            className={cn(
+                                "block text-xs font-medium",
+                                "text-slate-100"
+                            )}
+                        >
+                            Expérience globale
+                        </label>
+                        <input
+                            type="text"
+                            id="exp"
+                            value={exp.value}
+                            placeholder="3+ ans"
+                            onChange={(e) =>
+                                setExp({
+                                    value: e.target.value,
+                                    error: false,
+                                    error_message: "",
+                                })
+                            }
+                            className={cn(
+                                "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
+                                exp.error
+                                    ? "border-red-500 focus:ring-red-500"
+                                    : "border-gray-700 focus:ring-emerald-500"
+                            )}
+                        />
+                        {exp.error && (
+                            <small className="ml-1 text-xs font-medium text-red-500">
+                                {exp.error_message}
+                            </small>
+                        )}
+                    </div>
                 </div>
             </div>
 

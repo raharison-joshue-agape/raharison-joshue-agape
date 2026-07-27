@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import { User, Bell, Shield, Palette } from "lucide-react"
 import ProfileSetting, {
@@ -34,7 +35,12 @@ export default function AdminSetting() {
     }
 
     return (
-        <div className={cn("mx-auto max-w-6xl space-y-6 p-6")}>
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className={cn("mx-auto max-w-6xl space-y-6 p-6")}
+        >
             <div
                 className={cn(
                     "flex flex-col gap-2 border-b border-border pb-4"
@@ -139,6 +145,6 @@ export default function AdminSetting() {
                     {activeTab === "appearance" && <AppearanceSetting />}
                 </main>
             </div>
-        </div>
+        </motion.div>
     )
 }
