@@ -455,7 +455,12 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                         />
                                     </div>
                                     <div>
-                                        <label className="mb-1 block flex items-center gap-1 text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 flex items-center gap-1 text-xs font-semibold",
+                                                "block text-gray-700 dark:text-gray-300"
+                                            )}
+                                        >
                                             <Palette className="h-3.5 w-3.5" />{" "}
                                             Thème / Couleur accent
                                         </label>
@@ -515,7 +520,12 @@ export default function ProjectSetting({ loading }: SettingProp) {
 
                                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                     <div>
-                                        <label className="mb-1 block flex items-center gap-1 text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 flex items-center gap-1 text-xs font-semibold",
+                                                "block text-gray-700 dark:text-gray-300"
+                                            )}
+                                        >
                                             <GithubIcon /> URL Dépôt GitHub
                                         </label>
                                         <input
@@ -528,7 +538,12 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                         />
                                     </div>
                                     <div>
-                                        <label className="mb-1 block flex items-center gap-1 text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 flex items-center gap-1 text-xs font-semibold",
+                                                "block text-gray-700 dark:text-gray-300"
+                                            )}
+                                        >
                                             <ExternalLink className="h-3.5 w-3.5" />{" "}
                                             URL Démo Live
                                         </label>
@@ -544,7 +559,12 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                 </div>
 
                                 <div>
-                                    <label className="mb-1 block flex items-center gap-1 text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                    <label
+                                        className={cn(
+                                            "mb-1 flex items-center gap-1 text-xs font-semibold",
+                                            "block text-gray-700 dark:text-gray-300"
+                                        )}
+                                    >
                                         <ImageIcon className="h-3.5 w-3.5" />{" "}
                                         URL de l'image de couverture
                                     </label>
@@ -559,7 +579,12 @@ export default function ProjectSetting({ loading }: SettingProp) {
 
                                 {/* Tags */}
                                 <div>
-                                    <label className="mb-1 block flex items-center gap-1 text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                    <label
+                                        className={cn(
+                                            "mb-1 flex items-center gap-1 text-xs font-semibold",
+                                            "block text-gray-700 dark:text-gray-300"
+                                        )}
+                                    >
                                         <TagIcon className="h-3.5 w-3.5" />{" "}
                                         Technologies / Tags
                                     </label>
@@ -610,7 +635,12 @@ export default function ProjectSetting({ loading }: SettingProp) {
 
                                 {/* Metrics */}
                                 <div>
-                                    <label className="mb-1 block flex items-center gap-1 text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                    <label
+                                        className={cn(
+                                            "mb-1 flex items-center gap-1 text-xs font-semibold",
+                                            "block text-gray-700 dark:text-gray-300"
+                                        )}
+                                    >
                                         <TrendingUp className="h-3.5 w-3.5" />{" "}
                                         Chiffres / Métriques de résultat
                                     </label>

@@ -441,7 +441,12 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                 </div>
 
                                 <div>
-                                    <label className="mb-1 block flex items-center gap-1 text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                    <label
+                                        className={cn(
+                                            "mb-1 flex items-center gap-1 text-xs font-semibold",
+                                            "block text-gray-700 dark:text-gray-300"
+                                        )}
+                                    >
                                         <ImageIcon className="h-3.5 w-3.5" />{" "}
                                         URL de l'image d'illustration
                                     </label>
@@ -456,7 +461,12 @@ export default function ExperienceSetting({ loading }: SettingProp) {
 
                                 {/* Tags section */}
                                 <div>
-                                    <label className="mb-1 block flex items-center gap-1 text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                    <label
+                                        className={cn(
+                                            "mb-1 flex items-center gap-1 text-xs font-semibold",
+                                            "block text-gray-700 dark:text-gray-300"
+                                        )}
+                                    >
                                         <TagIcon className="h-3.5 w-3.5" />{" "}
                                         Technologies / Tags
                                     </label>
