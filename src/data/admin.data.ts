@@ -7,7 +7,6 @@ import {
     CheckCircle2,
     Eye,
     FolderKanban,
-    Globe,
     LayoutDashboard,
     ListTodo,
     MessageSquare,
@@ -78,11 +77,6 @@ export const adminNavItems = [
     {
         title: "Administration",
         items: [
-            {
-                title: "Contenu du portfolio",
-                href: "/portfolio/content?tab=personal-info",
-                icon: Globe,
-            },
             {
                 title: "Paramètres",
                 href: "/portfolio/settings?tab=profile",

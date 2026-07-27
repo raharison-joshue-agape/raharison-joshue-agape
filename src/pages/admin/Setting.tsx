@@ -26,6 +26,7 @@ import BioTaglineSetting from "@/components/admin/settings/bio-tagline-setting"
 import StatSetting from "@/components/admin/settings/stat-setting"
 import BadgeTechSetting from "@/components/admin/settings/badge-tech-setting"
 import ExperienceSetting from "@/components/admin/settings/experience-setting"
+import ProjectSetting from "@/components/admin/settings/project-setting";
 
 const sidebarItem = [
     { label: "Profil & Identité", tabValue: "profile", icon: User },
@@ -152,7 +153,7 @@ export default function AdminSetting() {
                     )}
 
                     {activeTab === "projects" && (
-                        <ExperienceSetting loading onSubmit={() => {}} />
+                        <ProjectSetting loading onSubmit={() => {}} />
                     )}
 
                     {activeTab === "security" && (
