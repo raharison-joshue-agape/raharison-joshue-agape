@@ -11,12 +11,12 @@ export type PayloadLinkType = {
     googleMap: string
 }
 
-interface ProfileSettingProp {
+interface SettingProp {
     loading: boolean
     onSubmit: (payload: PayloadLinkType) => void
 }
 
-export default function LinkSetting({ loading, onSubmit }: ProfileSettingProp) {
+export default function LinkSetting({ loading, onSubmit }: SettingProp) {
     const [onLoading, setLoading] = useState(loading)
 
     const [gitHubLink, setGitHubLink] = useState({

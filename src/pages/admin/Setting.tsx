@@ -9,6 +9,7 @@ import {
     Link,
     Contact,
     Sparkles,
+    BarChart2,
 } from "lucide-react"
 import ProfileSetting, {
     type PayloadProfileType,
@@ -20,12 +21,16 @@ import { useSearchParams } from "react-router-dom"
 import LinkSetting from "@/components/admin/settings/link-setting"
 import ContactSetting from "@/components/admin/settings/contact-setting"
 import BioTaglineSetting from "@/components/admin/settings/bio-tagline-setting"
+import StatSetting from "@/components/admin/settings/stat-setting"
+import BadgeTechSetting from "@/components/admin/settings/badge-tech-setting"
 
 const sidebarItem = [
     { label: "Profil & Identité", tabValue: "profile", icon: User },
     { label: "Contacts", tabValue: "contacts", icon: Contact },
     { label: "Liens Réseaux", tabValue: "links", icon: Link },
     { label: "Bio & Accroche", tabValue: "bio-and-tagline", icon: Sparkles },
+    { label: "Statistiques", tabValue: "stats", icon: BarChart2 },
+    { label: "Badges Flottants", tabValue: "tech-badge", icon: Sparkles },
     { label: "Sécurité & Mot de passe", tabValue: "security", icon: Shield },
     { label: "Notifications", tabValue: "notifications", icon: Bell },
     { label: "Apparence & Langue", tabValue: "appearance", icon: Palette },
@@ -127,6 +132,14 @@ export default function AdminSetting() {
 
                     {activeTab === "bio-and-tagline" && (
                         <BioTaglineSetting loading onSubmit={() => {}} />
+                    )}
+
+                    {activeTab === "stats" && (
+                        <StatSetting loading onSubmit={() => {}} />
+                    )}
+
+                    {activeTab === "tech-badge" && (
+                        <BadgeTechSetting loading onSubmit={() => {}} />
                     )}
 
                     {activeTab === "security" && (

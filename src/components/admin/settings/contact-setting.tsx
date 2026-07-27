@@ -9,15 +9,12 @@ export type PayloadLinkType = {
     airtel: string
 }
 
-interface ProfileSettingProp {
+interface SettingProp {
     loading: boolean
     onSubmit: (payload: PayloadLinkType) => void
 }
 
-export default function ContactSetting({
-    loading,
-    onSubmit,
-}: ProfileSettingProp) {
+export default function ContactSetting({ loading, onSubmit }: SettingProp) {
     const [onLoading, setLoading] = useState(loading)
 
     const [yas, setYas] = useState({

@@ -3,24 +3,22 @@ import { Save } from "lucide-react"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
-export type PayloadLinkType = {
+export type PayloadBioType = {
     tagline: string
     bio: string
 }
 
-interface ProfileSettingProp {
+interface SettingProp {
     loading: boolean
-    onSubmit: (payload: PayloadLinkType) => void
+    onSubmit: (payload: PayloadBioType) => void
 }
 
 const defaultTagline = `En tant que développeur passionné, je suis continuellement motivé par la création de solutions novatrices et par le perfectionnement constant de mes aptitudes techniques.`
 const defaultBio = `Développeur web motivé, cumulant plus de 3 années dans le métier, je crée des applications à la pointe, performantes et pensées pour l'utilisateur. Je me perfectionne sans cesse grâce à une veille technologique assidue et à des réalisations concrètes axées sur la qualité, la facilité d'entretien et l'efficacité.
 
 Ma méthode : l'Infrastructure as Code. Je monte des infrastructures solides qui autorisent les équipes produit à livrer avec assurance.`
-export default function BioTaglineSetting({
-    loading,
-    onSubmit,
-}: ProfileSettingProp) {
+
+export default function BioTaglineSetting({ loading, onSubmit }: SettingProp) {
     const [onLoading, setLoading] = useState(loading)
 
     const [tagline, setTagline] = useState({

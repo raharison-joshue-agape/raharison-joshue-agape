@@ -11,7 +11,7 @@ export type PayloadProfileType = {
     emailConnexion: string
 }
 
-interface ProfileSettingProp {
+interface SettingProp {
     loading: boolean
     onSubmit: (payload: PayloadProfileType) => void
 }
@@ -19,10 +19,7 @@ interface ProfileSettingProp {
 const DEFAULT_AVATAR_URL =
     "https://raharison-joshue-agape.vercel.app/assets/profile-7cyklktk.jpg"
 
-export default function ProfileSetting({
-    loading,
-    onSubmit,
-}: ProfileSettingProp) {
+export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
     const [onLoading, setLoading] = useState(loading)
 
     const [previewUrl, setPreviewUrl] = useState<string>(DEFAULT_AVATAR_URL)
