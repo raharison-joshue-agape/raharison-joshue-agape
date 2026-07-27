@@ -4,9 +4,8 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
 export type PayloadLinkType = {
-    yas: string
-    orange: string
-    airtel: string
+    tagline: string
+    bio: string
 }
 
 interface ProfileSettingProp {
@@ -14,33 +13,31 @@ interface ProfileSettingProp {
     onSubmit: (payload: PayloadLinkType) => void
 }
 
-export default function ContactSetting({
+const defaultTagline = `En tant que développeur passionné, je suis continuellement motivé par la création de solutions novatrices et par le perfectionnement constant de mes aptitudes techniques.`
+const defaultBio = `Développeur web motivé, cumulant plus de 3 années dans le métier, je crée des applications à la pointe, performantes et pensées pour l'utilisateur. Je me perfectionne sans cesse grâce à une veille technologique assidue et à des réalisations concrètes axées sur la qualité, la facilité d'entretien et l'efficacité.
+
+Ma méthode : l'Infrastructure as Code. Je monte des infrastructures solides qui autorisent les équipes produit à livrer avec assurance.`
+export default function BioTaglineSetting({
     loading,
     onSubmit,
 }: ProfileSettingProp) {
     const [onLoading, setLoading] = useState(loading)
 
-    const [yas, setYas] = useState({
-        value: "",
+    const [tagline, setTagline] = useState({
+        value: defaultTagline,
         error: false,
         error_message: "",
     })
-    const [orange, setOrange] = useState({
-        value: "",
-        error: false,
-        error_message: "",
-    })
-    const [airtel, setAirtel] = useState({
-        value: "",
+    const [bio, setBio] = useState({
+        value: defaultBio,
         error: false,
         error_message: "",
     })
 
     const handleSubmit = () => {
         const payload = {
-            yas: yas.value,
-            orange: orange.value,
-            airtel: airtel.value,
+            tagline: tagline.value,
+            bio: bio.value,
         }
 
         onSubmit(payload)
@@ -72,7 +69,7 @@ export default function ContactSetting({
                             "text-slate-100"
                         )}
                     >
-                        Informations sur les contacts
+                        Bio & Accroche
                     </h2>
                     <p className={cn("text-xs", "text-slate-400")}>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -82,111 +79,72 @@ export default function ContactSetting({
 
                 <div className={cn("space-y-1")}>
                     <label
-                        htmlFor="yas-number"
+                        htmlFor="tagline"
                         className={cn(
                             "block text-xs font-medium",
                             "text-slate-100"
                         )}
                     >
-                        YAS
+                        Tagline (Accroche principale)
                     </label>
-                    <input
-                        type="tel"
-                        id="yas-number"
-                        value={yas.value}
-                        placeholder="+261 34 24 393 87"
+                    <textarea
+                        id="tagline"
+                        value={tagline.value}
                         onChange={(e) =>
-                            setYas({
+                            setTagline({
                                 value: e.target.value,
                                 error: false,
                                 error_message: "",
                             })
                         }
+                        rows={4}
                         className={cn(
                             "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
                             "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
-                            yas.error
+                            tagline.error
                                 ? "border-red-500 focus:ring-red-500"
                                 : "border-gray-700 focus:ring-emerald-500"
                         )}
                     />
-                    {yas.error && (
+                    {tagline.error && (
                         <small className="ml-1 text-xs font-medium text-red-500">
-                            {yas.error_message}
+                            {tagline.error_message}
                         </small>
                     )}
                 </div>
 
                 <div className={cn("space-y-1")}>
                     <label
-                        htmlFor="orange-number"
+                        htmlFor="bio"
                         className={cn(
                             "block text-xs font-medium",
                             "text-slate-100"
                         )}
                     >
-                        ORANGE
+                        Biographie complète
                     </label>
-                    <input
-                        type="tel"
-                        id="orange-number"
-                        value={orange.value}
-                        placeholder="+261 32 81 727 37"
+                    <textarea
+                        id="bio"
+                        value={bio.value}
                         onChange={(e) =>
-                            setOrange({
+                            setBio({
                                 value: e.target.value,
                                 error: false,
                                 error_message: "",
                             })
                         }
+                        rows={7}
                         className={cn(
                             "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
                             "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
-                            orange.error
+                            bio.error
                                 ? "border-red-500 focus:ring-red-500"
                                 : "border-gray-700 focus:ring-emerald-500"
                         )}
                     />
-                    {orange.error && (
+                    {bio.error && (
                         <small className="ml-1 text-xs font-medium text-red-500">
-                            {orange.error_message}
-                        </small>
-                    )}
-                </div>
-
-                <div className={cn("space-y-1")}>
-                    <label
-                        htmlFor="airtel-number"
-                        className={cn(
-                            "block text-xs font-medium",
-                            "text-slate-100"
-                        )}
-                    >
-                        AIRTEL
-                    </label>
-                    <input
-                        type="tel"
-                        id="airtel-number"
-                        value={airtel.value}
-                        placeholder="+261 33 68 473 73"
-                        onChange={(e) =>
-                            setAirtel({
-                                value: e.target.value,
-                                error: false,
-                                error_message: "",
-                            })
-                        }
-                        className={cn(
-                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
-                            "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
-                            airtel.error
-                                ? "border-red-500 focus:ring-red-500"
-                                : "border-gray-700 focus:ring-emerald-500"
-                        )}
-                    />
-                    {airtel.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
-                            {airtel.error_message}
+                            {bio.error_message}
                         </small>
                     )}
                 </div>

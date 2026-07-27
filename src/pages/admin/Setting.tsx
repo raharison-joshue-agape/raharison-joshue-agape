@@ -1,7 +1,15 @@
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import { User, Bell, Shield, Palette, Link, Contact } from "lucide-react"
+import {
+    User,
+    Bell,
+    Shield,
+    Palette,
+    Link,
+    Contact,
+    Sparkles,
+} from "lucide-react"
 import ProfileSetting, {
     type PayloadProfileType,
 } from "@/components/admin/settings/profile-setting"
@@ -11,11 +19,13 @@ import AppearanceSetting from "@/components/admin/settings/appearance-setting"
 import { useSearchParams } from "react-router-dom"
 import LinkSetting from "@/components/admin/settings/link-setting"
 import ContactSetting from "@/components/admin/settings/contact-setting"
+import BioTaglineSetting from "@/components/admin/settings/bio-tagline-setting"
 
 const sidebarItem = [
     { label: "Profil & Identité", tabValue: "profile", icon: User },
     { label: "Contacts", tabValue: "contacts", icon: Contact },
     { label: "Liens Réseaux", tabValue: "links", icon: Link },
+    { label: "Bio & Accroche", tabValue: "bio-and-tagline", icon: Sparkles },
     { label: "Sécurité & Mot de passe", tabValue: "security", icon: Shield },
     { label: "Notifications", tabValue: "notifications", icon: Bell },
     { label: "Apparence & Langue", tabValue: "appearance", icon: Palette },
@@ -113,6 +123,10 @@ export default function AdminSetting() {
 
                     {activeTab === "links" && (
                         <LinkSetting loading onSubmit={() => {}} />
+                    )}
+
+                    {activeTab === "bio-and-tagline" && (
+                        <BioTaglineSetting loading onSubmit={() => {}} />
                     )}
 
                     {activeTab === "security" && (
