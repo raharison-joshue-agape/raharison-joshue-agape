@@ -108,7 +108,12 @@ export default function ContactSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {yas.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {yas.error_message}
                         </small>
                     )}
@@ -145,7 +150,12 @@ export default function ContactSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {orange.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {orange.error_message}
                         </small>
                     )}
@@ -182,7 +192,12 @@ export default function ContactSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {airtel.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {airtel.error_message}
                         </small>
                     )}

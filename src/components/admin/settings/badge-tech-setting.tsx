@@ -100,7 +100,7 @@ export default function BadgeTechSetting({ loading, onSubmit }: SettingProp) {
                     </button>
                 </div>
 
-                <div className={cn("grid grid-cols-1 gap-4")}>
+                <div className={cn("grid grid-cols-1 gap-4 lg:grid-cols-2")}>
                     {defaultBadgeTech.map((badge, index) => (
                         <div
                             key={index}

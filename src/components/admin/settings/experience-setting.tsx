@@ -226,7 +226,12 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                     "bg-gray-900/30"
                 )}
             >
-                <div className="flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-4 sm:flex-row sm:items-center dark:border-gray-700">
+                <div
+                    className={cn(
+                        "flex flex-col items-start justify-between gap-4 border-b pb-4 sm:flex-row sm:items-center",
+                        "border-gray-700"
+                    )}
+                >
                     <div>
                         <h2
                             className={cn(
@@ -244,74 +249,149 @@ export default function ExperienceSetting({ loading }: SettingProp) {
 
                     <button
                         onClick={handleOpenCreateModal}
-                        className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
+                        className={cn(
+                            "flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium shadow-sm transition",
+                            "bg-blue-600 text-white hover:bg-blue-700"
+                        )}
                     >
                         <Plus className="h-4 w-4" /> Ajouter une expérience
                     </button>
                 </div>
 
                 {/* Liste des cartes d'expériences */}
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-2")}>
                     {experiences.map((exp, index) => (
                         <div
                             key={index}
-                            className="flex flex-col justify-between gap-4 rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
+                            className={cn(
+                                "flex flex-col justify-between gap-4 rounded-lg border p-5 shadow-sm transition hover:shadow-md",
+                                "border-gray-700 bg-gray-800"
+                            )}
                         >
-                            <div className="space-y-3">
-                                <div className="flex items-start justify-between gap-2">
-                                    <span className="inline-block rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-1 text-xs font-semibold text-blue-600 dark:text-blue-400">
+                            <div className={cn("space-y-3")}>
+                                <div
+                                    className={cn(
+                                        "flex items-start justify-between gap-2"
+                                    )}
+                                >
+                                    <span
+                                        className={cn(
+                                            "inline-block rounded-full border px-2.5 py-1 text-xs font-semibold",
+                                            "border-blue-500/20 bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                                        )}
+                                    >
                                         {exp.type}
                                     </span>
-                                    <div className="flex items-center gap-1">
+                                    <div
+                                        className={cn(
+                                            "flex items-center gap-1"
+                                        )}
+                                    >
                                         <button
                                             onClick={() =>
                                                 handleOpenEditModal(index)
                                             }
-                                            className="rounded-md p-1.5 text-gray-500 transition hover:bg-gray-100 hover:text-blue-600 dark:hover:bg-gray-700"
+                                            className={cn(
+                                                "rounded-md p-1.5 transition",
+                                                "text-gray-500 hover:bg-gray-100 hover:text-blue-600 dark:hover:bg-gray-700"
+                                            )}
                                             title="Modifier"
                                         >
-                                            <Pencil className="h-4 w-4" />
+                                            <Pencil className={cn("h-4 w-4")} />
                                         </button>
                                         <button
                                             onClick={() => handleDelete(index)}
-                                            className="rounded-md p-1.5 text-gray-500 transition hover:bg-gray-100 hover:text-red-600 dark:hover:bg-gray-700"
+                                            className={cn(
+                                                "rounded-md p-1.5 transition",
+                                                "text-gray-500 hover:bg-gray-100 hover:text-red-600 dark:hover:bg-gray-700"
+                                            )}
                                             title="Supprimer"
                                         >
-                                            <Trash2 className="h-4 w-4" />
+                                            <Trash2 className={cn("h-4 w-4")} />
                                         </button>
                                     </div>
                                 </div>
 
-                                <h3 className="text-base leading-snug font-semibold text-gray-900 dark:text-white">
+                                <h3
+                                    className={cn(
+                                        "text-base leading-snug font-semibold",
+                                        "text-gray-900 dark:text-white"
+                                    )}
+                                >
                                     {exp.title}
                                 </h3>
 
-                                <div className="flex flex-wrap gap-3 text-xs text-gray-500 dark:text-gray-400">
-                                    <span className="flex items-center gap-1">
-                                        <Building2 className="h-3.5 w-3.5 text-blue-500" />
+                                <div
+                                    className={cn(
+                                        "flex flex-wrap gap-3 text-xs",
+                                        "text-gray-500 dark:text-gray-400"
+                                    )}
+                                >
+                                    <span
+                                        className={cn(
+                                            "flex items-center gap-1"
+                                        )}
+                                    >
+                                        <Building2
+                                            className={cn(
+                                                "h-3.5 w-3.5",
+                                                "text-blue-500"
+                                            )}
+                                        />
                                         {exp.company}
                                     </span>
-                                    <span className="flex items-center gap-1">
-                                        <Calendar className="h-3.5 w-3.5 text-blue-500" />
+                                    <span
+                                        className={cn(
+                                            "flex items-center gap-1"
+                                        )}
+                                    >
+                                        <Calendar
+                                            className={cn(
+                                                "h-3.5 w-3.5",
+                                                "text-blue-500"
+                                            )}
+                                        />
                                         {exp.year}
                                     </span>
-                                    <span className="flex items-center gap-1">
-                                        <MapPin className="h-3.5 w-3.5 text-blue-500" />
+                                    <span
+                                        className={cn(
+                                            "flex items-center gap-1"
+                                        )}
+                                    >
+                                        <MapPin
+                                            className={cn(
+                                                "h-3.5 w-3.5",
+                                                "text-blue-500"
+                                            )}
+                                        />
                                         {exp.location}
                                     </span>
                                 </div>
 
-                                <p className="line-clamp-3 text-sm text-gray-600 dark:text-gray-300">
+                                <p
+                                    className={cn(
+                                        "line-clamp-3 text-sm",
+                                        "text-gray-600 dark:text-gray-300"
+                                    )}
+                                >
                                     {exp.description}
                                 </p>
                             </div>
 
                             {/* Tags */}
-                            <div className="flex flex-wrap gap-1.5 border-t border-gray-100 pt-2 dark:border-gray-700/50">
+                            <div
+                                className={cn(
+                                    "flex flex-wrap gap-1.5 border-t pt-2",
+                                    "border-gray-700/50"
+                                )}
+                            >
                                 {exp.tags.map((tag, tIndex) => (
                                     <span
                                         key={tIndex}
-                                        className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                                        className={cn(
+                                            "rounded px-2 py-0.5 text-xs",
+                                            "bg-gray-700 text-gray-300"
+                                        )}
                                     >
                                         #{tag}
                                     </span>
@@ -323,32 +403,69 @@ export default function ExperienceSetting({ loading }: SettingProp) {
 
                 {/* MODAL / DIALOG D'ÉDITION ET CRÉATION */}
                 {isModalOpen && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/50 p-4 backdrop-blur-sm">
-                        <div className="my-8 w-full max-w-2xl overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl dark:border-gray-700 dark:bg-gray-800">
+                    <div
+                        className={cn(
+                            "fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4 backdrop-blur-sm",
+                            "bg-black/50"
+                        )}
+                    >
+                        <div
+                            className={cn(
+                                "my-8 w-full max-w-2xl overflow-hidden rounded-xl border shadow-xl",
+                                "border-gray-700 bg-gray-800"
+                            )}
+                        >
                             {/* Modal Header */}
-                            <div className="flex items-center justify-between border-b border-gray-200 p-4 dark:border-gray-700">
-                                <h3 className="flex items-center gap-2 text-lg font-bold text-gray-900 dark:text-white">
-                                    <Briefcase className="h-5 w-5 text-blue-500" />
+                            <div
+                                className={cn(
+                                    "flex items-center justify-between border-b p-4",
+                                    "border-gray-700"
+                                )}
+                            >
+                                <h3
+                                    className={cn(
+                                        "flex items-center gap-2 text-lg font-bold",
+                                        "text-white"
+                                    )}
+                                >
+                                    <Briefcase
+                                        className={cn(
+                                            "h-5 w-5",
+                                            "text-blue-500"
+                                        )}
+                                    />
                                     {editingIndex !== null
                                         ? "Modifier l'expérience"
                                         : "Ajouter une expérience"}
                                 </h3>
                                 <button
                                     onClick={() => setIsModalOpen(false)}
-                                    className="rounded-lg p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                                    className={cn(
+                                        "rounded-lg p-1",
+                                        "text-gray-400 hover:text-gray-200"
+                                    )}
                                 >
-                                    <X className="h-5 w-5" />
+                                    <X className={cn("h-5 w-5")} />
                                 </button>
                             </div>
 
                             {/* Modal Form */}
                             <form
                                 onSubmit={handleSubmit}
-                                className="space-y-4 p-6"
+                                className={cn("space-y-4 p-6")}
                             >
-                                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div
+                                    className={cn(
+                                        "grid grid-cols-1 gap-4 md:grid-cols-2"
+                                    )}
+                                >
                                     <div>
-                                        <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 block text-xs font-semibold",
+                                                "text-gray-300"
+                                            )}
+                                        >
                                             Titre du poste / Mission
                                         </label>
                                         <input
@@ -357,11 +474,19 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                             value={formData.title}
                                             onChange={handleChange}
                                             required
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         />
                                     </div>
                                     <div>
-                                        <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 block text-xs font-semibold",
+                                                "text-gray-300"
+                                            )}
+                                        >
                                             Entreprise / Organisation
                                         </label>
                                         <input
@@ -370,18 +495,29 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                             value={formData.company}
                                             onChange={handleChange}
                                             required
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         />
                                     </div>
                                     <div>
-                                        <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 block text-xs font-semibold",
+                                                "text-gray-300"
+                                            )}
+                                        >
                                             Type de contrat
                                         </label>
                                         <select
                                             name="type"
                                             value={formData.type}
                                             onChange={handleChange}
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         >
                                             <option value="Freelance">
                                                 Freelance
@@ -409,7 +545,10 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                             value={formData.year}
                                             onChange={handleChange}
                                             required
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         />
                                     </div>
                                     <div className="md:col-span-2">
@@ -421,7 +560,10 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                             name="location"
                                             value={formData.location}
                                             onChange={handleChange}
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         />
                                     </div>
                                 </div>
@@ -436,7 +578,10 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                         onChange={handleChange}
                                         rows={4}
                                         required
-                                        className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                        className={cn(
+                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                        )}
                                     />
                                 </div>
 
@@ -455,7 +600,10 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                         name="image"
                                         value={formData.image}
                                         onChange={handleChange}
-                                        className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                        className={cn(
+                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                        )}
                                     />
                                 </div>
 
@@ -484,7 +632,10 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                                 }
                                             }}
                                             placeholder="Ajouter une tech (ex: React.js)"
-                                            className="flex-1 rounded-lg border border-gray-300 bg-gray-50 px-3 py-1.5 text-sm outline-none dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "flex-1 rounded-lg border px-3 py-1.5 text-sm outline-none",
+                                                "border-gray-700 bg-gray-900"
+                                            )}
                                         />
                                         <button
                                             type="button"
