@@ -14,14 +14,14 @@ import { ThemeProvider } from "@/components/theme-provider.tsx"
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 
 import AdminDashboard from "@/pages/admin/Dashboard"
-import AdminAnalytic from "@/pages/admin/AdminAnalytic"
-import AdminProject from "@/pages/admin/AdminProject"
-import AdminTask from "@/pages/admin/AdminTask"
-import AdminInvoice from "@/pages/admin/AdminInvoice"
-import AdminClient from "@/pages/admin/AdminClient"
-import AdminTestimonial from "@/pages/admin/AdminTestimonial"
-import AdminContent from "@/pages/admin/AdminContent"
-import AdminSetting from "./pages/admin/AdminSetting"
+import AdminAnalytic from "@/pages/admin/Analytic"
+import AdminProject from "@/pages/admin/Project"
+import AdminTask from "@/pages/admin/Task"
+import AdminInvoice from "@/pages/admin/Invoice"
+import AdminClient from "@/pages/admin/Client"
+import AdminTestimonial from "@/pages/admin/Testimonial"
+import AdminContent from "@/pages/admin/Content"
+import AdminSetting from "./pages/admin/Setting"
 
 const router = createBrowserRouter([
     { path: "/", element: <App /> },

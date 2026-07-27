@@ -1,4 +1,5 @@
 import type { MessageItemProps } from "@/components/admin/message"
+import type { ConversationGroup } from "@/components/admin/messages/types"
 import type { NotificationItemProps } from "@/components/admin/notification"
 import {
     Briefcase,
@@ -289,5 +290,66 @@ export const quickMessagesData = [
             "Voici les spécifications techniques demandées pour la partie backend NestJS.",
         time: "Il y a 1 jour",
         unread: false,
+    },
+]
+
+export const initialConversations: ConversationGroup[] = [
+    {
+        email: "jean.dupont@enterprise.com",
+        name: "Jean Dupont",
+        location: "Paris, France",
+        subject: "Demande de prestation - Architecture ERP",
+        isStarred: true,
+        isRead: false,
+        messages: [
+            {
+                id: "m1",
+                description:
+                    "Bonjour,\n\nJ'ai consulté vos réalisations et votre profil m'intéresse vivement. Nous avons un projet d'intégration ERP nécessitant des compétences poussées en Angular et NestJS.\n\nSeriez-vous disponible pour un échange ?",
+                created_at: "2026-07-26T10:45:00.000Z",
+                isFromAdmin: false,
+            },
+        ],
+    },
+    {
+        email: "sarah.rav@tech-solutions.mg",
+        name: "Sarah Ravelo",
+        location: "Antananarivo, Madagascar",
+        subject: "Refonte Interface Web Client",
+        isStarred: false,
+        isRead: false,
+        messages: [
+            {
+                id: "m2",
+                description:
+                    "Salut,\n\nJe reviens vers toi suite à notre dernière réunion. Est-ce que tu as eu le temps de jeter un œil aux maquettes Figma pour l'interface client ?",
+                created_at: "2026-07-25T14:20:00.000Z",
+                isFromAdmin: false,
+            },
+            {
+                id: "m3",
+                description:
+                    "Bonjour Sarah, oui j'ai regardé. C'est très propre. Je t'envoie une invitation sur ma plateforme client pour suivre l'avancement.",
+                created_at: "2026-07-25T16:00:00.000Z",
+                isFromAdmin: true,
+            },
+        ],
+    },
+    {
+        email: "marc.andriana@dgsr-sec.mg",
+        name: "Marc Andriana",
+        location: "Fianarantsoa, Madagascar",
+        subject: "Spécifications techniques - Module Sécurité",
+        isStarred: true,
+        isRead: true,
+        messages: [
+            {
+                id: "m4",
+                description:
+                    "Bonjour,\n\nVous trouverez ci-joint les spécifications validées concernant les rôles d'accès et le chiffrement des données pour la plateforme DGSR.",
+                created_at: "2026-07-24T09:15:00.000Z",
+                isFromAdmin: false,
+            },
+        ],
     },
 ]

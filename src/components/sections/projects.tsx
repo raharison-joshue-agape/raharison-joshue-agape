@@ -1,6 +1,8 @@
+import { cn } from "@/lib/utils"
+import { useMemo, useState } from "react"
 import { projects } from "@/data/projects"
-import { staggerContainer, staggerItem } from "@/lib/animations"
 import { AnimatePresence, motion } from "framer-motion"
+import { staggerContainer, staggerItem } from "@/lib/animations"
 import {
     ExternalLink,
     Filter,
@@ -10,10 +12,8 @@ import {
     Star,
     Terminal,
 } from "lucide-react"
-import { useMemo, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import GridBackground from "@/components/grid-background"
-import { cn } from "@/lib/utils"
 
 const GithubIcon = () => (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -33,27 +33,27 @@ const colorMap: Record<string, { text: string; bg: string; glow: string }> = {
         text: "#22d3ee",
         bg: "rgba(34,211,238,0.08)",
         glow: "rgba(34,211,238,0.18)",
-    }, // cyan
+    },
     green: {
         text: "#34d399",
         bg: "rgba(52,211,153,0.08)",
         glow: "rgba(52,211,153,0.18)",
-    }, // emerald
+    },
     sky: {
         text: "#38bdf8",
         bg: "rgba(56,189,248,0.08)",
         glow: "rgba(56,189,248,0.18)",
-    }, // sky
+    },
     teal: {
         text: "#2dd4bf",
         bg: "rgba(45,212,191,0.08)",
         glow: "rgba(45,212,191,0.18)",
-    }, // teal
+    },
     slate: {
         text: "#94a3b8",
         bg: "rgba(148,163,184,0.08)",
         glow: "rgba(148,163,184,0.12)",
-    }, // slate
+    },
 }
 
 const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
@@ -381,7 +381,7 @@ export default function Projects() {
             ref={ref}
             className={cn(
                 "relative overflow-hidden py-28 backdrop-blur-lg",
-                "bg-gray-950/30"
+                "bg-gray-950/5"
             )}
         >
             <GridBackground className={cn("opacity-15")} />

@@ -13,7 +13,10 @@ export default function Services() {
         <section
             id="services"
             ref={ref}
-            className={cn("relative py-28 backdrop-blur-lg", "bg-gray-950/30")}
+            className={cn(
+                "relative overflow-hidden py-28 backdrop-blur-lg",
+                "bg-gray-950/5"
+            )}
         >
             <GridBackground className={cn("opacity-15")} />
 

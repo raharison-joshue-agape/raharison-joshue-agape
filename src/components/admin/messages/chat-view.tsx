@@ -123,7 +123,7 @@ export function ChatView({
                 <div className={cn("text-center")}>
                     <span
                         className={cn(
-                            "rounded-full border px-3 py-1 text-[10px]",
+                            "rounded-full border px-3 py-1 text-xs",
                             "border-gray-700/50 bg-gray-800/60 text-slate-400"
                         )}
                     >
@@ -135,7 +135,7 @@ export function ChatView({
                     <div
                         key={msg.id}
                         className={cn(
-                            "flex flex-col space-y-1.5 rounded-xl p-3 text-xs shadow-sm",
+                            "flex flex-col space-y-1.5 rounded-xl border border-red-600 p-3 text-xs shadow-sm",
                             msg.isFromAdmin
                                 ? "ml-6 border border-emerald-500/30 bg-emerald-500/5 text-slate-200"
                                 : "mr-6 border border-gray-800 bg-gray-900/60 text-slate-300"

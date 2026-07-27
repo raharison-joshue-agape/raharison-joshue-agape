@@ -1,76 +1,32 @@
+import { cn } from "@/lib/utils"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
 import type {
     ConversationGroup,
     FilterType,
     ReplyMode,
 } from "@/components/admin/messages/types"
+import { Shredder } from "lucide-react"
 import { MessageSidebar } from "@/components/admin/messages/message-sidebar"
 import { ConversationList } from "@/components/admin/messages/conversation-list"
 import { ChatView } from "@/components/admin/messages/chat-view"
-import { cn } from "@/lib/utils"
+import { initialConversations } from "@/data/admin.data"
+import { Button } from "@/components/ui/button"
 
-const initialConversations: ConversationGroup[] = [
-    {
-        email: "jean.dupont@enterprise.com",
-        name: "Jean Dupont",
-        location: "Paris, France",
-        subject: "Demande de prestation - Architecture ERP",
-        isStarred: true,
-        isRead: false,
-        messages: [
-            {
-                id: "m1",
-                description:
-                    "Bonjour,\n\nJ'ai consulté vos réalisations et votre profil m'intéresse vivement. Nous avons un projet d'intégration ERP nécessitant des compétences poussées en Angular et NestJS.\n\nSeriez-vous disponible pour un échange ?",
-                created_at: "2026-07-26T10:45:00.000Z",
-                isFromAdmin: false,
-            },
-        ],
-    },
-    {
-        email: "sarah.rav@tech-solutions.mg",
-        name: "Sarah Ravelo",
-        location: "Antananarivo, Madagascar",
-        subject: "Refonte Interface Web Client",
-        isStarred: false,
-        isRead: false,
-        messages: [
-            {
-                id: "m2",
-                description:
-                    "Salut,\n\nJe reviens vers toi suite à notre dernière réunion. Est-ce que tu as eu le temps de jeter un œil aux maquettes Figma pour l'interface client ?",
-                created_at: "2026-07-25T14:20:00.000Z",
-                isFromAdmin: false,
-            },
-            {
-                id: "m3",
-                description:
-                    "Bonjour Sarah, oui j'ai regardé. C'est très propre. Je t'envoie une invitation sur ma plateforme client pour suivre l'avancement.",
-                created_at: "2026-07-25T16:00:00.000Z",
-                isFromAdmin: true,
-            },
-        ],
-    },
-    {
-        email: "marc.andriana@dgsr-sec.mg",
-        name: "Marc Andriana",
-        location: "Fianarantsoa, Madagascar",
-        subject: "Spécifications techniques - Module Sécurité",
-        isStarred: true,
-        isRead: true,
-        messages: [
-            {
-                id: "m4",
-                description:
-                    "Bonjour,\n\nVous trouverez ci-joint les spécifications validées concernant les rôles d'accès et le chiffrement des données pour la plateforme DGSR.",
-                created_at: "2026-07-24T09:15:00.000Z",
-                isFromAdmin: false,
-            },
-        ],
-    },
-]
+const customInvite = `Bonjour,
+
+Suite à votre message envoyé depuis mon portfolio, je vous invite à rejoindre mon espace client sécurisé pour collaborer sur votre projet.
+
+Cliquez sur le lien ci-dessous pour activer votre compte :`
 
 export default function AdminMessage() {
     const [conversations, setConversations] =
@@ -83,9 +39,10 @@ export default function AdminMessage() {
 
     const [mode, setMode] = useState<ReplyMode>("message")
     const [replyText, setReplyText] = useState("")
-    const [customInviteNote, setCustomInviteNote] = useState(
-        "Bonjour,\n\nSuite à votre message envoyé depuis mon portfolio, je vous invite à rejoindre mon espace client sécurisé pour collaborer sur votre projet.\n\nCliquez sur le lien ci-dessous pour activer votre compte :"
-    )
+    const [customInviteNote, setCustomInviteNote] = useState(customInvite)
+
+    const [isOpen, setIsOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const formatDate = (isoString: string) => {
         try {
@@ -134,11 +91,17 @@ export default function AdminMessage() {
         )
     }
 
-    const handleDelete = (email: string) => {
-        setConversations((prev) => prev.filter((c) => c.email !== email))
-        if (selectedEmail === email) {
-            setSelectedEmail(null)
-        }
+    const [email, setEmail] = useState("")
+    const handleDelete = () => {
+        setLoading(true)
+        setTimeout(() => {
+            setConversations((prev) => prev.filter((c) => c.email !== email))
+            if (selectedEmail === email) {
+                setSelectedEmail(null)
+            }
+            setLoading(false)
+            setIsOpen(false)
+        }, 1000)
     }
 
     const handleSend = () => {
@@ -148,7 +111,7 @@ export default function AdminMessage() {
             mode === "invitation"
                 ? `${customInviteNote}\n\n👉 [Lien d'inscription client sécurisé](https://votreplateforme.com/register?email=${encodeURIComponent(
                       selectedEmail
-                  )}&invite=true)`
+                  )}&invite=true&code=30N001)`
                 : replyText
 
         if (!newDescription.trim()) return
@@ -212,9 +175,69 @@ export default function AdminMessage() {
                 </Badge>
             </div>
 
+            <Dialog open={isOpen}>
+                <DialogContent
+                    showCloseButton={false}
+                    className={cn("backdrop-blur-sm", "bg-gray-900/50")}
+                >
+                    <DialogHeader>
+                        <DialogTitle>
+                            <div className={cn("flex items-center gap-x-2.5")}>
+                                <Shredder size={25} />
+                                Supprimer la conversation
+                            </div>
+                        </DialogTitle>
+                        <DialogDescription className={cn("mt-3 text-sm")}>
+                            Êtes-vous sûr de vouloir supprimer cette
+                            conversation ? Cette action est irréversible et
+                            effacera tout l'historique.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter
+                        className={cn("py-2 sm:justify-end", "bg-gray-900/80")}
+                    >
+                        <Button
+                            variant="ghost"
+                            onClick={() => setIsOpen(false)}
+                            autoFocus
+                        >
+                            Annuler
+                        </Button>
+                        <Button
+                            disabled={loading}
+                            className={cn(
+                                "rounded-md px-4 pt-2 pb-1.75 normal-case",
+                                "bg-red-600 text-white hover:bg-red-600/80 dark:bg-red-500 dark:hover:bg-red-500/80"
+                            )}
+                            onClick={handleDelete}
+                        >
+                            {loading ? (
+                                <span className="flex items-center gap-2">
+                                    <motion.div
+                                        animate={{ rotate: 360 }}
+                                        transition={{
+                                            duration: 1,
+                                            repeat: Infinity,
+                                            ease: "linear",
+                                        }}
+                                        className={cn(
+                                            "h-4 w-4 rounded-full border-2",
+                                            "border-[#6e7681]/30 border-t-[#6e7681]"
+                                        )}
+                                    />
+                                    Suppression en cours...
+                                </span>
+                            ) : (
+                                "Confirmer la suppression"
+                            )}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
             <div
                 className={cn(
-                    "grid flex-1 grid-cols-1 overflow-hidden rounded-xl border backdrop-blur-sm lg:grid-cols-12",
+                    "grid flex-1 grid-cols-1 overflow-hidden rounded-xl border backdrop-blur-sm lg:grid-cols-[16rem_28rem_auto]",
                     "border-gray-800 bg-gray-900/40"
                 )}
             >
@@ -234,15 +257,13 @@ export default function AdminMessage() {
                     formatDate={formatDate}
                 />
 
-                <div
-                    className={cn(
-                        "flex flex-1 flex-col lg:col-span-5",
-                        "bg-gray-950/20"
-                    )}
-                >
+                <div className={cn("flex flex-1 flex-col", "bg-gray-950/20")}>
                     <ChatView
                         activeConversation={activeConversation}
-                        onDelete={handleDelete}
+                        onDelete={(email: string) => {
+                            setEmail(email)
+                            setIsOpen(true)
+                        }}
                         formatDate={formatDate}
                         mode={mode}
                         setMode={setMode}

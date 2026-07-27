@@ -23,7 +23,7 @@ export function MessageSidebar({
     return (
         <div
             className={cn(
-                "flex space-y-1 border-b p-3 lg:col-span-3 lg:flex-col lg:border-r lg:border-b-0",
+                "flex space-y-1 border-b p-3 lg:flex-col lg:border-r lg:border-b-0",
                 "border-gray-800"
             )}
         >

@@ -20,10 +20,11 @@ export default function ToolBox() {
             id="tool-box"
             className={cn(
                 "relative overflow-hidden py-28 backdrop-blur-lg",
-                "bg-gray-950/30"
+                "bg-gray-950/5"
             )}
         >
             <GridBackground className="opacity-15" />
+
             <div
                 className={cn(
                     "pointer-events-none absolute inset-0 overflow-hidden"

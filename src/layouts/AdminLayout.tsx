@@ -514,7 +514,7 @@ export default function AdminLayout() {
                     </DialogContent>
                 </Dialog>
 
-                <div className={cn("flex-1 p-6")}>
+                <div className={cn("flex-1 px-16 py-6")}>
                     <Outlet />
                 </div>
             </main>

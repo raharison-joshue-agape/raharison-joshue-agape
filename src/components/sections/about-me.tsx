@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import {
@@ -19,7 +20,6 @@ import {
 } from "lucide-react"
 import { personalInfo } from "@/data/Personal-info"
 import GridBackground from "@/components/grid-background"
-import { cn } from "@/lib/utils"
 
 const focuses = [
     {
@@ -74,10 +74,10 @@ export default function AboutMe() {
             ref={ref}
             className={cn(
                 "relative overflow-hidden py-28 backdrop-blur-lg",
-                "bg-gray-950/30"
+                "bg-gray-950/5"
             )}
         >
-            <GridBackground className="opacity-15" />
+            <GridBackground className={cn("opacity-15")} />
 
             <div
                 className={cn(

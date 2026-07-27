@@ -26,7 +26,7 @@ export function ConversationList({
     return (
         <div
             className={cn(
-                "flex flex-col border-b lg:col-span-4 lg:border-r lg:border-b-0",
+                "flex flex-col border-b lg:border-r lg:border-b-0",
                 "border-gray-800"
             )}
         >
