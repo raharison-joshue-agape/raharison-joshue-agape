@@ -303,7 +303,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                         "text-gray-900"
                                     )}
                                 >
-                                    <ImageIcon className={cn("h-12 w-12")} />
+                                    <ImageIcon size={48} />
                                 </div>
                             )}
 
@@ -340,8 +340,8 @@ export default function MyProjects({ loading }: SettingProp) {
                                 )}
                             >
                                 <Star
+                                    size={14}
                                     className={cn(
-                                        "h-3.5 w-3.5",
                                         "fill-amber-400 text-amber-400"
                                     )}
                                 />
@@ -384,7 +384,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                             )}
                                             title="Modifier"
                                         >
-                                            <Pencil className={cn("h-4 w-4")} />
+                                            <Pencil size={16} />
                                         </button>
                                         <button
                                             onClick={() => handleDelete(index)}
@@ -394,7 +394,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                             )}
                                             title="Supprimer"
                                         >
-                                            <Trash2 className={cn("h-4 w-4")} />
+                                            <Trash2 size={16} />
                                         </button>
                                     </div>
                                 </div>
@@ -417,8 +417,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                             "text-gray-400"
                                         )}
                                     >
-                                        <TrendingUp className={cn("h-3 w-3")} />{" "}
-                                        Impact :
+                                        <TrendingUp size={14} /> Impact :
                                     </span>
                                     <div className={cn("flex flex-wrap gap-1")}>
                                         {proj.metrics.map((m, mIdx) => (
@@ -482,10 +481,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                                 "text-blue-400"
                                             )}
                                         >
-                                            <ExternalLink
-                                                className={cn("h-3.5 w-3.5")}
-                                            />{" "}
-                                            Démo Live
+                                            <ExternalLink size={16} /> Démo Live
                                         </a>
                                     )}
                                 </div>
@@ -512,9 +508,16 @@ export default function MyProjects({ loading }: SettingProp) {
                         "border-gray-800 bg-gray-900/70 text-slate-100"
                     )}
                 >
-                    <DialogHeader className="border-b pb-2">
-                        <DialogTitle className="flex items-center gap-2 text-xl font-bold">
-                            <FolderGit2 className="h-5 w-5 text-primary" />
+                    <DialogHeader className={cn("border-b pb-2")}>
+                        <DialogTitle
+                            className={cn(
+                                "flex items-center gap-2 text-xl font-bold"
+                            )}
+                        >
+                            <FolderGit2
+                                size={20}
+                                className={cn("text-primary")}
+                            />
                             {editingIndex !== null
                                 ? "Modifier le projet"
                                 : "Ajouter un projet"}
@@ -586,8 +589,12 @@ export default function MyProjects({ loading }: SettingProp) {
                         </div>
 
                         {/* Ligne 2 : Note & Couleur d'accent */}
-                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <div className="space-y-2">
+                        <div
+                            className={cn(
+                                "grid grid-cols-1 gap-4 sm:grid-cols-2"
+                            )}
+                        >
+                            <div className={cn("space-y-2")}>
                                 <Label
                                     htmlFor="stars"
                                     className={cn(
@@ -597,7 +604,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                 >
                                     <Star
                                         size={16}
-                                        className="text-amber-500"
+                                        className={cn("text-amber-500")}
                                     />
                                     Note / Nombre d'étoiles
                                 </Label>
@@ -616,7 +623,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                 />
                             </div>
 
-                            <div className="space-y-2">
+                            <div className={cn("space-y-2")}>
                                 <Label
                                     htmlFor="color"
                                     className={cn(
@@ -626,7 +633,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                 >
                                     <Palette
                                         size={16}
-                                        className="text-muted-foreground"
+                                        className={cn("text-muted-foreground")}
                                     />
                                     Thème / Couleur accent
                                 </Label>
@@ -653,7 +660,11 @@ export default function MyProjects({ loading }: SettingProp) {
                         </div>
 
                         {/* Option Featured (Mis en avant) */}
-                        <div className="flex items-center space-x-3 rounded-lg">
+                        <div
+                            className={cn(
+                                "flex items-center space-x-3 rounded-lg"
+                            )}
+                        >
                             <Checkbox
                                 id="featured"
                                 checked={formData.featured}
@@ -676,7 +687,7 @@ export default function MyProjects({ loading }: SettingProp) {
                         </div>
 
                         {/* Description */}
-                        <div className="space-y-2">
+                        <div className={cn("space-y-2")}>
                             <Label
                                 htmlFor="description"
                                 className={cn(
@@ -699,26 +710,47 @@ export default function MyProjects({ loading }: SettingProp) {
                             />
                         </div>
 
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-5">
+                        <div
+                            className={cn(
+                                "grid grid-cols-1 gap-6 md:grid-cols-5"
+                            )}
+                        >
                             {/* Image de couverture */}
-                            <div className="md:col-span-2">
-                                <label className="mb-1.5 flex items-center gap-2 text-xs font-semibold text-gray-300">
-                                    <ImageIcon className="h-3.5 w-3.5" /> Image
-                                    d'illustration
+                            <div className={cn("md:col-span-2")}>
+                                <label
+                                    className={cn(
+                                        "mb-1.5 flex items-center gap-2 text-xs font-semibold",
+                                        "text-gray-300"
+                                    )}
+                                >
+                                    <ImageIcon size={16} /> Image d'illustration
                                 </label>
                                 <label
                                     htmlFor="image-upload"
-                                    className="relative flex h-36 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md border border-dashed border-gray-700 bg-gray-950/40 p-2 transition hover:border-gray-500"
+                                    className={cn(
+                                        "relative flex h-36 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md border border-dashed p-2 transition",
+                                        "border-gray-700 bg-gray-950/40 hover:border-gray-500"
+                                    )}
                                 >
                                     {formData.image ? (
                                         <img
                                             src={formData.image}
                                             alt="Aperçu"
-                                            className="h-full w-full rounded object-cover"
+                                            className={cn(
+                                                "h-full w-full rounded object-cover"
+                                            )}
                                         />
                                     ) : (
-                                        <div className="flex flex-col items-center gap-1 text-center text-xs text-gray-400">
-                                            <CloudUpload className="h-8 w-8 text-blue-500" />
+                                        <div
+                                            className={cn(
+                                                "flex flex-col items-center gap-1 text-center text-xs",
+                                                "text-gray-400"
+                                            )}
+                                        >
+                                            <CloudUpload
+                                                size={32}
+                                                className={cn("text-blue-500")}
+                                            />
                                             <span>Télécharger une image</span>
                                         </div>
                                     )}
@@ -728,16 +760,18 @@ export default function MyProjects({ loading }: SettingProp) {
                                     type="file"
                                     accept="image/*"
                                     onChange={handleImageUpload}
-                                    className="hidden"
+                                    className={cn("hidden")}
                                 />
                             </div>
 
                             {/* Liens GitHub & Live Demo */}
                             <div className={cn("space-y-5 md:col-span-3")}>
-                                <div className="space-y-2">
+                                <div className={cn("space-y-2")}>
                                     <Label
                                         htmlFor="github"
-                                        className="flex items-center gap-1.5"
+                                        className={cn(
+                                            "flex items-center gap-1.5"
+                                        )}
                                     >
                                         <GithubIcon /> URL Dépôt GitHub
                                     </Label>
@@ -755,13 +789,14 @@ export default function MyProjects({ loading }: SettingProp) {
                                     />
                                 </div>
 
-                                <div className="space-y-2">
+                                <div className={cn("space-y-2")}>
                                     <Label
                                         htmlFor="demo"
-                                        className="flex items-center gap-1.5"
+                                        className={cn(
+                                            "flex items-center gap-1.5"
+                                        )}
                                     >
-                                        <ExternalLink className="h-3.5 w-3.5" />{" "}
-                                        URL Démo Live
+                                        <ExternalLink size={16} /> URL Démo Live
                                     </Label>
                                     <input
                                         id="demo"
@@ -780,14 +815,14 @@ export default function MyProjects({ loading }: SettingProp) {
                         </div>
 
                         {/* Gestion des Tags / Techs */}
-                        <div className="space-y-2">
+                        <div className={cn("space-y-2")}>
                             <Label
                                 htmlFor="tag"
-                                className="flex items-center gap-1.5"
+                                className={cn("flex items-center gap-1.5")}
                             >
                                 <TagIcon size={16} /> Technologies / Tags
                             </Label>
-                            <div className="flex items-center gap-2">
+                            <div className={cn("flex items-center gap-2")}>
                                 <input
                                     id="tag"
                                     type="text"
@@ -822,12 +857,18 @@ export default function MyProjects({ loading }: SettingProp) {
                             </div>
 
                             {formData.tags?.length > 0 && (
-                                <div className="flex flex-wrap gap-1.5 pt-1">
+                                <div
+                                    className={cn(
+                                        "flex flex-wrap gap-1.5 pt-1"
+                                    )}
+                                >
                                     {formData.tags.map((tag, tIdx) => (
                                         <Badge
                                             key={tIdx}
                                             variant="secondary"
-                                            className="gap-1.5 pr-1 text-xs"
+                                            className={cn(
+                                                "gap-1.5 pr-1 text-xs"
+                                            )}
                                         >
                                             #{tag}
                                             <button
@@ -835,9 +876,12 @@ export default function MyProjects({ loading }: SettingProp) {
                                                 onClick={() =>
                                                     handleRemoveTag(tag)
                                                 }
-                                                className="rounded-full p-0.5 transition-colors hover:bg-destructive/20 hover:text-destructive"
+                                                className={cn(
+                                                    "rounded-full p-0.5 transition-colors",
+                                                    "hover:bg-destructive/20 hover:text-destructive"
+                                                )}
                                             >
-                                                <X className="h-3 w-3" />
+                                                <X size={16} />
                                             </button>
                                         </Badge>
                                     ))}
@@ -846,12 +890,12 @@ export default function MyProjects({ loading }: SettingProp) {
                         </div>
 
                         {/* Gestion des Métriques */}
-                        <div className="space-y-2">
-                            <Label className="flex items-center gap-1.5">
-                                <TrendingUp className="h-3.5 w-3.5" /> Chiffres
-                                / Métriques de résultat
+                        <div className={cn("space-y-2")}>
+                            <Label className={cn("flex items-center gap-1.5")}>
+                                <TrendingUp size={15} /> Chiffres / Métriques de
+                                résultat
                             </Label>
-                            <div className="flex gap-2">
+                            <div className={cn("flex gap-2")}>
                                 <input
                                     id="tag"
                                     type="text"
@@ -886,12 +930,19 @@ export default function MyProjects({ loading }: SettingProp) {
                             </div>
 
                             {formData.metrics?.length > 0 && (
-                                <div className="flex flex-wrap gap-1.5 pt-1">
+                                <div
+                                    className={cn(
+                                        "flex flex-wrap gap-1.5 pt-1"
+                                    )}
+                                >
                                     {formData.metrics.map((metric, mIdx) => (
                                         <Badge
                                             key={mIdx}
                                             variant="outline"
-                                            className="gap-1.5 border-emerald-500/30 bg-emerald-500/10 pr-1 text-xs text-emerald-500"
+                                            className={cn(
+                                                "gap-1.5 pr-1 text-xs",
+                                                "border-emerald-500/30 bg-emerald-500/10 text-emerald-500"
+                                            )}
                                         >
                                             {metric}
                                             <button
@@ -899,9 +950,12 @@ export default function MyProjects({ loading }: SettingProp) {
                                                 onClick={() =>
                                                     handleRemoveMetric(metric)
                                                 }
-                                                className="rounded-full p-0.5 transition-colors hover:bg-destructive/20 hover:text-destructive"
+                                                className={cn(
+                                                    "rounded-full p-0.5 transition-colors",
+                                                    "hover:bg-destructive/20 hover:text-destructive"
+                                                )}
                                             >
-                                                <X className="h-3 w-3" />
+                                                <X size={15} />
                                             </button>
                                         </Badge>
                                     ))}
@@ -909,7 +963,9 @@ export default function MyProjects({ loading }: SettingProp) {
                             )}
                         </div>
 
-                        <DialogFooter className="mt-6 gap-2 bg-gray-800/50">
+                        <DialogFooter
+                            className={cn("mt-6 gap-2", "bg-gray-800/50")}
+                        >
                             <Button
                                 type="button"
                                 variant="outline"
