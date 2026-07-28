@@ -75,8 +75,18 @@ export const adminNavItems = [
         ],
     },
     {
-        title: "Administration",
+        title: "Portfolio",
         items: [
+            {
+                title: "Expériences",
+                href: "/portfolio/experiences",
+                icon: Settings,
+            },
+            {
+                title: "Mes Projets",
+                href: "/portfolio/my-projects",
+                icon: Settings,
+            },
             {
                 title: "Paramètres",
                 href: "/portfolio/settings?tab=profile",

@@ -105,7 +105,7 @@ export default function AdminLayout() {
             {/* Sidebar de navigation */}
             <aside
                 className={cn(
-                    "z-50 hidden h-screen w-70 flex-col overflow-auto border-r p-4 md:flex",
+                    "z-50 hidden h-screen w-70 flex-col overflow-auto border-r md:flex",
                     "border-gray-800 bg-gray-900/50"
                 )}
             >
@@ -114,7 +114,7 @@ export default function AdminLayout() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     className={cn(
-                        "sticky top-0 z-5 mb-10 flex flex-col items-center rounded-lg border px-2 py-4",
+                        "sticky top-0 z-5 mb-5 flex flex-col items-center rounded-lg border px-2 py-4 backdrop-blur-3xl",
                         "border-gray-800/50 bg-gray-900/50"
                     )}
                 >
@@ -148,7 +148,7 @@ export default function AdminLayout() {
                 <nav className={cn("flex-1 space-y-1")}>
                     {adminNavItems.map((childrens, index) => {
                         return (
-                            <div key={index} className="mb-6">
+                            <div key={index} className="p-4">
                                 <p
                                     className={cn(
                                         "mb-2.5 ml-2.5 text-xs uppercase",
@@ -187,8 +187,8 @@ export default function AdminLayout() {
                 {/* Section déconnexion en bas de sidebar */}
                 <div
                     className={cn(
-                        "sticky bottom-0 border-t pt-4",
-                        "border-gray-800/80"
+                        "sticky bottom-0 border-t p-4 backdrop-blur-3xl",
+                        "border-gray-800/80 bg-gray-900/50"
                     )}
                 >
                     <button

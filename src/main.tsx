@@ -20,7 +20,9 @@ import AdminTask from "@/pages/admin/Task"
 import AdminInvoice from "@/pages/admin/Invoice"
 import AdminClient from "@/pages/admin/Client"
 import AdminTestimonial from "@/pages/admin/Testimonial"
-import AdminSetting from "./pages/admin/Setting"
+import AdminSetting from "@/pages/admin/Setting"
+import MyProjects from "@/pages/admin/MyProject"
+import Experiences from "@/pages/admin/Experiences"
 
 const router = createBrowserRouter([
     { path: "/", element: <App /> },
@@ -47,6 +49,8 @@ const router = createBrowserRouter([
                     { path: "clients", element: <AdminClient /> },
                     { path: "messages", element: <AdminMessage /> },
                     { path: "testimonials", element: <AdminTestimonial /> },
+                    { path: "experiences", element: <Experiences /> },
+                    { path: "my-projects", element: <MyProjects /> },
                     { path: "settings", element: <AdminSetting /> },
                 ],
             },
