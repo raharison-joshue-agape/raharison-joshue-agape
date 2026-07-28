@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -60,6 +61,8 @@ export default function Experiences({ loading = false }: ExperiencesProps) {
     const [experiencesData, setExperiences] =
         useState<Experience[]>(experiences)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isOpenDelete, setOpenDelete] = useState(false)
+
     const [editingIndex, setEditingIndex] = useState<number | null>(null)
     const [formData, setFormData] = useState<Experience>(emptyExperience)
     const [newTagInput, setNewTagInput] = useState("")
@@ -79,10 +82,8 @@ export default function Experiences({ loading = false }: ExperiencesProps) {
     }
 
     // Suppression d'une expérience
-    const handleDelete = (index: number) => {
-        if (confirm("Voulez-vous vraiment supprimer cette expérience ?")) {
-            setExperiences((prev) => prev.filter((_, i) => i !== index))
-        }
+    const handleDelete = () => {
+        setOpenDelete(true)
     }
 
     // Changement dans les champs standard
@@ -228,7 +229,7 @@ export default function Experiences({ loading = false }: ExperiencesProps) {
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        onClick={() => handleDelete(index)}
+                                        onClick={() => setOpenDelete(true)}
                                         className={cn(
                                             "h-8 w-8",
                                             "text-gray-400 hover:bg-gray-800 hover:text-red-500"
@@ -654,6 +655,67 @@ export default function Experiences({ loading = false }: ExperiencesProps) {
                             </Button>
                         </DialogFooter>
                     </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Modal de suppression */}
+            <Dialog open={isOpenDelete}>
+                <DialogContent
+                    showCloseButton={false}
+                    className={cn("backdrop-blur-sm", "bg-gray-900/50")}
+                >
+                    <DialogHeader>
+                        <DialogTitle>
+                            <div className={cn("flex items-center gap-x-2.5")}>
+                                <Trash2 size={25} />
+                                Supprimer l'expérience
+                            </div>
+                        </DialogTitle>
+                        <DialogDescription className={cn("mt-3 text-sm")}>
+                            Êtes-vous sûr de vouloir supprimer cette expérience
+                            ? Cette action est <strong>irréversible</strong> et
+                            la retirera définitivement de votre parcours.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter
+                        className={cn("py-2 sm:justify-end", "bg-gray-900/80")}
+                    >
+                        <Button
+                            variant="ghost"
+                            onClick={() => setOpenDelete(false)}
+                            autoFocus
+                        >
+                            Annuler
+                        </Button>
+                        <Button
+                            disabled={loading}
+                            className={cn(
+                                "rounded-md px-4 pt-2 pb-1.75 normal-case",
+                                "bg-red-600 text-white hover:bg-red-600/80 dark:bg-red-500 dark:hover:bg-red-500/80"
+                            )}
+                            onClick={handleDelete}
+                        >
+                            {loading ? (
+                                <span className="flex items-center gap-2">
+                                    <motion.div
+                                        animate={{ rotate: 360 }}
+                                        transition={{
+                                            duration: 1,
+                                            repeat: Infinity,
+                                            ease: "linear",
+                                        }}
+                                        className={cn(
+                                            "h-4 w-4 rounded-full border-2",
+                                            "border-[#6e7681]/30 border-t-[#6e7681]"
+                                        )}
+                                    />
+                                    Suppression...
+                                </span>
+                            ) : (
+                                "Oui, supprimer"
+                            )}
+                        </Button>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </motion.div>

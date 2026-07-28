@@ -108,6 +108,8 @@ export default function MyProjects({ loading }: SettingProp) {
 
     const [projects, setProjects] = useState<Project[]>(initialProjects)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isOpenDelete, setOpenDelete] = useState(false)
+
     const [editingIndex, setEditingIndex] = useState<number | null>(null)
     const [formData, setFormData] = useState<Project>(emptyProject)
 
@@ -130,10 +132,8 @@ export default function MyProjects({ loading }: SettingProp) {
     }
 
     // Suppression
-    const handleDelete = (index: number) => {
-        if (confirm("Voulez-vous vraiment supprimer ce projet ?")) {
-            setProjects((prev) => prev.filter((_, i) => i !== index))
-        }
+    const handleDelete = () => {
+        setOpenDelete(false)
     }
 
     // Basculer 'featured' directement depuis la carte
@@ -387,7 +387,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                             <Pencil size={16} />
                                         </button>
                                         <button
-                                            onClick={() => handleDelete(index)}
+                                            onClick={() => setOpenDelete(true)}
                                             className={cn(
                                                 "rounded-md p-1.5 transition",
                                                 "text-gray-500 hover:bg-gray-700 hover:text-red-600"
@@ -991,6 +991,70 @@ export default function MyProjects({ loading }: SettingProp) {
                             </Button>
                         </DialogFooter>
                     </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Modal de suppression */}
+            <Dialog open={isOpenDelete}>
+                <DialogContent
+                    showCloseButton={false}
+                    className={cn("backdrop-blur-sm", "bg-gray-900/50")}
+                >
+                    <DialogHeader>
+                        <DialogTitle>
+                            <div className={cn("flex items-center gap-x-2.5")}>
+                                <Trash2 size={25} />
+                                Supprimer le projet
+                            </div>
+                        </DialogTitle>
+                        <DialogDescription className={cn("mt-3 text-sm")}>
+                            Êtes-vous sûr de vouloir supprimer ce projet ? Cette
+                            action est{" "}
+                            <strong className="text-gray-300">
+                                irréversible
+                            </strong>
+                            .
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter
+                        className={cn("py-2 sm:justify-end", "bg-gray-900/80")}
+                    >
+                        <Button
+                            variant="ghost"
+                            onClick={() => setOpenDelete(false)}
+                            autoFocus
+                        >
+                            Annuler
+                        </Button>
+                        <Button
+                            disabled={loading}
+                            className={cn(
+                                "rounded-md px-4 pt-2 pb-1.75 normal-case",
+                                "bg-red-600 text-white hover:bg-red-600/80 dark:bg-red-500 dark:hover:bg-red-500/80"
+                            )}
+                            onClick={handleDelete}
+                        >
+                            {loading ? (
+                                <span className="flex items-center gap-2">
+                                    <motion.div
+                                        animate={{ rotate: 360 }}
+                                        transition={{
+                                            duration: 1,
+                                            repeat: Infinity,
+                                            ease: "linear",
+                                        }}
+                                        className={cn(
+                                            "h-4 w-4 rounded-full border-2",
+                                            "border-[#6e7681]/30 border-t-[#6e7681]"
+                                        )}
+                                    />
+                                    Suppression...
+                                </span>
+                            ) : (
+                                "Oui, supprimer"
+                            )}
+                        </Button>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </motion.div>
