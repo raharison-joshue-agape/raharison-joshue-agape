@@ -56,7 +56,7 @@ const colorMap: Record<string, { text: string; bg: string; glow: string }> = {
     },
 }
 
-const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
+export const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
     const [hovered, setHovered] = useState(false)
     const [imageLoaded, setImageLoaded] = useState(false)
     const colors = colorMap[project.color] || colorMap.accent

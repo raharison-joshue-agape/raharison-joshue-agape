@@ -63,7 +63,8 @@ const initialProjects: Project[] = [
             "Un espace web moderne et responsive pour présenter mes réalisations et mon parcours avec une navigation fluide et adaptée à tous les écrans.",
         tags: ["Vue.js", "PrimeVue", "Tailwindcss", "FastAPI"],
         category: "Applications Web",
-        image: "/assets/projects/portfolio-v1.png",
+        image: new URL("@/assets/projects/portfolio-v1.png", import.meta.url)
+            .href,
         github: "",
         demo: "https://raharison-joshue-agape-folio.vercel.app",
         stars: 1,
@@ -77,7 +78,8 @@ const initialProjects: Project[] = [
             "Refonte complète de mon portfolio personnel intégrant des animations fluides et de nouvelles technologies pour booster les performances et dynamiser l'expérience.",
         tags: ["React", "Framer Motion", "Tailwindcss", "Node.js/Express"],
         category: "Applications Web",
-        image: "/assets/projects/portfolio-v2.png",
+        image: new URL("@/assets/projects/portfolio-v2.png", import.meta.url)
+            .href,
         github: "",
         demo: "https://raharison-joshue-agape.vercel.app/",
         stars: 1,
@@ -271,14 +273,14 @@ export default function MyProjects({ loading }: SettingProp) {
                     <div
                         key={index}
                         className={cn(
-                            "flex flex-col justify-between overflow-hidden rounded-xl border shadow-sm",
-                            "border-gray-700 bg-gray-800"
+                            "flex flex-col justify-between overflow-hidden rounded-xl border shadow-sm backdrop-blur-3xl",
+                            "border-gray-800 bg-gray-900/30"
                         )}
                     >
                         <div
                             className={cn(
                                 "group relative h-44 overflow-hidden",
-                                "bg-gray-900"
+                                "bg-gray-900/50"
                             )}
                         >
                             {proj.image ? (
@@ -298,7 +300,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                 <div
                                     className={cn(
                                         "flex h-full w-full items-center justify-center",
-                                        "text-gray-400"
+                                        "text-gray-900"
                                     )}
                                 >
                                     <ImageIcon className={cn("h-12 w-12")} />
@@ -400,7 +402,7 @@ export default function MyProjects({ loading }: SettingProp) {
                                 <p
                                     className={cn(
                                         "line-clamp-3 text-sm",
-                                        "text-gray-600"
+                                        "text-gray-400"
                                     )}
                                 >
                                     {proj.description}
@@ -440,8 +442,8 @@ export default function MyProjects({ loading }: SettingProp) {
                                     <span
                                         key={tIdx}
                                         className={cn(
-                                            "rounded px-2 py-0.5 text-xs",
-                                            "bg-gray-700 text-gray-700"
+                                            "rounded px-2 py-1 text-xs",
+                                            "bg-gray-800/80 text-gray-400"
                                         )}
                                     >
                                         #{tag}
