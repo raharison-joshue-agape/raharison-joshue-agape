@@ -135,8 +135,11 @@ export default function SecuritySetting({
     }, [loading])
 
     return (
-        <form
+        <motion.form
             id="profile-form"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             onSubmit={(e) => {
                 e.preventDefault()
                 handleSubmit()
@@ -359,6 +362,6 @@ export default function SecuritySetting({
                     )}
                 </button>
             </div>
-        </form>
+        </motion.form>
     )
 }

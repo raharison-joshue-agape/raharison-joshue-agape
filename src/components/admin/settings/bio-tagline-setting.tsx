@@ -47,8 +47,11 @@ export default function BioTaglineSetting({ loading, onSubmit }: SettingProp) {
     }, [loading])
 
     return (
-        <form
-            id="contact-form"
+        <motion.form
+            id="bio-form"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             onSubmit={(e) => {
                 e.preventDefault()
                 handleSubmit()
@@ -170,7 +173,7 @@ export default function BioTaglineSetting({ loading, onSubmit }: SettingProp) {
                 </button>
                 <button
                     type="submit"
-                    form="contact-form"
+                    form="bio-form"
                     className={cn(
                         "flex items-center gap-2 rounded-md px-4 py-2 text-xs font-medium transition-colors",
                         "bg-primary text-primary-foreground hover:bg-primary/90"
@@ -200,6 +203,6 @@ export default function BioTaglineSetting({ loading, onSubmit }: SettingProp) {
                     )}
                 </button>
             </div>
-        </form>
+        </motion.form>
     )
 }

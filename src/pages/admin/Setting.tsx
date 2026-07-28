@@ -10,7 +10,6 @@ import {
     Contact,
     Sparkles,
     BarChart2,
-    Briefcase,
 } from "lucide-react"
 import ProfileSetting, {
     type PayloadProfileType,
@@ -24,7 +23,6 @@ import ContactSetting from "@/components/admin/settings/contact-setting"
 import BioTaglineSetting from "@/components/admin/settings/bio-tagline-setting"
 import StatSetting from "@/components/admin/settings/stat-setting"
 import BadgeTechSetting from "@/components/admin/settings/badge-tech-setting"
-import ExperienceSetting from "@/components/admin/settings/experience-setting"
 
 const sidebarItem = [
     { label: "Profil & Identité", tabValue: "profile", icon: User },
@@ -33,7 +31,6 @@ const sidebarItem = [
     { label: "Bio & Accroche", tabValue: "bio-and-tagline", icon: Sparkles },
     { label: "Statistiques", tabValue: "stats", icon: BarChart2 },
     { label: "Badges Flottants", tabValue: "tech-badge", icon: Sparkles },
-    { label: "Mes Expériences", tabValue: "experiences", icon: Briefcase },
     { label: "Sécurité & Mot de passe", tabValue: "security", icon: Shield },
     { label: "Notifications", tabValue: "notifications", icon: Bell },
     { label: "Apparence & Langue", tabValue: "appearance", icon: Palette },
@@ -147,10 +144,6 @@ export default function AdminSetting() {
 
                     {activeTab === "tech-badge" && (
                         <BadgeTechSetting loading onSubmit={() => {}} />
-                    )}
-
-                    {activeTab === "experiences" && (
-                        <ExperienceSetting loading onSubmit={() => {}} />
                     )}
 
                     {activeTab === "security" && (

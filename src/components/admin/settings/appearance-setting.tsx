@@ -1,8 +1,12 @@
 import { cn } from "@/lib/utils"
+import { motion } from "framer-motion"
 
 export default function AppearanceSetting() {
     return (
-        <div
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className={cn(
                 "space-y-6 rounded-lg border border-border p-6 shadow-sm",
                 "bg-gray-900/30"
@@ -52,6 +56,6 @@ export default function AppearanceSetting() {
                     </select>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }

@@ -49,8 +49,11 @@ export default function ContactSetting({ loading, onSubmit }: SettingProp) {
     }, [loading])
 
     return (
-        <form
+        <motion.form
             id="contact-form"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             onSubmit={(e) => {
                 e.preventDefault()
                 handleSubmit()
@@ -246,6 +249,6 @@ export default function ContactSetting({ loading, onSubmit }: SettingProp) {
                     )}
                 </button>
             </div>
-        </form>
+        </motion.form>
     )
 }

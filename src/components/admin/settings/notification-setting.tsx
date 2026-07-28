@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
-import { Switch } from "../../ui/switch"
+import { motion } from "framer-motion"
+import { Switch } from "@/components/ui/switch"
 import { useState } from "react"
 
 export default function NotificationSetting() {
@@ -7,7 +8,10 @@ export default function NotificationSetting() {
     const [securityAlert, setSecurityAlert] = useState(false)
     const [clientMessage, setClientMessage] = useState(false)
     return (
-        <div
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className={cn(
                 "space-y-6 rounded-lg border border-border p-6 shadow-sm",
                 "bg-gray-900/30"
@@ -93,6 +97,6 @@ export default function NotificationSetting() {
                     />
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
