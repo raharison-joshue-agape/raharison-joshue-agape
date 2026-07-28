@@ -6,6 +6,7 @@ import {
     ChartColumn,
     CheckCircle2,
     Eye,
+    FolderGit2,
     FolderKanban,
     LayoutDashboard,
     ListTodo,
@@ -80,12 +81,12 @@ export const adminNavItems = [
             {
                 title: "Expériences",
                 href: "/portfolio/experiences",
-                icon: Settings,
+                icon: Briefcase,
             },
             {
                 title: "Mes Projets",
                 href: "/portfolio/my-projects",
-                icon: Settings,
+                icon: FolderGit2,
             },
             {
                 title: "Paramètres",
