@@ -188,7 +188,7 @@ export default function Experiences({ loading = false }: ExperiencesProps) {
             </div>
 
             {/* Liste des cartes d'expériences */}
-            <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-2")}>
+            <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-3")}>
                 {experiencesData.map((exp, index) => (
                     <div
                         key={exp.id || `${exp.title}-${index}`}
@@ -241,6 +241,16 @@ export default function Experiences({ loading = false }: ExperiencesProps) {
                                 </div>
                             </div>
 
+                            {/* Aperçu de l'image */}
+                            {exp.image && (
+                                <div className="relative h-40 w-full overflow-hidden rounded-md border border-gray-800 bg-gray-950">
+                                    <img
+                                        src={exp.image}
+                                        alt={exp.title}
+                                        className="h-full w-full object-cover object-top transition-transform duration-300 hover:scale-105"
+                                    />
+                                </div>
+                            )}
                             <h3
                                 className={cn(
                                     "text-base leading-snug font-semibold",

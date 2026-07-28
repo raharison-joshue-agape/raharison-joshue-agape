@@ -148,7 +148,9 @@ export default function AdminMessage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className={cn("flex h-[calc(100vh-7rem)] flex-col space-y-4")}
+            className={cn(
+                "flex h-[calc(100vh-4rem)] flex-col space-y-4 px-16 py-6"
+            )}
         >
             <div className={cn("flex items-center justify-between")}>
                 <div>
