@@ -597,7 +597,7 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                 </div>
 
                 <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-8")}>
-                    <div className="col-span-3 space-y-1">
+                    <div className={cn("col-span-3 space-y-1")}>
                         <label
                             htmlFor="birth-date"
                             className={cn(
@@ -607,8 +607,13 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                         >
                             Date de naissance
                         </label>
-                        <div className="relative">
-                            <Calendar className="absolute top-2.5 left-3 h-4 w-4 text-muted-foreground" />
+                        <div className={cn("relative")}>
+                            <Calendar
+                                className={cn(
+                                    "absolute top-2.5 left-3 h-4 w-4",
+                                    "text-muted-foreground"
+                                )}
+                            />
                             <input
                                 type="date"
                                 id="birth-date"
@@ -641,7 +646,7 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     </div>
 
-                    <div className="col-span-3 space-y-1">
+                    <div className={cn("col-span-3 space-y-1")}>
                         <label
                             htmlFor="availability"
                             className={cn(
@@ -726,7 +731,7 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                     </div>
                 </div>
 
-                <div className="col-span-3 space-y-1">
+                <div className={cn("col-span-3 space-y-1")}>
                     <label
                         htmlFor="location"
                         className={cn(
