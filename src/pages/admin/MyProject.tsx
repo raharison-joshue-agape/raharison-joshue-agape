@@ -230,9 +230,9 @@ export default function MyProjects({ loading }: SettingProp) {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className={cn("space-y-6 px-16 py-6")}
         >
             <div

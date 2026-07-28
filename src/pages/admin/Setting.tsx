@@ -62,9 +62,9 @@ export default function AdminSetting() {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className={cn("z-0 mx-auto max-w-360 space-y-6 pt-6")}
         >
             <div
