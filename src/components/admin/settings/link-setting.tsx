@@ -122,7 +122,12 @@ export default function LinkSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {gitHubLink.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {gitHubLink.error_message}
                         </small>
                     )}
@@ -159,7 +164,12 @@ export default function LinkSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {gitLabLink.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {gitLabLink.error_message}
                         </small>
                     )}
@@ -196,7 +206,12 @@ export default function LinkSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {linkedinLink.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {linkedinLink.error_message}
                         </small>
                     )}
@@ -233,7 +248,12 @@ export default function LinkSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {facebookLink.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {facebookLink.error_message}
                         </small>
                     )}
@@ -270,7 +290,12 @@ export default function LinkSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {googleMap.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {googleMap.error_message}
                         </small>
                     )}

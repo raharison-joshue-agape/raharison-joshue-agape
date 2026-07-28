@@ -62,7 +62,8 @@ export default function StatSetting({ loading, onSubmit }: SettingProp) {
             >
                 <div
                     className={cn(
-                        "flex items-center justify-between border-b border-gray-200 pb-2 dark:border-gray-700"
+                        "flex items-center justify-between border-b pb-2",
+                        "border-gray-700"
                     )}
                 >
                     <h2
@@ -76,27 +77,41 @@ export default function StatSetting({ loading, onSubmit }: SettingProp) {
 
                     <button
                         type="button"
-                        className="flex items-center gap-1 rounded-md bg-blue-500/10 px-3 py-1.5 text-xs font-medium text-blue-600 transition hover:bg-blue-500/20 dark:text-blue-400"
+                        className={cn(
+                            "flex items-center gap-1 rounded-md px-3 py-1.5 text-xs font-medium transition",
+                            "bg-blue-500/10 text-blue-400 hover:bg-blue-500/20"
+                        )}
                     >
-                        <Plus className="h-3.5 w-3.5" /> Ajouter une stat
+                        <Plus className={cn("h-3.5 w-3.5")} /> Ajouter une stat
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-2")}>
                     {defaultStat.map((stat, index) => (
                         <div
                             key={index}
-                            className="group relative space-y-2 rounded-lg border border-gray-700 bg-gray-900/50 p-3"
+                            className={cn(
+                                "group relative space-y-2 rounded-lg border p-3",
+                                "border-gray-700 bg-gray-900/50"
+                            )}
                         >
                             <button
                                 type="button"
-                                className="absolute top-2 right-2 text-gray-400 transition hover:text-red-500"
+                                className={cn(
+                                    "absolute top-2 right-2 transition",
+                                    "text-gray-400 hover:text-red-500"
+                                )}
                             >
-                                <Trash2 className="h-4 w-4" />
+                                <Trash2 className={cn("h-4 w-4")} />
                             </button>
 
                             <div className="mt-2">
-                                <label className="block text-xs font-medium text-gray-400">
+                                <label
+                                    className={cn(
+                                        "block text-xs font-medium",
+                                        "text-gray-500"
+                                    )}
+                                >
                                     Label
                                 </label>
                                 <input
@@ -114,8 +129,13 @@ export default function StatSetting({ loading, onSubmit }: SettingProp) {
                                 />
                             </div>
 
-                            <div className="mt-4">
-                                <label className="block text-xs font-medium text-gray-500">
+                            <div className={cn("mt-4")}>
+                                <label
+                                    className={cn(
+                                        "block text-xs font-medium",
+                                        "text-gray-500"
+                                    )}
+                                >
                                     Valeur
                                 </label>
                                 <input
@@ -134,7 +154,12 @@ export default function StatSetting({ loading, onSubmit }: SettingProp) {
                             </div>
 
                             {stat.error && (
-                                <small className="ml-1 text-xs font-medium text-red-500">
+                                <small
+                                    className={cn(
+                                        "ml-1 text-xs font-medium",
+                                        "text-red-500"
+                                    )}
+                                >
                                     {stat.error_message}
                                 </small>
                             )}

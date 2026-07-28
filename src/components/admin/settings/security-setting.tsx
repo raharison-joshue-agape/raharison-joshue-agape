@@ -162,8 +162,8 @@ export default function SecuritySetting({
                     </p>
                 </div>
 
-                <div className="space-y-4">
-                    <div className="space-y-2">
+                <div className={cn("space-y-4")}>
+                    <div className={cn("space-y-2")}>
                         <label
                             htmlFor="current-password"
                             className={cn(
@@ -195,13 +195,18 @@ export default function SecuritySetting({
                             )}
                         />
                         {currentPassword.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {currentPassword.error_message}
                             </small>
                         )}
                     </div>
 
-                    <div className="space-y-2">
+                    <div className={cn("space-y-2")}>
                         <label
                             htmlFor="new-password"
                             className={cn(
@@ -256,13 +261,18 @@ export default function SecuritySetting({
                             </button>
                         </div>
                         {newPassword.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {newPassword.error_message}
                             </small>
                         )}
                     </div>
 
-                    <div className="space-y-2">
+                    <div className={cn("space-y-2")}>
                         <label
                             htmlFor="confirm-new-password"
                             className={cn(
@@ -294,7 +304,12 @@ export default function SecuritySetting({
                             )}
                         />
                         {confirmNewPassword.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {confirmNewPassword.error_message}
                             </small>
                         )}

@@ -105,7 +105,12 @@ export default function BioTaglineSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {tagline.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {tagline.error_message}
                         </small>
                     )}
@@ -141,7 +146,12 @@ export default function BioTaglineSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {bio.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {bio.error_message}
                         </small>
                     )}

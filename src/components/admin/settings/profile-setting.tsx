@@ -408,7 +408,12 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                             )}
                         />
                         {firstname.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {firstname.error_message}
                             </small>
                         )}
@@ -445,7 +450,12 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                             )}
                         />
                         {lastname.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {lastname.error_message}
                             </small>
                         )}
@@ -487,7 +497,12 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                             />
                         </div>
                         {emailPro.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {emailPro.error_message}
                             </small>
                         )}
@@ -527,7 +542,12 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                             />
                         </div>
                         {emailConnexion.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {emailConnexion.error_message}
                             </small>
                         )}
@@ -565,7 +585,12 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {role.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {role.error_message}
                         </small>
                     )}
@@ -605,7 +630,12 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                             />
                         </div>
                         {birthDate.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {birthDate.error_message}
                             </small>
                         )}
@@ -642,7 +672,12 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                             )}
                         />
                         {availability.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {availability.error_message}
                             </small>
                         )}
@@ -679,7 +714,12 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                             )}
                         />
                         {exp.error && (
-                            <small className="ml-1 text-xs font-medium text-red-500">
+                            <small
+                                className={cn(
+                                    "ml-1 text-xs font-medium",
+                                    "text-red-500"
+                                )}
+                            >
                                 {exp.error_message}
                             </small>
                         )}
@@ -717,7 +757,12 @@ export default function ProfileSetting({ loading, onSubmit }: SettingProp) {
                         )}
                     />
                     {location.error && (
-                        <small className="ml-1 text-xs font-medium text-red-500">
+                        <small
+                            className={cn(
+                                "ml-1 text-xs font-medium",
+                                "text-red-500"
+                            )}
+                        >
                             {location.error_message}
                         </small>
                     )}
