@@ -277,7 +277,7 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                     <span
                                         className={cn(
                                             "inline-block rounded-full border px-2.5 py-1 text-xs font-semibold",
-                                            "border-blue-500/20 bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                                            "border-blue-500/20 bg-blue-500/10 text-blue-400"
                                         )}
                                     >
                                         {exp.type}
@@ -293,7 +293,7 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                             }
                                             className={cn(
                                                 "rounded-md p-1.5 transition",
-                                                "text-gray-500 hover:bg-gray-100 hover:text-blue-600 dark:hover:bg-gray-700"
+                                                "text-gray-500 hover:bg-gray-700 hover:text-blue-600"
                                             )}
                                             title="Modifier"
                                         >
@@ -303,7 +303,7 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                             onClick={() => handleDelete(index)}
                                             className={cn(
                                                 "rounded-md p-1.5 transition",
-                                                "text-gray-500 hover:bg-gray-100 hover:text-red-600 dark:hover:bg-gray-700"
+                                                "text-gray-500 hover:bg-gray-700 hover:text-red-600"
                                             )}
                                             title="Supprimer"
                                         >
@@ -315,7 +315,7 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                 <h3
                                     className={cn(
                                         "text-base leading-snug font-semibold",
-                                        "text-gray-900 dark:text-white"
+                                        "text-white"
                                     )}
                                 >
                                     {exp.title}
@@ -324,7 +324,7 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                 <div
                                     className={cn(
                                         "flex flex-wrap gap-3 text-xs",
-                                        "text-gray-500 dark:text-gray-400"
+                                        "text-gray-400"
                                     )}
                                 >
                                     <span
@@ -371,7 +371,7 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                 <p
                                     className={cn(
                                         "line-clamp-3 text-sm",
-                                        "text-gray-600 dark:text-gray-300"
+                                        "text-gray-300"
                                     )}
                                 >
                                     {exp.description}
@@ -536,7 +536,12 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                         </select>
                                     </div>
                                     <div>
-                                        <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 block text-xs font-semibold",
+                                                "text-gray-300"
+                                            )}
+                                        >
                                             Période (ex: Avr. 2026 - Jui. 2026)
                                         </label>
                                         <input
@@ -552,7 +557,12 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                         />
                                     </div>
                                     <div className="md:col-span-2">
-                                        <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 block text-xs font-semibold",
+                                                "text-gray-300"
+                                            )}
+                                        >
                                             Lieu / Localisation
                                         </label>
                                         <input
@@ -569,7 +579,12 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                 </div>
 
                                 <div>
-                                    <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                    <label
+                                        className={cn(
+                                            "mb-1 block text-xs font-semibold",
+                                            "text-gray-300"
+                                        )}
+                                    >
                                         Description détaillée
                                     </label>
                                     <textarea
@@ -589,7 +604,7 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                     <label
                                         className={cn(
                                             "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                            "block text-gray-700 dark:text-gray-300"
+                                            "block text-gray-300"
                                         )}
                                     >
                                         <ImageIcon className="h-3.5 w-3.5" />{" "}
@@ -612,13 +627,13 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                     <label
                                         className={cn(
                                             "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                            "block text-gray-700 dark:text-gray-300"
+                                            "block text-gray-300"
                                         )}
                                     >
                                         <TagIcon className="h-3.5 w-3.5" />{" "}
                                         Technologies / Tags
                                     </label>
-                                    <div className="mb-2 flex gap-2">
+                                    <div className={cn("mb-2 flex gap-2")}>
                                         <input
                                             type="text"
                                             value={newTagInput}
@@ -640,16 +655,24 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                         <button
                                             type="button"
                                             onClick={handleAddTag}
-                                            className="rounded-lg bg-gray-200 px-3 py-1.5 text-xs font-semibold hover:bg-gray-300 dark:bg-gray-700"
+                                            className={cn(
+                                                "rounded-lg px-3 py-1.5 text-xs font-semibold",
+                                                "bg-gray-700 hover:bg-gray-300"
+                                            )}
                                         >
                                             Ajouter
                                         </button>
                                     </div>
-                                    <div className="flex flex-wrap gap-1.5">
+                                    <div
+                                        className={cn("flex flex-wrap gap-1.5")}
+                                    >
                                         {formData.tags.map((tag, tIdx) => (
                                             <span
                                                 key={tIdx}
-                                                className="flex items-center gap-1 rounded-md bg-blue-500/10 px-2.5 py-1 text-xs font-medium text-blue-600 dark:text-blue-400"
+                                                className={cn(
+                                                    "flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium",
+                                                    "bg-blue-500/10 text-blue-400"
+                                                )}
                                             >
                                                 #{tag}
                                                 <button
@@ -667,19 +690,31 @@ export default function ExperienceSetting({ loading }: SettingProp) {
                                 </div>
 
                                 {/* Modal Actions */}
-                                <div className="flex justify-end gap-3 border-t border-gray-200 pt-4 dark:border-gray-700">
+                                <div
+                                    className={cn(
+                                        "flex justify-end gap-3 border-t pt-4",
+                                        "border-gray-700"
+                                    )}
+                                >
                                     <button
                                         type="button"
                                         onClick={() => setIsModalOpen(false)}
-                                        className="rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                                        className={cn(
+                                            "rounded-lg px-4 py-2 text-sm",
+                                            "text-gray-300 hover:bg-gray-700"
+                                        )}
                                     >
                                         Annuler
                                     </button>
                                     <button
                                         type="submit"
-                                        className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
+                                        className={cn(
+                                            "flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium shadow-sm transition",
+                                            "bg-blue-600 text-white hover:bg-blue-700"
+                                        )}
                                     >
-                                        <Save className="h-4 w-4" /> Enregistrer
+                                        <Save className={cn("h-4 w-4")} />{" "}
+                                        Enregistrer
                                     </button>
                                 </div>
                             </form>

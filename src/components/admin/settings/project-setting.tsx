@@ -213,7 +213,12 @@ export default function ProjectSetting({ loading }: SettingProp) {
                     "bg-gray-900/30"
                 )}
             >
-                <div className="flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-4 sm:flex-row sm:items-center dark:border-gray-700">
+                <div
+                    className={cn(
+                        "flex flex-col items-start justify-between gap-4 border-b pb-4 sm:flex-row sm:items-center",
+                        "border-gray-700"
+                    )}
+                >
                     <div>
                         <h2
                             className={cn(
@@ -231,50 +236,79 @@ export default function ProjectSetting({ loading }: SettingProp) {
 
                     <button
                         onClick={handleOpenCreateModal}
-                        className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
+                        className={cn(
+                            "flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium shadow-sm transition",
+                            "bg-blue-600 text-white hover:bg-blue-700"
+                        )}
                     >
-                        <Plus className="h-4 w-4" /> Ajouter une expérience
+                        <Plus className={cn("h-4 w-4")} /> Ajouter une
+                        expérience
                     </button>
                 </div>
 
                 {/* Grid des projets */}
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div className={cn("grid grid-cols-1 gap-6 md:grid-cols-2")}>
                     {projects.map((proj, index) => (
                         <div
                             key={index}
-                            className="flex flex-col justify-between overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                            className={cn(
+                                "flex flex-col justify-between overflow-hidden rounded-xl border shadow-sm",
+                                "border-gray-700 bg-gray-800"
+                            )}
                         >
-                            {/* Image preview & badges */}
-                            <div className="group relative h-44 overflow-hidden bg-gray-100 dark:bg-gray-900">
+                            <div
+                                className={cn(
+                                    "group relative h-44 overflow-hidden",
+                                    "bg-gray-900"
+                                )}
+                            >
                                 {proj.image ? (
                                     <img
                                         src={proj.image}
                                         alt={proj.title}
-                                        className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                                        className={cn(
+                                            "h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                                        )}
                                         onError={(e) => {
-                                            // Fallback if image fails to load
                                             ;(
                                                 e.target as HTMLElement
                                             ).style.display = "none"
                                         }}
                                     />
                                 ) : (
-                                    <div className="flex h-full w-full items-center justify-center text-gray-400">
-                                        <ImageIcon className="h-12 w-12" />
+                                    <div
+                                        className={cn(
+                                            "flex h-full w-full items-center justify-center",
+                                            "text-gray-400"
+                                        )}
+                                    >
+                                        <ImageIcon
+                                            className={cn("h-12 w-12")}
+                                        />
                                     </div>
                                 )}
 
-                                <div className="absolute top-3 left-3 flex gap-2">
-                                    <span className="rounded-full border border-white/20 bg-black/60 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-md">
+                                <div
+                                    className={cn(
+                                        "absolute top-3 left-3 flex gap-2"
+                                    )}
+                                >
+                                    <span
+                                        className={cn(
+                                            "rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-md",
+                                            "border-white/20 bg-black/60 text-white"
+                                        )}
+                                    >
                                         {proj.category}
                                     </span>
                                     <button
                                         onClick={() => toggleFeatured(index)}
-                                        className={`rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-md transition ${
+                                        className={cn(
+                                            "rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-md transition",
                                             proj.featured
                                                 ? "border-amber-500/40 bg-amber-500/20 text-amber-300"
                                                 : "border-white/10 bg-black/40 text-gray-300 hover:border-white/30"
-                                        }`}
+                                        )}
                                     >
                                         ★{" "}
                                         {proj.featured
@@ -283,58 +317,113 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                     </button>
                                 </div>
 
-                                <div className="absolute top-3 right-3 flex items-center gap-1 rounded-lg bg-black/60 px-2 py-1 text-xs text-white backdrop-blur-md">
-                                    <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                                <div
+                                    className={cn(
+                                        "absolute top-3 right-3 flex items-center gap-1 rounded-lg px-2 py-1 text-xs backdrop-blur-md",
+                                        "bg-black/60 text-white"
+                                    )}
+                                >
+                                    <Star
+                                        className={cn(
+                                            "h-3.5 w-3.5",
+                                            "fill-amber-400 text-amber-400"
+                                        )}
+                                    />
                                     <span>{proj.stars}</span>
                                 </div>
                             </div>
 
                             {/* Content */}
-                            <div className="flex flex-1 flex-col justify-between space-y-3 p-5">
-                                <div className="space-y-2">
-                                    <div className="flex items-start justify-between gap-2">
-                                        <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                            <div
+                                className={cn(
+                                    "flex flex-1 flex-col justify-between space-y-3 p-5"
+                                )}
+                            >
+                                <div className={cn("space-y-2")}>
+                                    <div
+                                        className={cn(
+                                            "flex items-start justify-between gap-2"
+                                        )}
+                                    >
+                                        <h3
+                                            className={cn(
+                                                "text-lg font-bold",
+                                                "text-white"
+                                            )}
+                                        >
                                             {proj.title}
                                         </h3>
-                                        <div className="flex items-center gap-1">
+                                        <div
+                                            className={cn(
+                                                "flex items-center gap-1"
+                                            )}
+                                        >
                                             <button
                                                 onClick={() =>
                                                     handleOpenEditModal(index)
                                                 }
-                                                className="rounded-md p-1.5 text-gray-500 transition hover:bg-gray-100 hover:text-blue-600 dark:hover:bg-gray-700"
+                                                className={cn(
+                                                    "rounded-md p-1.5 transition",
+                                                    "text-gray-500 hover:bg-gray-700 hover:text-blue-600"
+                                                )}
                                                 title="Modifier"
                                             >
-                                                <Pencil className="h-4 w-4" />
+                                                <Pencil
+                                                    className={cn("h-4 w-4")}
+                                                />
                                             </button>
                                             <button
                                                 onClick={() =>
                                                     handleDelete(index)
                                                 }
-                                                className="rounded-md p-1.5 text-gray-500 transition hover:bg-gray-100 hover:text-red-600 dark:hover:bg-gray-700"
+                                                className={cn(
+                                                    "rounded-md p-1.5 transition",
+                                                    "text-gray-500 hover:bg-gray-700 hover:text-red-600"
+                                                )}
                                                 title="Supprimer"
                                             >
-                                                <Trash2 className="h-4 w-4" />
+                                                <Trash2
+                                                    className={cn("h-4 w-4")}
+                                                />
                                             </button>
                                         </div>
                                     </div>
 
-                                    <p className="line-clamp-3 text-sm text-gray-600 dark:text-gray-300">
+                                    <p
+                                        className={cn(
+                                            "line-clamp-3 text-sm",
+                                            "text-gray-600"
+                                        )}
+                                    >
                                         {proj.description}
                                     </p>
                                 </div>
 
-                                {/* Metrics if any */}
                                 {proj.metrics.length > 0 && (
-                                    <div className="space-y-1">
-                                        <span className="flex items-center gap-1 text-xs font-semibold text-gray-400">
-                                            <TrendingUp className="h-3 w-3" />{" "}
+                                    <div className={cn("space-y-1")}>
+                                        <span
+                                            className={cn(
+                                                "flex items-center gap-1 text-xs font-semibold",
+                                                "text-gray-400"
+                                            )}
+                                        >
+                                            <TrendingUp
+                                                className={cn("h-3 w-3")}
+                                            />{" "}
                                             Impact :
                                         </span>
-                                        <div className="flex flex-wrap gap-1">
+                                        <div
+                                            className={cn(
+                                                "flex flex-wrap gap-1"
+                                            )}
+                                        >
                                             {proj.metrics.map((m, mIdx) => (
                                                 <span
                                                     key={mIdx}
-                                                    className="rounded bg-emerald-500/10 px-2 py-0.5 text-xs font-medium text-emerald-600 dark:text-emerald-400"
+                                                    className={cn(
+                                                        "rounded px-2 py-0.5 text-xs font-medium",
+                                                        "bg-emerald-500/10 text-emerald-400"
+                                                    )}
                                                 >
                                                     {m}
                                                 </span>
@@ -344,11 +433,18 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                 )}
 
                                 {/* Tags */}
-                                <div className="flex flex-wrap gap-1.5 pt-2">
+                                <div
+                                    className={cn(
+                                        "flex flex-wrap gap-1.5 pt-2"
+                                    )}
+                                >
                                     {proj.tags.map((tag, tIdx) => (
                                         <span
                                             key={tIdx}
-                                            className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                                            className={cn(
+                                                "rounded px-2 py-0.5 text-xs",
+                                                "bg-gray-700 text-gray-700"
+                                            )}
                                         >
                                             #{tag}
                                         </span>
@@ -356,14 +452,26 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                 </div>
 
                                 {/* Footer links */}
-                                <div className="flex items-center justify-between border-t border-gray-100 pt-4 text-xs dark:border-gray-700/60">
-                                    <div className="flex items-center gap-2">
+                                <div
+                                    className={cn(
+                                        "flex items-center justify-between border-t pt-4 text-xs",
+                                        "border-gray-700/60"
+                                    )}
+                                >
+                                    <div
+                                        className={cn(
+                                            "flex items-center gap-2"
+                                        )}
+                                    >
                                         {proj.github && (
                                             <a
                                                 href={proj.github}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="flex items-center gap-1 text-gray-600 hover:text-blue-500 dark:text-gray-400"
+                                                className={cn(
+                                                    "flex items-center gap-1",
+                                                    "text-gray-400 hover:text-blue-500"
+                                                )}
                                             >
                                                 <GithubIcon /> Code
                                             </a>
@@ -373,14 +481,26 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                                 href={proj.demo}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="flex items-center gap-1 font-medium text-blue-600 hover:underline dark:text-blue-400"
+                                                className={cn(
+                                                    "flex items-center gap-1 font-medium hover:underline",
+                                                    "text-blue-400"
+                                                )}
                                             >
-                                                <ExternalLink className="h-3.5 w-3.5" />{" "}
+                                                <ExternalLink
+                                                    className={cn(
+                                                        "h-3.5 w-3.5"
+                                                    )}
+                                                />{" "}
                                                 Démo Live
                                             </a>
                                         )}
                                     </div>
-                                    <span className="font-mono text-[10px] text-gray-400 uppercase">
+                                    <span
+                                        className={cn(
+                                            "font-mono text-[10px] uppercase",
+                                            "text-gray-400"
+                                        )}
+                                    >
                                         Couleur: {proj.color}
                                     </span>
                                 </div>
@@ -391,32 +511,69 @@ export default function ProjectSetting({ loading }: SettingProp) {
 
                 {/* MODAL CRÉATION / ÉDITION */}
                 {isModalOpen && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/50 p-4 backdrop-blur-sm">
-                        <div className="my-8 w-full max-w-2xl overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl dark:border-gray-700 dark:bg-gray-800">
+                    <div
+                        className={cn(
+                            "fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4 backdrop-blur-sm",
+                            "bg-black/50"
+                        )}
+                    >
+                        <div
+                            className={cn(
+                                "my-8 w-full max-w-2xl overflow-hidden rounded-xl border shadow-xl",
+                                "border-gray-700 bg-gray-800"
+                            )}
+                        >
                             {/* Header */}
-                            <div className="flex items-center justify-between border-b border-gray-200 p-4 dark:border-gray-700">
-                                <h3 className="flex items-center gap-2 text-lg font-bold text-gray-900 dark:text-white">
-                                    <FolderGit2 className="h-5 w-5 text-blue-500" />
+                            <div
+                                className={cn(
+                                    "flex items-center justify-between border-b p-4",
+                                    "border-gray-700"
+                                )}
+                            >
+                                <h3
+                                    className={cn(
+                                        "flex items-center gap-2 text-lg font-bold",
+                                        "text-white"
+                                    )}
+                                >
+                                    <FolderGit2
+                                        className={cn(
+                                            "h-5 w-5",
+                                            "text-blue-500"
+                                        )}
+                                    />
                                     {editingIndex !== null
                                         ? "Modifier le projet"
                                         : "Ajouter un projet"}
                                 </h3>
                                 <button
                                     onClick={() => setIsModalOpen(false)}
-                                    className="rounded-lg p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                                    className={cn(
+                                        "rounded-lg p-1",
+                                        "text-gray-400 hover:text-gray-200"
+                                    )}
                                 >
-                                    <X className="h-5 w-5" />
+                                    <X className={cn("h-5 w-5")} />
                                 </button>
                             </div>
 
                             {/* Form */}
                             <form
                                 onSubmit={handleSubmit}
-                                className="space-y-4 p-6"
+                                className={cn("space-y-4 p-6")}
                             >
-                                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div
+                                    className={cn(
+                                        "grid grid-cols-1 gap-4 md:grid-cols-2"
+                                    )}
+                                >
                                     <div>
-                                        <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 block text-xs font-semibold",
+                                                "text-gray-300"
+                                            )}
+                                        >
                                             Titre du projet
                                         </label>
                                         <input
@@ -425,11 +582,19 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                             value={formData.title}
                                             onChange={handleChange}
                                             required
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         />
                                     </div>
                                     <div>
-                                        <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 block text-xs font-semibold",
+                                                "text-gray-300"
+                                            )}
+                                        >
                                             Catégorie
                                         </label>
                                         <input
@@ -438,11 +603,19 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                             value={formData.category}
                                             onChange={handleChange}
                                             required
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         />
                                     </div>
                                     <div>
-                                        <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                        <label
+                                            className={cn(
+                                                "mb-1 block text-xs font-semibold",
+                                                "text-gray-300"
+                                            )}
+                                        >
                                             Nombre d'étoiles / Note
                                         </label>
                                         <input
@@ -451,24 +624,32 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                             value={formData.stars}
                                             onChange={handleChange}
                                             min={0}
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         />
                                     </div>
                                     <div>
                                         <label
                                             className={cn(
                                                 "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                                "block text-gray-700 dark:text-gray-300"
+                                                "block text-gray-300"
                                             )}
                                         >
-                                            <Palette className="h-3.5 w-3.5" />{" "}
+                                            <Palette
+                                                className={cn("h-3.5 w-3.5")}
+                                            />{" "}
                                             Thème / Couleur accent
                                         </label>
                                         <select
                                             name="color"
                                             value={formData.color}
                                             onChange={handleChange}
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         >
                                             <option value="accent">
                                                 Accent (Bleu / Cyan)
@@ -487,25 +668,40 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                 </div>
 
                                 {/* Option Featured */}
-                                <div className="flex items-center gap-2 pt-1">
+                                <div
+                                    className={cn(
+                                        "flex items-center gap-2 pt-1"
+                                    )}
+                                >
                                     <input
                                         type="checkbox"
                                         id="featured"
                                         name="featured"
                                         checked={formData.featured}
                                         onChange={handleChange}
-                                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                        className={cn(
+                                            "h-4 w-4 rounded",
+                                            "border-gray-300 text-blue-600 focus:ring-blue-500"
+                                        )}
                                     />
                                     <label
                                         htmlFor="featured"
-                                        className="cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-300"
+                                        className={cn(
+                                            "cursor-pointer text-sm font-medium",
+                                            "text-gray-300"
+                                        )}
                                     >
                                         Mettre ce projet en avant (Featured)
                                     </label>
                                 </div>
 
                                 <div>
-                                    <label className="mb-1 block text-xs font-semibold text-gray-700 dark:text-gray-300">
+                                    <label
+                                        className={cn(
+                                            "mb-1 block text-xs font-semibold",
+                                            "text-gray-300"
+                                        )}
+                                    >
                                         Description
                                     </label>
                                     <textarea
@@ -514,7 +710,10 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                         onChange={handleChange}
                                         rows={3}
                                         required
-                                        className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                        className={cn(
+                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                        )}
                                     />
                                 </div>
 
@@ -523,7 +722,7 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                         <label
                                             className={cn(
                                                 "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                                "block text-gray-700 dark:text-gray-300"
+                                                "block text-gray-300"
                                             )}
                                         >
                                             <GithubIcon /> URL Dépôt GitHub
@@ -534,17 +733,22 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                             value={formData.github}
                                             onChange={handleChange}
                                             placeholder="https://github.com/..."
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         />
                                     </div>
                                     <div>
                                         <label
                                             className={cn(
                                                 "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                                "block text-gray-700 dark:text-gray-300"
+                                                "block text-gray-300"
                                             )}
                                         >
-                                            <ExternalLink className="h-3.5 w-3.5" />{" "}
+                                            <ExternalLink
+                                                className={cn("h-3.5 w-3.5")}
+                                            />{" "}
                                             URL Démo Live
                                         </label>
                                         <input
@@ -553,7 +757,10 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                             value={formData.demo}
                                             onChange={handleChange}
                                             placeholder="https://monprojet.vercel.app"
-                                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                                "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            )}
                                         />
                                     </div>
                                 </div>
@@ -562,10 +769,12 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                     <label
                                         className={cn(
                                             "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                            "block text-gray-700 dark:text-gray-300"
+                                            "block text-gray-300"
                                         )}
                                     >
-                                        <ImageIcon className="h-3.5 w-3.5" />{" "}
+                                        <ImageIcon
+                                            className={cn("h-3.5 w-3.5")}
+                                        />{" "}
                                         URL de l'image de couverture
                                     </label>
                                     <input
@@ -573,7 +782,10 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                         name="image"
                                         value={formData.image}
                                         onChange={handleChange}
-                                        className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                        className={cn(
+                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
+                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                        )}
                                     />
                                 </div>
 
@@ -582,13 +794,15 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                     <label
                                         className={cn(
                                             "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                            "block text-gray-700 dark:text-gray-300"
+                                            "block text-gray-300"
                                         )}
                                     >
-                                        <TagIcon className="h-3.5 w-3.5" />{" "}
+                                        <TagIcon
+                                            className={cn("h-3.5 w-3.5")}
+                                        />{" "}
                                         Technologies / Tags
                                     </label>
-                                    <div className="mb-2 flex gap-2">
+                                    <div className={cn("mb-2 flex gap-2")}>
                                         <input
                                             type="text"
                                             value={tagInput}
@@ -602,21 +816,32 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                                 }
                                             }}
                                             placeholder="Ajouter une tech (ex: React)"
-                                            className="flex-1 rounded-lg border border-gray-300 bg-gray-50 px-3 py-1.5 text-sm outline-none dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "flex-1 rounded-lg border px-3 py-1.5 text-sm outline-none",
+                                                "border-gray-700 bg-gray-900"
+                                            )}
                                         />
                                         <button
                                             type="button"
                                             onClick={handleAddTag}
-                                            className="rounded-lg bg-gray-200 px-3 py-1.5 text-xs font-semibold hover:bg-gray-300 dark:bg-gray-700"
+                                            className={cn(
+                                                "rounded-lg px-3 py-1.5 text-xs font-semibold",
+                                                "bg-gray-700 hover:bg-gray-300"
+                                            )}
                                         >
                                             Ajouter
                                         </button>
                                     </div>
-                                    <div className="flex flex-wrap gap-1.5">
+                                    <div
+                                        className={cn("flex flex-wrap gap-1.5")}
+                                    >
                                         {formData.tags.map((tag, tIdx) => (
                                             <span
                                                 key={tIdx}
-                                                className="flex items-center gap-1 rounded-md bg-blue-500/10 px-2.5 py-1 text-xs font-medium text-blue-600 dark:text-blue-400"
+                                                className={cn(
+                                                    "flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium",
+                                                    "bg-blue-500/10 text-blue-400"
+                                                )}
                                             >
                                                 #{tag}
                                                 <button
@@ -624,9 +849,15 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                                     onClick={() =>
                                                         handleRemoveTag(tag)
                                                     }
-                                                    className="hover:text-red-500"
+                                                    className={cn(
+                                                        "hover:text-red-500"
+                                                    )}
                                                 >
-                                                    <X className="h-3 w-3" />
+                                                    <X
+                                                        className={cn(
+                                                            "h-3 w-3"
+                                                        )}
+                                                    />
                                                 </button>
                                             </span>
                                         ))}
@@ -638,13 +869,15 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                     <label
                                         className={cn(
                                             "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                            "block text-gray-700 dark:text-gray-300"
+                                            "block text-gray-300"
                                         )}
                                     >
-                                        <TrendingUp className="h-3.5 w-3.5" />{" "}
+                                        <TrendingUp
+                                            className={cn("h-3.5 w-3.5")}
+                                        />{" "}
                                         Chiffres / Métriques de résultat
                                     </label>
-                                    <div className="mb-2 flex gap-2">
+                                    <div className={cn("mb-2 flex gap-2")}>
                                         <input
                                             type="text"
                                             value={metricInput}
@@ -658,24 +891,39 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                                 }
                                             }}
                                             placeholder="ex: +40% de performance"
-                                            className="flex-1 rounded-lg border border-gray-300 bg-gray-50 px-3 py-1.5 text-sm outline-none dark:border-gray-700 dark:bg-gray-900"
+                                            className={cn(
+                                                "flex-1 rounded-lg border px-3 py-1.5 text-sm outline-none",
+                                                "border-gray-700 bg-gray-900"
+                                            )}
                                         />
                                         <button
                                             type="button"
                                             onClick={handleAddMetric}
-                                            className="rounded-lg bg-gray-200 px-3 py-1.5 text-xs font-semibold hover:bg-gray-300 dark:bg-gray-700"
+                                            className={cn(
+                                                "rounded-lg px-3 py-1.5 text-xs font-semibold",
+                                                "bg-gray-700 hover:bg-gray-300"
+                                            )}
                                         >
                                             Ajouter
                                         </button>
                                     </div>
-                                    <div className="flex flex-wrap gap-1.5">
+                                    <div
+                                        className={cn("flex flex-wrap gap-1.5")}
+                                    >
                                         {formData.metrics.map(
                                             (metric, mIdx) => (
                                                 <span
                                                     key={mIdx}
-                                                    className="flex items-center gap-1 rounded-md bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-600 dark:text-emerald-400"
+                                                    className={cn(
+                                                        "flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium",
+                                                        "bg-emerald-500/10 text-emerald-400"
+                                                    )}
                                                 >
-                                                    <Check className="h-3 w-3" />
+                                                    <Check
+                                                        className={cn(
+                                                            "h-3 w-3"
+                                                        )}
+                                                    />
                                                     {metric}
                                                     <button
                                                         type="button"
@@ -684,9 +932,15 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                                                 metric
                                                             )
                                                         }
-                                                        className="hover:text-red-500"
+                                                        className={cn(
+                                                            "hover:text-red-500"
+                                                        )}
                                                     >
-                                                        <X className="h-3 w-3" />
+                                                        <X
+                                                            className={cn(
+                                                                "h-3 w-3"
+                                                            )}
+                                                        />
                                                     </button>
                                                 </span>
                                             )
@@ -695,19 +949,31 @@ export default function ProjectSetting({ loading }: SettingProp) {
                                 </div>
 
                                 {/* Actions */}
-                                <div className="flex justify-end gap-3 border-t border-gray-200 pt-4 dark:border-gray-700">
+                                <div
+                                    className={cn(
+                                        "flex justify-end gap-3 border-t pt-4",
+                                        "border-gray-700"
+                                    )}
+                                >
                                     <button
                                         type="button"
                                         onClick={() => setIsModalOpen(false)}
-                                        className="rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                                        className={cn(
+                                            "rounded-lg px-4 py-2 text-sm",
+                                            "text-gray-300 hover:bg-gray-700"
+                                        )}
                                     >
                                         Annuler
                                     </button>
                                     <button
                                         type="submit"
-                                        className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
+                                        className={cn(
+                                            "flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium shadow-sm transition",
+                                            "bg-blue-600 text-white hover:bg-blue-700"
+                                        )}
                                     >
-                                        <Save className="h-4 w-4" /> Enregistrer
+                                        <Save className={cn("h-4 w-4")} />{" "}
+                                        Enregistrer
                                     </button>
                                 </div>
                             </form>
