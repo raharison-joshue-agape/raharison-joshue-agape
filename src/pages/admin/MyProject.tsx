@@ -1,15 +1,26 @@
 import { GithubIcon } from "@/components/sections/hero"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import {
-    Check,
+    CloudUpload,
     ExternalLink,
     FolderGit2,
     ImageIcon,
     Palette,
     Pencil,
     Plus,
-    Save,
     Star,
     TagIcon,
     Trash2,
@@ -180,6 +191,21 @@ export default function MyProjects({ loading }: SettingProp) {
             ...prev,
             metrics: prev.metrics.filter((m) => m !== metricToRemove),
         }))
+    }
+
+    // Upload d'image avec lecture en Base64 pour prévisualisation
+    const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                setFormData((prev) => ({
+                    ...prev,
+                    image: reader.result as string,
+                }))
+            }
+            reader.readAsDataURL(file)
+        }
     }
 
     // Soumission du formulaire
@@ -476,321 +502,330 @@ export default function MyProjects({ loading }: SettingProp) {
             </div>
 
             {/* MODAL CRÉATION / ÉDITION */}
-            {isModalOpen && (
-                <div
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogContent
+                    showCloseButton={false}
                     className={cn(
-                        "fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4 backdrop-blur-sm",
-                        "bg-black/50"
+                        "min-w-3xl backdrop-blur-sm",
+                        "border-gray-800 bg-gray-900/70 text-slate-100"
                     )}
                 >
-                    <div
-                        className={cn(
-                            "my-8 w-full max-w-2xl overflow-hidden rounded-xl border shadow-xl",
-                            "border-gray-700 bg-gray-800"
-                        )}
+                    <DialogHeader className="border-b pb-2">
+                        <DialogTitle className="flex items-center gap-2 text-xl font-bold">
+                            <FolderGit2 className="h-5 w-5 text-primary" />
+                            {editingIndex !== null
+                                ? "Modifier le projet"
+                                : "Ajouter un projet"}
+                        </DialogTitle>
+                        <DialogDescription>
+                            Renseignez les informations ci-dessous pour
+                            enregistrer ou mettre à jour votre projet.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <form
+                        onSubmit={handleSubmit}
+                        className={cn("space-y-5 pt-2")}
                     >
-                        {/* Header */}
                         <div
                             className={cn(
-                                "flex items-center justify-between border-b p-4",
-                                "border-gray-700"
+                                "grid grid-cols-1 gap-4 sm:grid-cols-2"
                             )}
                         >
-                            <h3
-                                className={cn(
-                                    "flex items-center gap-2 text-lg font-bold",
-                                    "text-white"
-                                )}
-                            >
-                                <FolderGit2
-                                    className={cn("h-5 w-5", "text-blue-500")}
-                                />
-                                {editingIndex !== null
-                                    ? "Modifier le projet"
-                                    : "Ajouter un projet"}
-                            </h3>
-                            <button
-                                onClick={() => setIsModalOpen(false)}
-                                className={cn(
-                                    "rounded-lg p-1",
-                                    "text-gray-400 hover:text-gray-200"
-                                )}
-                            >
-                                <X className={cn("h-5 w-5")} />
-                            </button>
-                        </div>
-
-                        {/* Form */}
-                        <form
-                            onSubmit={handleSubmit}
-                            className={cn("space-y-4 p-6")}
-                        >
-                            <div
-                                className={cn(
-                                    "grid grid-cols-1 gap-4 md:grid-cols-2"
-                                )}
-                            >
-                                <div>
-                                    <label
-                                        className={cn(
-                                            "mb-1 block text-xs font-semibold",
-                                            "text-gray-300"
-                                        )}
-                                    >
-                                        Titre du projet
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        value={formData.title}
-                                        onChange={handleChange}
-                                        required
-                                        className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
-                                        )}
-                                    />
-                                </div>
-                                <div>
-                                    <label
-                                        className={cn(
-                                            "mb-1 block text-xs font-semibold",
-                                            "text-gray-300"
-                                        )}
-                                    >
-                                        Catégorie
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="category"
-                                        value={formData.category}
-                                        onChange={handleChange}
-                                        required
-                                        className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
-                                        )}
-                                    />
-                                </div>
-                                <div>
-                                    <label
-                                        className={cn(
-                                            "mb-1 block text-xs font-semibold",
-                                            "text-gray-300"
-                                        )}
-                                    >
-                                        Nombre d'étoiles / Note
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="stars"
-                                        value={formData.stars}
-                                        onChange={handleChange}
-                                        min={0}
-                                        className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
-                                        )}
-                                    />
-                                </div>
-                                <div>
-                                    <label
-                                        className={cn(
-                                            "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                            "block text-gray-300"
-                                        )}
-                                    >
-                                        <Palette
-                                            className={cn("h-3.5 w-3.5")}
-                                        />{" "}
-                                        Thème / Couleur accent
-                                    </label>
-                                    <select
-                                        name="color"
-                                        value={formData.color}
-                                        onChange={handleChange}
-                                        className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
-                                        )}
-                                    >
-                                        <option value="accent">
-                                            Accent (Bleu / Cyan)
-                                        </option>
-                                        <option value="green">
-                                            Vert (Emerald)
-                                        </option>
-                                        <option value="purple">Violet</option>
-                                        <option value="orange">Orange</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            {/* Option Featured */}
-                            <div className={cn("flex items-center gap-2 pt-1")}>
+                            <div className={cn("space-y-2")}>
+                                <Label
+                                    htmlFor="title"
+                                    className={cn(
+                                        "mb-1.5 flex items-center gap-2 text-xs font-semibold",
+                                        "text-gray-300"
+                                    )}
+                                >
+                                    Titre du projet
+                                </Label>
                                 <input
-                                    type="checkbox"
-                                    id="featured"
-                                    name="featured"
-                                    checked={formData.featured}
+                                    id="title"
+                                    type="text"
+                                    name="title"
+                                    placeholder="Ex: ERP DGSR Madagascar"
+                                    value={formData.title}
                                     onChange={handleChange}
-                                    className={cn(
-                                        "h-4 w-4 rounded",
-                                        "border-gray-300 text-blue-600 focus:ring-blue-500"
-                                    )}
-                                />
-                                <label
-                                    htmlFor="featured"
-                                    className={cn(
-                                        "cursor-pointer text-sm font-medium",
-                                        "text-gray-300"
-                                    )}
-                                >
-                                    Mettre ce projet en avant (Featured)
-                                </label>
-                            </div>
-
-                            <div>
-                                <label
-                                    className={cn(
-                                        "mb-1 block text-xs font-semibold",
-                                        "text-gray-300"
-                                    )}
-                                >
-                                    Description
-                                </label>
-                                <textarea
-                                    name="description"
-                                    value={formData.description}
-                                    onChange={handleChange}
-                                    rows={3}
                                     required
                                     className={cn(
-                                        "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                        "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
                                     )}
                                 />
                             </div>
 
-                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label
-                                        className={cn(
-                                            "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                            "block text-gray-300"
-                                        )}
+                            <div className={cn("space-y-2")}>
+                                <Label
+                                    htmlFor="category"
+                                    className={cn(
+                                        "mb-1.5 flex items-center gap-2 text-xs font-semibold",
+                                        "text-gray-300"
+                                    )}
+                                >
+                                    Catégorie
+                                </Label>
+                                <input
+                                    id="category"
+                                    type="text"
+                                    name="category"
+                                    placeholder="Ex: Application Web"
+                                    value={formData.category}
+                                    onChange={handleChange}
+                                    required
+                                    className={cn(
+                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
+                                    )}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Ligne 2 : Note & Couleur d'accent */}
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div className="space-y-2">
+                                <Label
+                                    htmlFor="stars"
+                                    className={cn(
+                                        "mb-1.5 flex items-center gap-2 text-xs font-semibold",
+                                        "text-gray-300"
+                                    )}
+                                >
+                                    <Star
+                                        size={16}
+                                        className="text-amber-500"
+                                    />
+                                    Note / Nombre d'étoiles
+                                </Label>
+                                <input
+                                    id="stars"
+                                    type="number"
+                                    name="stars"
+                                    min={0}
+                                    max={5}
+                                    value={formData.stars}
+                                    onChange={handleChange}
+                                    className={cn(
+                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
+                                    )}
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label
+                                    htmlFor="color"
+                                    className={cn(
+                                        "mb-1.5 flex items-center gap-2 text-xs font-semibold",
+                                        "text-gray-300"
+                                    )}
+                                >
+                                    <Palette
+                                        size={16}
+                                        className="text-muted-foreground"
+                                    />
+                                    Thème / Couleur accent
+                                </Label>
+                                <select
+                                    id="color"
+                                    name="type"
+                                    value={formData.color}
+                                    onChange={handleChange}
+                                    className={cn(
+                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
+                                    )}
+                                >
+                                    <option value="accent">
+                                        Accent (Bleu / Cyan)
+                                    </option>
+                                    <option value="green">
+                                        Vert (Emerald)
+                                    </option>
+                                    <option value="purple">Violet</option>
+                                    <option value="orange">Orange</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        {/* Option Featured (Mis en avant) */}
+                        <div className="flex items-center space-x-3 rounded-lg">
+                            <Checkbox
+                                id="featured"
+                                checked={formData.featured}
+                                onCheckedChange={(checked) =>
+                                    setFormData((prev) => ({
+                                        ...prev,
+                                        featured: !!checked,
+                                    }))
+                                }
+                            />
+                            <Label
+                                htmlFor="featured"
+                                className={cn(
+                                    "cursor-pointer text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+                                    "text-gray-300"
+                                )}
+                            >
+                                Mettre ce projet en avant (Featured)
+                            </Label>
+                        </div>
+
+                        {/* Description */}
+                        <div className="space-y-2">
+                            <Label
+                                htmlFor="description"
+                                className={cn(
+                                    "mb-1.5 flex items-center gap-2 text-xs font-semibold",
+                                    "text-gray-300"
+                                )}
+                            >
+                                Description
+                            </Label>
+                            <textarea
+                                id="tagline"
+                                value={formData.description}
+                                onChange={handleChange}
+                                rows={4}
+                                placeholder="Description synthétique des fonctionnalités..."
+                                className={cn(
+                                    "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                    "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
+                                )}
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-5">
+                            {/* Image de couverture */}
+                            <div className="md:col-span-2">
+                                <label className="mb-1.5 flex items-center gap-2 text-xs font-semibold text-gray-300">
+                                    <ImageIcon className="h-3.5 w-3.5" /> Image
+                                    d'illustration
+                                </label>
+                                <label
+                                    htmlFor="image-upload"
+                                    className="relative flex h-36 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md border border-dashed border-gray-700 bg-gray-950/40 p-2 transition hover:border-gray-500"
+                                >
+                                    {formData.image ? (
+                                        <img
+                                            src={formData.image}
+                                            alt="Aperçu"
+                                            className="h-full w-full rounded object-cover"
+                                        />
+                                    ) : (
+                                        <div className="flex flex-col items-center gap-1 text-center text-xs text-gray-400">
+                                            <CloudUpload className="h-8 w-8 text-blue-500" />
+                                            <span>Télécharger une image</span>
+                                        </div>
+                                    )}
+                                </label>
+                                <input
+                                    id="image-upload"
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
+                                    className="hidden"
+                                />
+                            </div>
+
+                            {/* Liens GitHub & Live Demo */}
+                            <div className={cn("space-y-5 md:col-span-3")}>
+                                <div className="space-y-2">
+                                    <Label
+                                        htmlFor="github"
+                                        className="flex items-center gap-1.5"
                                     >
                                         <GithubIcon /> URL Dépôt GitHub
-                                    </label>
+                                    </Label>
                                     <input
+                                        id="github"
                                         type="url"
                                         name="github"
                                         value={formData.github}
                                         onChange={handleChange}
                                         placeholder="https://github.com/..."
                                         className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                            "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
                                         )}
                                     />
                                 </div>
-                                <div>
-                                    <label
-                                        className={cn(
-                                            "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                            "block text-gray-300"
-                                        )}
+
+                                <div className="space-y-2">
+                                    <Label
+                                        htmlFor="demo"
+                                        className="flex items-center gap-1.5"
                                     >
-                                        <ExternalLink
-                                            className={cn("h-3.5 w-3.5")}
-                                        />{" "}
+                                        <ExternalLink className="h-3.5 w-3.5" />{" "}
                                         URL Démo Live
-                                    </label>
+                                    </Label>
                                     <input
+                                        id="demo"
                                         type="url"
                                         name="demo"
                                         value={formData.demo}
                                         onChange={handleChange}
                                         placeholder="https://monprojet.vercel.app"
                                         className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                            "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
                                         )}
                                     />
                                 </div>
                             </div>
+                        </div>
 
-                            <div>
-                                <label
-                                    className={cn(
-                                        "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                        "block text-gray-300"
-                                    )}
-                                >
-                                    <ImageIcon className={cn("h-3.5 w-3.5")} />{" "}
-                                    URL de l'image de couverture
-                                </label>
+                        {/* Gestion des Tags / Techs */}
+                        <div className="space-y-2">
+                            <Label
+                                htmlFor="tag"
+                                className="flex items-center gap-1.5"
+                            >
+                                <TagIcon size={16} /> Technologies / Tags
+                            </Label>
+                            <div className="flex items-center gap-2">
                                 <input
+                                    id="tag"
                                     type="text"
-                                    name="image"
-                                    value={formData.image}
-                                    onChange={handleChange}
+                                    name="tag"
+                                    value={tagInput}
+                                    onChange={(e) =>
+                                        setTagInput(e.target.value)
+                                    }
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            e.preventDefault()
+                                            handleAddTag()
+                                        }
+                                    }}
+                                    placeholder="Ajouter une tech (ex: React)"
                                     className={cn(
-                                        "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                        "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                        "w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
                                     )}
                                 />
-                            </div>
-
-                            {/* Tags */}
-                            <div>
-                                <label
+                                <Button
+                                    type="button"
+                                    onClick={handleAddTag}
+                                    variant="secondary"
                                     className={cn(
-                                        "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                        "block text-gray-300"
+                                        "h-10 shrink-0",
+                                        "bg-gray-800 hover:bg-gray-700"
                                     )}
                                 >
-                                    <TagIcon className={cn("h-3.5 w-3.5")} />{" "}
-                                    Technologies / Tags
-                                </label>
-                                <div className={cn("mb-2 flex gap-2")}>
-                                    <input
-                                        type="text"
-                                        value={tagInput}
-                                        onChange={(e) =>
-                                            setTagInput(e.target.value)
-                                        }
-                                        onKeyDown={(e) => {
-                                            if (e.key === "Enter") {
-                                                e.preventDefault()
-                                                handleAddTag()
-                                            }
-                                        }}
-                                        placeholder="Ajouter une tech (ex: React)"
-                                        className={cn(
-                                            "flex-1 rounded-lg border px-3 py-1.5 text-sm outline-none",
-                                            "border-gray-700 bg-gray-900"
-                                        )}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={handleAddTag}
-                                        className={cn(
-                                            "rounded-lg px-3 py-1.5 text-xs font-semibold",
-                                            "bg-gray-700 hover:bg-gray-300"
-                                        )}
-                                    >
-                                        Ajouter
-                                    </button>
-                                </div>
-                                <div className={cn("flex flex-wrap gap-1.5")}>
+                                    <Plus size={16} /> Ajouter
+                                </Button>
+                            </div>
+
+                            {formData.tags?.length > 0 && (
+                                <div className="flex flex-wrap gap-1.5 pt-1">
                                     {formData.tags.map((tag, tIdx) => (
-                                        <span
+                                        <Badge
                                             key={tIdx}
-                                            className={cn(
-                                                "flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium",
-                                                "bg-blue-500/10 text-blue-400"
-                                            )}
+                                            variant="secondary"
+                                            className="gap-1.5 pr-1 text-xs"
                                         >
                                             #{tag}
                                             <button
@@ -798,118 +833,108 @@ export default function MyProjects({ loading }: SettingProp) {
                                                 onClick={() =>
                                                     handleRemoveTag(tag)
                                                 }
-                                                className={cn(
-                                                    "hover:text-red-500"
-                                                )}
+                                                className="rounded-full p-0.5 transition-colors hover:bg-destructive/20 hover:text-destructive"
                                             >
-                                                <X className={cn("h-3 w-3")} />
+                                                <X className="h-3 w-3" />
                                             </button>
-                                        </span>
+                                        </Badge>
                                     ))}
                                 </div>
-                            </div>
+                            )}
+                        </div>
 
-                            {/* Metrics */}
-                            <div>
-                                <label
+                        {/* Gestion des Métriques */}
+                        <div className="space-y-2">
+                            <Label className="flex items-center gap-1.5">
+                                <TrendingUp className="h-3.5 w-3.5" /> Chiffres
+                                / Métriques de résultat
+                            </Label>
+                            <div className="flex gap-2">
+                                <input
+                                    id="tag"
+                                    type="text"
+                                    name="tag"
+                                    value={metricInput}
+                                    onChange={(e) =>
+                                        setMetricInput(e.target.value)
+                                    }
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            e.preventDefault()
+                                            handleAddMetric()
+                                        }
+                                    }}
+                                    placeholder="ex: +40% de performance"
                                     className={cn(
-                                        "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                        "block text-gray-300"
+                                        "w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
+                                    )}
+                                />
+                                <Button
+                                    type="button"
+                                    onClick={handleAddMetric}
+                                    variant="secondary"
+                                    className={cn(
+                                        "h-10 shrink-0",
+                                        "bg-gray-800 hover:bg-gray-700"
                                     )}
                                 >
-                                    <TrendingUp className={cn("h-3.5 w-3.5")} />{" "}
-                                    Chiffres / Métriques de résultat
-                                </label>
-                                <div className={cn("mb-2 flex gap-2")}>
-                                    <input
-                                        type="text"
-                                        value={metricInput}
-                                        onChange={(e) =>
-                                            setMetricInput(e.target.value)
-                                        }
-                                        onKeyDown={(e) => {
-                                            if (e.key === "Enter") {
-                                                e.preventDefault()
-                                                handleAddMetric()
-                                            }
-                                        }}
-                                        placeholder="ex: +40% de performance"
-                                        className={cn(
-                                            "flex-1 rounded-lg border px-3 py-1.5 text-sm outline-none",
-                                            "border-gray-700 bg-gray-900"
-                                        )}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={handleAddMetric}
-                                        className={cn(
-                                            "rounded-lg px-3 py-1.5 text-xs font-semibold",
-                                            "bg-gray-700 hover:bg-gray-300"
-                                        )}
-                                    >
-                                        Ajouter
-                                    </button>
-                                </div>
-                                <div className={cn("flex flex-wrap gap-1.5")}>
+                                    <Plus size={16} /> Ajouter
+                                </Button>
+                            </div>
+
+                            {formData.metrics?.length > 0 && (
+                                <div className="flex flex-wrap gap-1.5 pt-1">
                                     {formData.metrics.map((metric, mIdx) => (
-                                        <span
+                                        <Badge
                                             key={mIdx}
-                                            className={cn(
-                                                "flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium",
-                                                "bg-emerald-500/10 text-emerald-400"
-                                            )}
+                                            variant="outline"
+                                            className="gap-1.5 border-emerald-500/30 bg-emerald-500/10 pr-1 text-xs text-emerald-500"
                                         >
-                                            <Check className={cn("h-3 w-3")} />
                                             {metric}
                                             <button
                                                 type="button"
                                                 onClick={() =>
                                                     handleRemoveMetric(metric)
                                                 }
-                                                className={cn(
-                                                    "hover:text-red-500"
-                                                )}
+                                                className="rounded-full p-0.5 transition-colors hover:bg-destructive/20 hover:text-destructive"
                                             >
-                                                <X className={cn("h-3 w-3")} />
+                                                <X className="h-3 w-3" />
                                             </button>
-                                        </span>
+                                        </Badge>
                                     ))}
                                 </div>
-                            </div>
+                            )}
+                        </div>
 
-                            {/* Actions */}
-                            <div
+                        <DialogFooter className="mt-6 gap-2 bg-gray-800/50">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => setIsModalOpen(false)}
                                 className={cn(
-                                    "flex justify-end gap-3 border-t pt-4",
-                                    "border-gray-700"
+                                    "h-10 px-4",
+                                    "bg-gray-700/80 text-gray-300 hover:bg-gray-700"
                                 )}
                             >
-                                <button
-                                    type="button"
-                                    onClick={() => setIsModalOpen(false)}
-                                    className={cn(
-                                        "rounded-lg px-4 py-2 text-sm",
-                                        "text-gray-300 hover:bg-gray-700"
-                                    )}
-                                >
-                                    Annuler
-                                </button>
-                                <button
-                                    type="submit"
-                                    disabled={onLoading}
-                                    className={cn(
-                                        "flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium shadow-sm transition",
-                                        "bg-blue-600 text-white hover:bg-blue-700"
-                                    )}
-                                >
-                                    <Save className={cn("h-4 w-4")} />{" "}
-                                    Enregistrer
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
+                                Annuler
+                            </Button>
+                            <Button
+                                type="submit"
+                                disabled={onLoading}
+                                className={cn(
+                                    "h-10 px-4",
+                                    "bg-blue-600 text-white hover:bg-blue-700"
+                                )}
+                            >
+                                {editingIndex !== null
+                                    ? "Enregistrer les modifications"
+                                    : "Créer le projet"}
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </motion.div>
     )
 }

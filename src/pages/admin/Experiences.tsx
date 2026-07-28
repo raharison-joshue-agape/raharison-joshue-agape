@@ -447,7 +447,7 @@ export default function Experiences({ loading = false }: ExperiencesProps) {
                                     onKeyDown={handleTagKeyDown}
                                     placeholder="Ajouter un tag (ex: React, TypeScript) et appuyer sur Entrée"
                                     className={cn(
-                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
                                         "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
                                     )}
                                 />
@@ -488,7 +488,7 @@ export default function Experiences({ loading = false }: ExperiencesProps) {
                         </div>
 
                         {/* Boutons du Formulaire */}
-                        <DialogFooter className="mt-6 gap-2 bg-gray-800">
+                        <DialogFooter className="mt-6 gap-2 bg-gray-800/50">
                             <Button
                                 type="button"
                                 variant="secondary"
