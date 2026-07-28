@@ -218,7 +218,7 @@ export default function Experiences({ loading }: SettingProp) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className={cn("space-y-6")}
+            className={cn("space-y-6 px-16 py-6")}
         >
             <div
                 className={cn(

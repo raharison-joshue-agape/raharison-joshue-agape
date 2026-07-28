@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import { Plus, Save, Trash2 } from "lucide-react"
+import { GripVertical, Plus, Save, Trash2 } from "lucide-react"
 
 export type PayloadLinkType = {
     tagline: string
@@ -15,34 +15,26 @@ interface SettingProp {
 
 const defaultBadgeTech = [
     {
-        text: "TypeScript",
-        color: "text-cyan-400",
-        bg_color: "bg-cyan-400",
-        pos: "absolute -right-10 top-8",
+        tech: "TypeScript",
+        class: "text-cyan-400 bg-cyan-400 absolute -right-10 top-8",
         error: false,
         error_message: "",
     },
     {
-        text: "PHP",
-        color: "text-orange-400",
-        bg_color: "bg-orange-400",
-        pos: "absolute left-4 top-0",
+        tech: "PHP",
+        class: "text-orange-400 bg-orange-400 absolute left-4 top-0",
         error: false,
         error_message: "",
     },
     {
-        text: "Python",
-        color: "text-emerald-400",
-        bg_color: "bg-emerald-400",
-        pos: "absolute -left-8 bottom-16",
+        tech: "Python",
+        class: "text-emerald-400 bg-emerald-400 absolute -left-8 bottom-16",
         error: false,
         error_message: "",
     },
     {
-        text: "Dart",
-        color: "text-yellow-400",
-        bg_color: "bg-yellow-400",
-        pos: "absolute -right-4 bottom-10",
+        tech: "Dart",
+        class: "text-yellow-400 bg-yellow-400 absolute -right-4 bottom-10",
         error: false,
         error_message: "",
     },
@@ -79,8 +71,8 @@ export default function BadgeTechSetting({ loading, onSubmit }: SettingProp) {
             >
                 <div
                     className={cn(
-                        "bo flex items-center justify-between border-b",
-                        "rder-gray-200 pb-2 dark:border-gray-700"
+                        "flex items-center justify-between border-b pb-2",
+                        "dark:border-gray-800"
                     )}
                 >
                     <h2
@@ -89,143 +81,92 @@ export default function BadgeTechSetting({ loading, onSubmit }: SettingProp) {
                             "text-slate-100"
                         )}
                     >
-                        Statistiques chiffrées
+                        Badges Flottants
                     </h2>
 
                     <button
                         type="button"
                         className={cn(
-                            "flex items-center gap-1 rounded-md px-3 py-1.5 text-xs font-medium transition",
-                            "bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 dark:text-blue-400"
+                            "flex items-center gap-1 rounded-md p-2.5 text-xs font-medium transition",
+                            "bg-blue-500/10 text-blue-400 hover:bg-blue-500/20"
                         )}
                     >
-                        <Plus className={cn("h-3.5 w-3.5")} /> Ajouter une stat
+                        <Plus className={cn("h-3.5 w-3.5")} /> Ajouter une badge
                     </button>
                 </div>
 
-                <div className={cn("grid grid-cols-1 gap-4 lg:grid-cols-2")}>
-                    {defaultBadgeTech.map((badge, index) => (
-                        <div
-                            key={index}
-                            className={cn(
-                                "relative space-y-2 rounded-lg border p-3",
-                                "border-gray-700 bg-gray-900/40"
-                            )}
-                        >
-                            <button
-                                type="button"
-                                className={cn(
-                                    "absolute top-2 right-2 transition",
-                                    "text-gray-400 hover:text-red-500"
-                                )}
-                            >
-                                <Trash2 className={cn("h-4 w-4")} />
-                            </button>
-                            <div
-                                className={cn(
-                                    "mt-2 grid grid-cols-2 gap-x-3 gap-y-4"
-                                )}
-                            >
-                                <div className={cn("space-y-1")}>
-                                    <label
-                                        className={cn(
-                                            "block text-xs font-medium",
-                                            "text-gray-400"
-                                        )}
-                                    >
-                                        Texte
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        id="yas-number"
-                                        value={badge.text}
-                                        placeholder={badge.text}
-                                        className={cn(
-                                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
-                                            "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
-                                            badge.error
-                                                ? "border-red-500 focus:ring-red-500"
-                                                : "border-gray-700 focus:ring-emerald-500"
-                                        )}
-                                    />
-                                </div>
-                                <div className={cn("space-y-1")}>
-                                    <label
-                                        className={cn(
-                                            "block text-xs font-medium",
-                                            "text-gray-400"
-                                        )}
-                                    >
-                                        Classe Couleur Texte
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={badge.color}
-                                        className={cn(
-                                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
-                                            "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
-                                            badge.error
-                                                ? "border-red-500 focus:ring-red-500"
-                                                : "border-gray-700 focus:ring-emerald-500"
-                                        )}
-                                    />
-                                </div>
-                                <div className={cn("space-y-1")}>
-                                    <label
-                                        className={cn(
-                                            "block text-xs font-medium",
-                                            "text-gray-400"
-                                        )}
-                                    >
-                                        Classe Couleur Fond
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={badge.bg_color}
-                                        className={cn(
-                                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
-                                            "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
-                                            badge.error
-                                                ? "border-red-500 focus:ring-red-500"
-                                                : "border-gray-700 focus:ring-emerald-500"
-                                        )}
-                                    />
-                                </div>
-                                <div className={cn("space-y-1")}>
-                                    <label
-                                        className={cn(
-                                            "block text-xs font-medium",
-                                            "text-gray-400"
-                                        )}
-                                    >
-                                        Position CSS Absolue
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={badge.pos}
-                                        className={cn(
-                                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
-                                            "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
-                                            badge.error
-                                                ? "border-red-500 focus:ring-red-500"
-                                                : "border-gray-700 focus:ring-emerald-500"
-                                        )}
-                                    />
-                                </div>
-                            </div>
-                            {badge.error && (
-                                <small
+                {defaultBadgeTech.map((badge, index) => (
+                    <div
+                        key={index}
+                        className={cn(
+                            "flex items-center gap-2.5 rounded-md border p-3",
+                            "border-gray-800 bg-gray-900/30"
+                        )}
+                    >
+                        <GripVertical
+                            className={cn("cursor-move", "text-gray-500")}
+                        />
+
+                        <div className={cn("grid flex-1 grid-cols-7 gap-2.5")}>
+                            <div className={cn("relative col-span-2")}>
+                                <label
                                     className={cn(
-                                        "ml-1 text-xs font-medium",
-                                        "text-red-500"
+                                        "absolute top-1/2 left-2 -translate-y-1/2 border-r pr-2 text-xs font-medium",
+                                        "border-gray-700 text-gray-400"
                                     )}
                                 >
-                                    {badge.error_message}
-                                </small>
-                            )}
+                                    TECH
+                                </label>
+                                <input
+                                    type="text"
+                                    id="badge-label"
+                                    value={badge.tech}
+                                    placeholder={badge.tech}
+                                    className={cn(
+                                        "w-full rounded-md border py-2 pr-3 pl-14 text-sm focus:ring-1 focus:outline-none",
+                                        "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
+                                        badge.error
+                                            ? "border-red-500 focus:ring-red-500"
+                                            : "border-gray-700 focus:ring-emerald-500"
+                                    )}
+                                />
+                            </div>
+                            <div className={cn("relative col-span-5")}>
+                                <label
+                                    className={cn(
+                                        "absolute top-1/2 left-2 -translate-y-1/2 border-r pr-2 text-xs font-medium",
+                                        "border-gray-700 text-gray-400"
+                                    )}
+                                >
+                                    CLASS
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="badge-value"
+                                    value={badge.class}
+                                    placeholder={badge.class}
+                                    className={cn(
+                                        "w-full rounded-md border py-2 pr-3 pl-16 text-sm focus:ring-1 focus:outline-none",
+                                        "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
+                                        badge.error
+                                            ? "border-red-500 focus:ring-red-500"
+                                            : "border-gray-700 focus:ring-emerald-500"
+                                    )}
+                                />
+                            </div>
                         </div>
-                    ))}
-                </div>
+
+                        <button
+                            type="button"
+                            className={cn(
+                                "rounded-md p-2 transition",
+                                "bg-gray-800/50 text-gray-400 hover:bg-red-500/10 hover:text-red-500"
+                            )}
+                        >
+                            <Trash2 className={cn("h-4 w-4")} />
+                        </button>
+                    </div>
+                ))}
             </div>
 
             <div className={cn("mt-4 flex justify-end gap-3 pt-2")}>

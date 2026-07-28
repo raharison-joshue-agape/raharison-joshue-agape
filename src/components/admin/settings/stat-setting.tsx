@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { Plus, Save, Trash2 } from "lucide-react"
+import { GripVertical, Plus, Save, Trash2 } from "lucide-react"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
@@ -66,7 +66,7 @@ export default function StatSetting({ loading, onSubmit }: SettingProp) {
                 <div
                     className={cn(
                         "flex items-center justify-between border-b pb-2",
-                        "border-gray-700"
+                        "border-gray-800"
                     )}
                 >
                     <h2
@@ -81,7 +81,7 @@ export default function StatSetting({ loading, onSubmit }: SettingProp) {
                     <button
                         type="button"
                         className={cn(
-                            "flex items-center gap-1 rounded-md px-3 py-1.5 text-xs font-medium transition",
+                            "flex items-center gap-1 rounded-md p-2.5 text-xs font-medium transition",
                             "bg-blue-500/10 text-blue-400 hover:bg-blue-500/20"
                         )}
                     >
@@ -89,41 +89,34 @@ export default function StatSetting({ loading, onSubmit }: SettingProp) {
                     </button>
                 </div>
 
-                <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-2")}>
-                    {defaultStat.map((stat, index) => (
-                        <div
-                            key={index}
-                            className={cn(
-                                "group relative space-y-2 rounded-lg border p-3",
-                                "border-gray-700 bg-gray-900/50"
-                            )}
-                        >
-                            <button
-                                type="button"
-                                className={cn(
-                                    "absolute top-2 right-2 transition",
-                                    "text-gray-400 hover:text-red-500"
-                                )}
-                            >
-                                <Trash2 className={cn("h-4 w-4")} />
-                            </button>
-
-                            <div className="mt-2">
+                {defaultStat.map((stat, index) => (
+                    <div
+                        key={index}
+                        className={cn(
+                            "flex items-center gap-2.5 rounded-md border p-3",
+                            "border-gray-800 bg-gray-900/30"
+                        )}
+                    >
+                        <GripVertical
+                            className={cn("cursor-move", "text-gray-500")}
+                        />
+                        <div className={cn("grid flex-1 grid-cols-5 gap-2.5")}>
+                            <div className={cn("relative col-span-3")}>
                                 <label
                                     className={cn(
-                                        "block text-xs font-medium",
-                                        "text-gray-500"
+                                        "absolute top-1/2 left-2 -translate-y-1/2 border-r pr-2 text-xs font-medium",
+                                        "border-gray-700 text-gray-400"
                                     )}
                                 >
-                                    Label
+                                    TITRE
                                 </label>
                                 <input
-                                    type="tel"
-                                    id="yas-number"
+                                    type="text"
+                                    id="stat-label"
                                     value={stat.label}
                                     placeholder={stat.label}
                                     className={cn(
-                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "w-full rounded-md border py-2 pr-3 pl-17 text-sm focus:ring-1 focus:outline-none",
                                         "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
                                         stat.error
                                             ? "border-red-500 focus:ring-red-500"
@@ -131,23 +124,22 @@ export default function StatSetting({ loading, onSubmit }: SettingProp) {
                                     )}
                                 />
                             </div>
-
-                            <div className={cn("mt-4")}>
+                            <div className={cn("relative col-span-2")}>
                                 <label
                                     className={cn(
-                                        "block text-xs font-medium",
-                                        "text-gray-500"
+                                        "absolute top-1/2 left-2 -translate-y-1/2 border-r pr-2 text-xs font-medium",
+                                        "border-gray-700 text-gray-400"
                                     )}
                                 >
-                                    Valeur
+                                    VALEUR
                                 </label>
                                 <input
-                                    type="tel"
-                                    id="yas-number"
+                                    type="text"
+                                    id="stat-value"
                                     value={stat.value}
                                     placeholder={stat.value}
                                     className={cn(
-                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "w-full rounded-md border py-2 pr-3 pl-17 text-sm focus:ring-1 focus:outline-none",
                                         "bg-gray-950/80 text-slate-100 placeholder:text-slate-500",
                                         stat.error
                                             ? "border-red-500 focus:ring-red-500"
@@ -155,20 +147,19 @@ export default function StatSetting({ loading, onSubmit }: SettingProp) {
                                     )}
                                 />
                             </div>
-
-                            {stat.error && (
-                                <small
-                                    className={cn(
-                                        "ml-1 text-xs font-medium",
-                                        "text-red-500"
-                                    )}
-                                >
-                                    {stat.error_message}
-                                </small>
-                            )}
                         </div>
-                    ))}
-                </div>
+
+                        <button
+                            type="button"
+                            className={cn(
+                                "rounded-md p-2 transition",
+                                "bg-gray-800/50 text-gray-400 hover:bg-red-500/10 hover:text-red-500"
+                            )}
+                        >
+                            <Trash2 className={cn("h-4 w-4")} />
+                        </button>
+                    </div>
+                ))}
             </div>
 
             <div className={cn("mt-4 flex justify-end gap-3 pt-2")}>

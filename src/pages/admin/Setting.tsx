@@ -65,7 +65,7 @@ export default function AdminSetting() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className={cn("z-0 mx-auto max-w-375 space-y-6 p-6")}
+            className={cn("z-0 mx-auto max-w-360 space-y-6 pt-6")}
         >
             <div
                 className={cn(
@@ -88,7 +88,7 @@ export default function AdminSetting() {
 
             <div
                 className={cn(
-                    "flex max-h-[calc(100vh-16.3rem)] flex-col gap-8 overflow-y-auto lg:flex-row"
+                    "flex h-[calc(100vh-13rem)] flex-col gap-8 overflow-y-auto lg:flex-row"
                 )}
             >
                 <aside className={cn("sticky top-0 z-50 shrink-0 lg:w-64")}>
