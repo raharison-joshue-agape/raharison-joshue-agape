@@ -1,34 +1,36 @@
-import { cn } from "@/lib/utils"
+import {
+    useState,
+    type ChangeEvent,
+    type FormEvent,
+    type KeyboardEvent,
+} from "react"
+import { motion } from "framer-motion"
 import {
     Briefcase,
     Building2,
     Calendar,
+    CloudUpload,
     ImageIcon,
     MapPin,
     Pencil,
     Plus,
-    Save,
-    TagIcon,
     Trash2,
     X,
 } from "lucide-react"
-import { motion } from "framer-motion"
-import { useEffect, useState, type ChangeEvent, type FormEvent } from "react"
 
-export type PayloadLinkType = {
-    gitHubLink: string
-    gitLabLink: string
-    linkedinLink: string
-    facebookLink: string
-    googleMap: string
-}
-
-interface SettingProp {
-    loading: boolean
-    onSubmit: (payload: PayloadLinkType) => void
-}
+import { experiences } from "@/data/experiences"
+import { Button } from "@/components/ui/button"
+import {
+    Dialog,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
+import { cn } from "@/lib/utils"
 
 export interface Experience {
+    id?: string
     year: string
     type: string
     title: string
@@ -39,93 +41,9 @@ export interface Experience {
     image: string
 }
 
-const initialExperiences: Experience[] = [
-    {
-        year: "Avr. 2026 - Jui. 2026",
-        type: "Freelance",
-        title: "Création d'une application web mobile-first (Ton Cosmos)",
-        company: "JVN Lab",
-        location: "Fianarantsoa 301, Madagascar",
-        description:
-            "Conception d'une plateforme avec FastAPI, Stripe et l'IA Anthropic pour générer des rapports astrologiques personnalisés.",
-        tags: [
-            "React.js",
-            "Supabase",
-            "FastAPI",
-            "Docker",
-            "Stripe API",
-            "Anthropic API",
-        ],
-        image: "/assets/experiences/tonCosmos.png",
-    },
-    {
-        year: "Oct. 2025 - Nov. 2025",
-        type: "Projet de fin de cycle",
-        title: "Automatisation de l'analyse d'e-mails avec l'IA et n8n",
-        company: "ENI",
-        location: "Fianarantsoa 301, Madagascar",
-        description:
-            "Développement d'une solution d'automatisation intelligente sous n8n et Flask pour analyser, trier et gérer les e-mails.",
-        tags: ["React.js", "PostgreSQL", "Flask", "N8N", "Docker"],
-        image: "/assets/experiences/n8nENI.png",
-    },
-    {
-        year: "Oct. 2025 - Nov. 2025",
-        type: "Mission",
-        title: "Développement de l'application mobile - Mandika",
-        company: "RafalTech",
-        location: "Full Remote",
-        description:
-            "Conception d'une application mobile Flutter intégrant OCR et Django pour capturer, analyser et exporter des données.",
-        tags: [
-            "Flutter",
-            "Django",
-            "PostgreSQL",
-            "Tesseract OCR",
-            "Hugging Face",
-        ],
-        image: "/assets/experiences/mandikaAPK.png",
-    },
-    {
-        year: "Aug. 2024 - Dec. 2024",
-        type: "Stage en entreprise",
-        title: "Gestion de rendez-vous synchronisée avec Google Calendar",
-        company: "SfyriTech",
-        location: "Antananarivo, Madagascar",
-        description:
-            "Création d'une application de planification synchronisée avec Google Calendar grâce à Nest.js et des API WebSockets.",
-        tags: [
-            "Quasar",
-            "PostgreSQL",
-            "Nest.js",
-            "Prisma ORM",
-            "Google Calendar API",
-        ],
-        image: "/assets/experiences/sfyriBooking.png",
-    },
-    {
-        year: "May 2024 - Sept. 2024",
-        type: "Mission",
-        title: "Développement d'API pour la plateforme Hello Archi",
-        company: "SfyriTech",
-        location: "Full Remote",
-        description:
-            "Optimisation du backend Node.js et développement de nouvelles fonctionnalités d'API pour améliorer la scalabilité système.",
-        tags: ["Node.js", "Express", "Docker", "Sequelize ORM", "websocket"],
-        image: "/assets/experiences/helloArchi.png",
-    },
-    {
-        year: "Sept. 2023 - Nov. 2023",
-        type: "Stage en entreprise",
-        title: "Application de gestion des commandes et des livraisons",
-        company: "Open Delivery",
-        location: "Antsirabe, Madagascar",
-        description:
-            "Participation au développement Full Stack d'un système de gestion des livraisons sous Laravel et Vue.js.",
-        tags: ["Vue.js", "PHP", "Laravel", "jQuery", "MySQL"],
-        image: "/assets/experiences/openDelivery.png",
-    },
-]
+interface ExperiencesProps {
+    loading?: boolean
+}
 
 const emptyExperience: Experience = {
     year: "",
@@ -138,11 +56,9 @@ const emptyExperience: Experience = {
     image: "",
 }
 
-export default function Experiences({ loading }: SettingProp) {
-    const [onLoading, setLoading] = useState(loading)
-
-    const [experiences, setExperiences] =
-        useState<Experience[]>(initialExperiences)
+export default function Experiences({ loading = false }: ExperiencesProps) {
+    const [experiencesData, setExperiences] =
+        useState<Experience[]>(experiences)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [editingIndex, setEditingIndex] = useState<number | null>(null)
     const [formData, setFormData] = useState<Experience>(emptyExperience)
@@ -158,7 +74,7 @@ export default function Experiences({ loading }: SettingProp) {
     // Ouverture du modal pour édition
     const handleOpenEditModal = (index: number) => {
         setEditingIndex(index)
-        setFormData(experiences[index])
+        setFormData(experiencesData[index])
         setIsModalOpen(true)
     }
 
@@ -169,7 +85,7 @@ export default function Experiences({ loading }: SettingProp) {
         }
     }
 
-    // Changement dans les champs du formulaire
+    // Changement dans les champs standard
     const handleChange = (
         e: ChangeEvent<
             HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -179,12 +95,34 @@ export default function Experiences({ loading }: SettingProp) {
         setFormData((prev) => ({ ...prev, [name]: value }))
     }
 
+    // Upload d'image avec lecture en Base64 pour prévisualisation
+    const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                setFormData((prev) => ({
+                    ...prev,
+                    image: reader.result as string,
+                }))
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
     // Gestion des tags
     const handleAddTag = () => {
         const trimmed = newTagInput.trim()
         if (trimmed && !formData.tags.includes(trimmed)) {
             setFormData((prev) => ({ ...prev, tags: [...prev.tags, trimmed] }))
             setNewTagInput("")
+        }
+    }
+
+    const handleTagKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            handleAddTag()
         }
     }
 
@@ -199,7 +137,7 @@ export default function Experiences({ loading }: SettingProp) {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
         if (editingIndex !== null) {
-            const updated = [...experiences]
+            const updated = [...experiencesData]
             updated[editingIndex] = formData
             setExperiences(updated)
         } else {
@@ -208,442 +146,330 @@ export default function Experiences({ loading }: SettingProp) {
         setIsModalOpen(false)
     }
 
-    useEffect(() => {
-        const initLoading = () => setLoading(loading)
-        initLoading()
-    }, [loading])
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className={cn("space-y-6 px-16 py-6")}
+            className="space-y-6 px-4 py-6 md:px-16"
         >
-            <div
-                className={cn(
-                    "flex flex-col items-start justify-between gap-4 border-b pb-4 sm:flex-row sm:items-center",
-                    "border-gray-700"
-                )}
-            >
+            <div className="flex flex-col items-start justify-between gap-4 border-b border-gray-800 pb-4 sm:flex-row sm:items-center">
                 <div>
-                    <h2
-                        className={cn(
-                            "text-lg font-semibold",
-                            "text-slate-100"
-                        )}
-                    >
+                    <h2 className="text-lg font-semibold text-slate-100">
                         Gestion des Expériences
                     </h2>
-                    <p className={cn("text-xs", "text-slate-400")}>
+                    <p className="text-xs text-slate-400">
                         Ajoutez, modifiez ou supprimez vos expériences
                         professionnelles et stages.
                     </p>
                 </div>
 
-                <button
+                <Button
                     onClick={handleOpenCreateModal}
-                    className={cn(
-                        "flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium shadow-sm transition",
-                        "bg-blue-600 text-white hover:bg-blue-700"
-                    )}
+                    disabled={loading}
+                    className="h-10 rounded-md bg-blue-600 text-white hover:bg-blue-700"
                 >
-                    <Plus className="h-4 w-4" /> Ajouter une expérience
-                </button>
+                    <Plus className="mr-2 h-4 w-4" /> Ajouter une expérience
+                </Button>
             </div>
 
             {/* Liste des cartes d'expériences */}
-            <div className={cn("grid grid-cols-1 gap-4 md:grid-cols-2")}>
-                {experiences.map((exp, index) => (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {experiencesData.map((exp, index) => (
                     <div
-                        key={index}
-                        className={cn(
-                            "flex flex-col justify-between gap-4 rounded-lg border p-5 shadow-sm transition hover:shadow-md",
-                            "border-gray-700 bg-gray-800"
-                        )}
+                        key={exp.id || `${exp.title}-${index}`}
+                        className="flex flex-col justify-between gap-4 rounded-lg border border-gray-800 bg-gray-900/50 p-5 shadow-sm transition hover:shadow-md"
                     >
-                        <div className={cn("space-y-3")}>
-                            <div
-                                className={cn(
-                                    "flex items-start justify-between gap-2"
-                                )}
-                            >
-                                <span
-                                    className={cn(
-                                        "inline-block rounded-full border px-2.5 py-1 text-xs font-semibold",
-                                        "border-blue-500/20 bg-blue-500/10 text-blue-400"
-                                    )}
-                                >
+                        <div className="space-y-3">
+                            <div className="flex items-start justify-between gap-2">
+                                <span className="inline-block rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-1 text-xs font-semibold text-blue-400">
                                     {exp.type}
                                 </span>
-                                <div className={cn("flex items-center gap-1")}>
-                                    <button
+                                <div className="flex items-center gap-1">
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
                                         onClick={() =>
                                             handleOpenEditModal(index)
                                         }
-                                        className={cn(
-                                            "rounded-md p-1.5 transition",
-                                            "text-gray-500 hover:bg-gray-700 hover:text-blue-600"
-                                        )}
+                                        className="h-8 w-8 text-gray-400 hover:bg-gray-800 hover:text-blue-500"
                                         title="Modifier"
                                     >
-                                        <Pencil className={cn("h-4 w-4")} />
-                                    </button>
-                                    <button
+                                        <Pencil className="h-4 w-4" />
+                                    </Button>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
                                         onClick={() => handleDelete(index)}
-                                        className={cn(
-                                            "rounded-md p-1.5 transition",
-                                            "text-gray-500 hover:bg-gray-700 hover:text-red-600"
-                                        )}
+                                        className="h-8 w-8 text-gray-400 hover:bg-gray-800 hover:text-red-500"
                                         title="Supprimer"
                                     >
-                                        <Trash2 className={cn("h-4 w-4")} />
-                                    </button>
+                                        <Trash2 className="h-4 w-4" />
+                                    </Button>
                                 </div>
                             </div>
 
-                            <h3
-                                className={cn(
-                                    "text-base leading-snug font-semibold",
-                                    "text-white"
-                                )}
-                            >
+                            <h3 className="text-base leading-snug font-semibold text-white">
                                 {exp.title}
                             </h3>
 
-                            <div
-                                className={cn(
-                                    "flex flex-wrap gap-3 text-xs",
-                                    "text-gray-400"
-                                )}
-                            >
-                                <span className={cn("flex items-center gap-1")}>
-                                    <Building2
-                                        className={cn(
-                                            "h-3.5 w-3.5",
-                                            "text-blue-500"
-                                        )}
-                                    />
+                            <div className="flex flex-wrap gap-3 text-xs text-gray-400">
+                                <span className="flex items-center gap-1">
+                                    <Building2 className="h-3.5 w-3.5 text-blue-500" />
                                     {exp.company}
                                 </span>
-                                <span className={cn("flex items-center gap-1")}>
-                                    <Calendar
-                                        className={cn(
-                                            "h-3.5 w-3.5",
-                                            "text-blue-500"
-                                        )}
-                                    />
+                                <span className="flex items-center gap-1">
+                                    <Calendar className="h-3.5 w-3.5 text-blue-500" />
                                     {exp.year}
                                 </span>
-                                <span className={cn("flex items-center gap-1")}>
-                                    <MapPin
-                                        className={cn(
-                                            "h-3.5 w-3.5",
-                                            "text-blue-500"
-                                        )}
-                                    />
-                                    {exp.location}
-                                </span>
+                                {exp.location && (
+                                    <span className="flex items-center gap-1">
+                                        <MapPin className="h-3.5 w-3.5 text-blue-500" />
+                                        {exp.location}
+                                    </span>
+                                )}
                             </div>
 
-                            <p
-                                className={cn(
-                                    "line-clamp-3 text-sm",
-                                    "text-gray-300"
-                                )}
-                            >
+                            <p className="line-clamp-3 text-sm text-gray-300">
                                 {exp.description}
                             </p>
                         </div>
 
-                        {/* Tags */}
-                        <div
-                            className={cn(
-                                "flex flex-wrap gap-1.5 border-t pt-2",
-                                "border-gray-700/50"
-                            )}
-                        >
-                            {exp.tags.map((tag, tIndex) => (
-                                <span
-                                    key={tIndex}
-                                    className={cn(
-                                        "rounded px-2 py-0.5 text-xs",
-                                        "bg-gray-700 text-gray-300"
-                                    )}
-                                >
-                                    #{tag}
-                                </span>
-                            ))}
-                        </div>
+                        {exp.tags && exp.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 border-t border-gray-700/50 pt-2">
+                                {exp.tags.map((tag, tIndex) => (
+                                    <span
+                                        key={tIndex}
+                                        className="rounded bg-gray-800 px-2 py-0.5 text-xs text-gray-300"
+                                    >
+                                        #{tag}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
 
-            {/* MODAL / DIALOG D'ÉDITION ET CRÉATION */}
-            {isModalOpen && (
-                <div
+            {/* Modal d'édition / création */}
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogContent
+                    showCloseButton={false}
                     className={cn(
-                        "fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4 backdrop-blur-sm",
-                        "bg-black/50"
+                        "min-w-3xl backdrop-blur-sm",
+                        "border-gray-800 bg-gray-900/70 text-slate-100"
                     )}
                 >
-                    <div
-                        className={cn(
-                            "my-8 w-full max-w-2xl overflow-hidden rounded-xl border shadow-xl",
-                            "border-gray-700 bg-gray-800"
-                        )}
-                    >
-                        {/* Modal Header */}
-                        <div
-                            className={cn(
-                                "flex items-center justify-between border-b p-4",
-                                "border-gray-700"
-                            )}
-                        >
-                            <h3
-                                className={cn(
-                                    "flex items-center gap-2 text-lg font-bold",
-                                    "text-white"
-                                )}
-                            >
-                                <Briefcase
-                                    className={cn("h-5 w-5", "text-blue-500")}
-                                />
-                                {editingIndex !== null
-                                    ? "Modifier l'expérience"
-                                    : "Ajouter une expérience"}
-                            </h3>
-                            <button
-                                onClick={() => setIsModalOpen(false)}
-                                className={cn(
-                                    "rounded-lg p-1",
-                                    "text-gray-400 hover:text-gray-200"
-                                )}
-                            >
-                                <X className={cn("h-5 w-5")} />
-                            </button>
-                        </div>
+                    <DialogHeader>
+                        <DialogTitle className="flex items-center gap-2.5 text-lg font-semibold">
+                            <Briefcase className="h-6 w-6 text-blue-500" />
+                            {editingIndex !== null
+                                ? "Modifier l'expérience"
+                                : "Ajouter une expérience"}
+                        </DialogTitle>
+                    </DialogHeader>
 
-                        {/* Modal Form */}
-                        <form
-                            onSubmit={handleSubmit}
-                            className={cn("space-y-4 p-6")}
-                        >
-                            <div
-                                className={cn(
-                                    "grid grid-cols-1 gap-4 md:grid-cols-2"
-                                )}
-                            >
-                                <div>
+                    <form
+                        id="experience-form"
+                        onSubmit={handleSubmit}
+                        className="space-y-4 pt-2"
+                    >
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-5">
+                            <div className="md:col-span-2">
+                                <label className="mb-1.5 flex items-center gap-2 text-xs font-semibold text-gray-300">
+                                    <ImageIcon className="h-3.5 w-3.5" /> Image
+                                    d'illustration
+                                </label>
+                                <label
+                                    htmlFor="image-upload"
+                                    className="relative flex h-36 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md border border-dashed border-gray-700 bg-gray-950/40 p-2 transition hover:border-gray-500"
+                                >
+                                    {formData.image ? (
+                                        <img
+                                            src={formData.image}
+                                            alt="Aperçu"
+                                            className="h-full w-full rounded object-cover"
+                                        />
+                                    ) : (
+                                        <div className="flex flex-col items-center gap-1 text-center text-xs text-gray-400">
+                                            <CloudUpload className="h-8 w-8 text-blue-500" />
+                                            <span>Télécharger une image</span>
+                                        </div>
+                                    )}
+                                </label>
+                                <input
+                                    id="image-upload"
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
+                                    className="hidden"
+                                />
+                            </div>
+
+                            {/* Titre & Entreprise */}
+                            <div className="space-y-3 md:col-span-3">
+                                <div className="space-y-1">
                                     <label
-                                        className={cn(
-                                            "mb-1 block text-xs font-semibold",
-                                            "text-gray-300"
-                                        )}
+                                        htmlFor="title"
+                                        className="block text-xs font-semibold text-gray-300"
                                     >
-                                        Titre du poste / Mission
+                                        Titre du poste / Mission *
                                     </label>
                                     <input
+                                        id="title"
                                         type="text"
                                         name="title"
                                         value={formData.title}
                                         onChange={handleChange}
                                         required
                                         className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                            "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
                                         )}
                                     />
                                 </div>
-                                <div>
+
+                                <div className="space-y-1">
                                     <label
-                                        className={cn(
-                                            "mb-1 block text-xs font-semibold",
-                                            "text-gray-300"
-                                        )}
+                                        htmlFor="company"
+                                        className="block text-xs font-semibold text-gray-300"
                                     >
-                                        Entreprise / Organisation
+                                        Entreprise / Organisation *
                                     </label>
                                     <input
+                                        id="company"
                                         type="text"
                                         name="company"
                                         value={formData.company}
                                         onChange={handleChange}
                                         required
                                         className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
-                                        )}
-                                    />
-                                </div>
-                                <div>
-                                    <label
-                                        className={cn(
-                                            "mb-1 block text-xs font-semibold",
-                                            "text-gray-300"
-                                        )}
-                                    >
-                                        Type de contrat
-                                    </label>
-                                    <select
-                                        name="type"
-                                        value={formData.type}
-                                        onChange={handleChange}
-                                        className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
-                                        )}
-                                    >
-                                        <option value="Freelance">
-                                            Freelance
-                                        </option>
-                                        <option value="Stage en entreprise">
-                                            Stage en entreprise
-                                        </option>
-                                        <option value="Mission">Mission</option>
-                                        <option value="Projet de fin de cycle">
-                                            Projet de fin de cycle
-                                        </option>
-                                        <option value="CDI">CDI</option>
-                                        <option value="CDD">CDD</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label
-                                        className={cn(
-                                            "mb-1 block text-xs font-semibold",
-                                            "text-gray-300"
-                                        )}
-                                    >
-                                        Période (ex: Avr. 2026 - Jui. 2026)
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="year"
-                                        value={formData.year}
-                                        onChange={handleChange}
-                                        required
-                                        className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
-                                        )}
-                                    />
-                                </div>
-                                <div className="md:col-span-2">
-                                    <label
-                                        className={cn(
-                                            "mb-1 block text-xs font-semibold",
-                                            "text-gray-300"
-                                        )}
-                                    >
-                                        Lieu / Localisation
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="location"
-                                        value={formData.location}
-                                        onChange={handleChange}
-                                        className={cn(
-                                            "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                            "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                            "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                            "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
                                         )}
                                     />
                                 </div>
                             </div>
+                        </div>
 
+                        {/* Type & Période */}
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
-                                <label
-                                    className={cn(
-                                        "mb-1 block text-xs font-semibold",
-                                        "text-gray-300"
-                                    )}
-                                >
-                                    Description détaillée
+                                <label className="mb-1 block text-xs font-semibold text-gray-300">
+                                    Type de contrat
                                 </label>
-                                <textarea
-                                    name="description"
-                                    value={formData.description}
+                                <select
+                                    name="type"
+                                    value={formData.type}
                                     onChange={handleChange}
-                                    rows={4}
-                                    required
                                     className={cn(
-                                        "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                        "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
                                     )}
-                                />
+                                >
+                                    <option value="Freelance">Freelance</option>
+                                    <option value="Stage en entreprise">
+                                        Stage en entreprise
+                                    </option>
+                                    <option value="Mission">Mission</option>
+                                    <option value="Projet de fin de cycle">
+                                        Projet de fin de cycle
+                                    </option>
+                                    <option value="CDI">CDI</option>
+                                    <option value="CDD">CDD</option>
+                                </select>
                             </div>
 
                             <div>
-                                <label
-                                    className={cn(
-                                        "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                        "block text-gray-300"
-                                    )}
-                                >
-                                    <ImageIcon className="h-3.5 w-3.5" /> URL de
-                                    l'image d'illustration
+                                <label className="mb-1 block text-xs font-semibold text-gray-300">
+                                    Période (ex: Avr. 2026 - Jui. 2026) *
                                 </label>
                                 <input
                                     type="text"
-                                    name="image"
-                                    value={formData.image}
+                                    name="year"
+                                    value={formData.year}
                                     onChange={handleChange}
+                                    required
                                     className={cn(
-                                        "w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2",
-                                        "border-gray-700 bg-gray-900 focus:ring-blue-500"
+                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
                                     )}
                                 />
                             </div>
+                        </div>
 
-                            {/* Tags section */}
-                            <div>
-                                <label
+                        {/* Localisation */}
+                        <div>
+                            <label className="mb-1 block text-xs font-semibold text-gray-300">
+                                Lieu / Localisation
+                            </label>
+                            <input
+                                type="text"
+                                name="location"
+                                value={formData.location}
+                                onChange={handleChange}
+                                className={cn(
+                                    "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                    "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
+                                )}
+                            />
+                        </div>
+
+                        {/* Description */}
+                        <div>
+                            <label className="mb-1 block text-xs font-semibold text-gray-300">
+                                Description détaillée
+                            </label>
+                            <textarea
+                                name="description"
+                                rows={3}
+                                value={formData.description}
+                                onChange={handleChange}
+                                className={cn(
+                                    "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                    "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
+                                )}
+                            />
+                        </div>
+
+                        {/* Saisie & Affichage des Tags */}
+                        <div>
+                            <label className="mb-1 block text-xs font-semibold text-gray-300">
+                                Technologies / Tags
+                            </label>
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="text"
+                                    value={newTagInput}
+                                    onChange={(e) =>
+                                        setNewTagInput(e.target.value)
+                                    }
+                                    onKeyDown={handleTagKeyDown}
+                                    placeholder="Ajouter un tag (ex: React, TypeScript) et appuyer sur Entrée"
                                     className={cn(
-                                        "mb-1 flex items-center gap-1 text-xs font-semibold",
-                                        "block text-gray-300"
+                                        "-mb-1 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus:outline-none",
+                                        "border-gray-700 bg-gray-950/30 text-slate-100 placeholder:text-slate-500 focus:ring-emerald-500"
+                                    )}
+                                />
+                                <Button
+                                    type="button"
+                                    onClick={handleAddTag}
+                                    variant="secondary"
+                                    className={cn(
+                                        "h-10 shrink-0",
+                                        "bg-gray-800 hover:bg-gray-700"
                                     )}
                                 >
-                                    <TagIcon className="h-3.5 w-3.5" />{" "}
-                                    Technologies / Tags
-                                </label>
-                                <div className={cn("mb-2 flex gap-2")}>
-                                    <input
-                                        type="text"
-                                        value={newTagInput}
-                                        onChange={(e) =>
-                                            setNewTagInput(e.target.value)
-                                        }
-                                        onKeyDown={(e) => {
-                                            if (e.key === "Enter") {
-                                                e.preventDefault()
-                                                handleAddTag()
-                                            }
-                                        }}
-                                        placeholder="Ajouter une tech (ex: React.js)"
-                                        className={cn(
-                                            "flex-1 rounded-lg border px-3 py-1.5 text-sm outline-none",
-                                            "border-gray-700 bg-gray-900"
-                                        )}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={handleAddTag}
-                                        className={cn(
-                                            "rounded-lg px-3 py-1.5 text-xs font-semibold",
-                                            "bg-gray-700 hover:bg-gray-300"
-                                        )}
-                                    >
-                                        Ajouter
-                                    </button>
-                                </div>
-                                <div className={cn("flex flex-wrap gap-1.5")}>
-                                    {formData.tags.map((tag, tIdx) => (
+                                    <Plus className="h-4 w-4" />
+                                </Button>
+                            </div>
+
+                            {formData.tags.length > 0 && (
+                                <div className="mt-2 flex flex-wrap gap-1.5">
+                                    {formData.tags.map((tag) => (
                                         <span
-                                            key={tIdx}
-                                            className={cn(
-                                                "flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium",
-                                                "bg-blue-500/10 text-blue-400"
-                                            )}
+                                            key={tag}
+                                            className="inline-flex items-center gap-1 rounded bg-gray-800 px-2.5 py-1 text-xs text-blue-400"
                                         >
                                             #{tag}
                                             <button
@@ -651,48 +477,44 @@ export default function Experiences({ loading }: SettingProp) {
                                                 onClick={() =>
                                                     handleRemoveTag(tag)
                                                 }
-                                                className="hover:text-red-500"
+                                                className="text-gray-400 hover:text-red-400"
                                             >
                                                 <X className="h-3 w-3" />
                                             </button>
                                         </span>
                                     ))}
                                 </div>
-                            </div>
+                            )}
+                        </div>
 
-                            {/* Modal Actions */}
-                            <div
+                        {/* Boutons du Formulaire */}
+                        <DialogFooter className="mt-6 gap-2 bg-gray-800">
+                            <Button
+                                type="button"
+                                variant="secondary"
+                                onClick={() => setIsModalOpen(false)}
                                 className={cn(
-                                    "flex justify-end gap-3 border-t pt-4",
-                                    "border-gray-700"
+                                    "h-10 px-4",
+                                    "bg-gray-700/80 text-gray-300 hover:bg-gray-700"
                                 )}
                             >
-                                <button
-                                    type="button"
-                                    onClick={() => setIsModalOpen(false)}
-                                    className={cn(
-                                        "rounded-lg px-4 py-2 text-sm",
-                                        "text-gray-300 hover:bg-gray-700"
-                                    )}
-                                >
-                                    Annuler
-                                </button>
-                                <button
-                                    type="submit"
-                                    disabled={onLoading}
-                                    className={cn(
-                                        "flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium shadow-sm transition",
-                                        "bg-blue-600 text-white hover:bg-blue-700"
-                                    )}
-                                >
-                                    <Save className={cn("h-4 w-4")} />{" "}
-                                    Enregistrer
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
+                                Annuler
+                            </Button>
+                            <Button
+                                type="submit"
+                                className={cn(
+                                    "h-10 px-4",
+                                    "bg-blue-600 text-white hover:bg-blue-700"
+                                )}
+                            >
+                                {editingIndex !== null
+                                    ? "Mettre à jour"
+                                    : "Enregistrer"}
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </motion.div>
     )
 }
